@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nawwarah Zulkifli | Computer Science & IT Portfolio</title>
+  <meta name="description" content="Portfolio of Nawwarah Binti Zulkifli - Final-year Computer Science student at UPNM (CGPA 3.79), IT Intern at EDAG Holding, specializing in Web Development, Data Analytics, and Systems.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <!-- Custom Mouse Cursor Elements -->
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+  <div class="cursor-spotlight" id="cursor-spotlight"></div>
+
+  <!-- Background Ambient Glow Shapes -->
+  <div class="ambient-glow bg-glow-1"></div>
+  <div class="ambient-glow bg-glow-2"></div>
+  <div class="ambient-glow bg-glow-3"></div>
+
+  <!-- Navigation Header -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#hero" class="nav-logo">
+        <span class="logo-badge">NZ</span>
+        <span class="logo-text">Nawwarah<span class="logo-dot">.</span></span>
+      </a>
+
+      <div class="nav-status">
+        <span class="status-indicator"></span>
+        <span class="status-text">IT Intern @ EDAG | Open to Roles</span>
+      </div>
+
+      <nav class="nav-menu" id="nav-menu">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#leadership" class="nav-link">Leadership</a>
+        <a href="#contact" class="nav-link btn-nav-cta">Contact Me</a>
+      </nav>
+
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="container hero-grid">
+        <!-- Hero Text Column -->
+        <div class="hero-content" data-tilt-disabled>
+          <div class="hero-pill-tag">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            Computer Science (Hons) Student • CGPA 3.79
+          </div>
+
+          <h1 class="hero-title">
+            Hi, I'm <span class="gradient-text">Nawwarah Zulkifli</span>
+          </h1>
+          <h2 class="hero-subtitle">IT Administrator & Full-Stack Developer</h2>
+
+          <p class="hero-description">
+            Final-year Bachelor of Computer Science student at Universiti Pertahanan Nasional Malaysia (UPNM) with proven expertise in IT operations, system administration, data analytics, and web engineering.
+          </p>
+
+          <div class="hero-meta-pills">
+            <span class="meta-pill">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              Port Dickson, Malaysia
+            </span>
+            <a href="mailto:nawwarah.zulkifli123@gmail.com" class="meta-pill meta-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              nawwarah.zulkifli123@gmail.com
+            </a>
+            <a href="https://www.linkedin.com/in/nawwarah-zulkifli" target="_blank" class="meta-pill meta-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.74a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2Z"/></svg>
+              LinkedIn Profile
+            </a>
+          </div>
+
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">
+              View Featured Projects
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            <button id="download-cv-btn" class="btn btn-outline">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              Resume PDF
+            </button>
+          </div>
+        </div>
+
+        <!-- Hero Card / Profile Feature Visual -->
+        <div class="hero-visual-wrapper">
+          <div class="hero-card tilt-card" data-tilt>
+            <div class="card-glow-overlay"></div>
+            
+            <div class="hero-card-header">
+              <div class="avatar-box">
+                <span class="avatar-initials">NZ</span>
+                <span class="online-dot"></span>
+              </div>
+              <div class="avatar-info">
+                <h3>Nawwarah Zulkifli</h3>
+                <p>Bachelor of CS (Hons) • UPNM</p>
+              </div>
+            </div>
+
+            <div class="hero-card-stats">
+              <div class="stat-box">
+                <span class="stat-number">3.79</span>
+                <span class="stat-label">Degree CGPA</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-number">4x</span>
+                <span class="stat-label">Dean's Award</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-number">Silver</span>
+                <span class="stat-label">InTeLex '24</span>
+              </div>
+            </div>
+
+            <div class="hero-card-featured">
+              <div class="featured-badge">Featured System</div>
+              <h4>SentRa: FYP Sentiment Analysis</h4>
+              <p>Bilingual Malay & English student feedback opinion mining tool built with Python & Lexicon ML.</p>
+            </div>
+
+            <div class="tech-stack-row">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Active Directory</span>
+              <span class="tech-tag">Linux</span>
+              <span class="tech-tag">PHP/MySQL</span>
+              <span class="tech-tag">Supabase</span>
+            </div>
+          </div>
+
+          <!-- Floating Badges -->
+          <div class="floating-badge badge-top-right">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            Google Certified Technical Support
+          </div>
+          <div class="floating-badge badge-bottom-left">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+            TISAX & ISO 9001 Audit Ready
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About & Education Section -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Academic Excellence</span>
+          <h2 class="section-title">Education & Background</h2>
+          <div class="title-bar"></div>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-bio-card tilt-card" data-tilt>
+            <div class="bio-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+            <h3>Professional Profile</h3>
+            <p>
+              I am a dedicated Computer Science student with a strong academic standing of <strong>CGPA 3.79</strong> at National Defence University of Malaysia (UPNM). Combined with practical IT enterprise experience at <strong>EDAG Holding Sdn. Bhd.</strong>, I bridge the gap between technical infrastructure, database architecture, and user-centric software development.
+            </p>
+            
+            <div class="bio-highlights">
+              <div class="highlight-item">
+                <span class="highlight-num">100%</span>
+                <span class="highlight-desc">Commitment to IT Operations & Compliance</span>
+              </div>
+              <div class="highlight-item">
+                <span class="highlight-num">4</span>
+                <span class="highlight-desc">Consecutive Dean's Award Semesters</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="education-timeline">
+            <!-- Degree -->
+            <div class="edu-card tilt-card" data-tilt>
+              <div class="edu-year">2023 - Present</div>
+              <div class="edu-details">
+                <h3>Bachelor's Degree in Computer Science (Honours)</h3>
+                <p class="edu-institution">Universiti Pertahanan Nasional Malaysia (UPNM)</p>
+                <div class="edu-cgpa-pill">CGPA: 3.79 / 4.00</div>
+                <ul class="edu-bullet-list">
+                  <li>Dean's Award Recipient (Semester 1 & 2 Session 2023/2024)</li>
+                  <li>Dean's Award Recipient (Semester 1 & 2 Session 2024/2025)</li>
+                  <li>Relevant Coursework: Web Programming, Data Structures, OOP, Database Systems, Operating Systems, Big Data Analytics, Software Engineering, Digital Forensics.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Foundation -->
+            <div class="edu-card tilt-card" data-tilt>
+              <div class="edu-year">2022 - 2023</div>
+              <div class="edu-details">
+                <h3>Foundation in Medicine</h3>
+                <p class="edu-institution">Universiti Pertahanan Nasional Malaysia (UPNM)</p>
+                <div class="edu-cgpa-pill">CGPA: 3.57 / 4.00</div>
+                <p class="edu-subtext">Awarded Excellent Academic Award for high academic performance.</p>
+              </div>
+            </div>
+
+            <!-- SPM -->
+            <div class="edu-card tilt-card" data-tilt>
+              <div class="edu-year">2019 - 2021</div>
+              <div class="edu-details">
+                <h3>Malayan Certificate of Education (SPM)</h3>
+                <p class="edu-institution">SMK Yam Tuan Radin, Negeri Sembilan</p>
+                <div class="edu-cgpa-pill">Result: 3A+ | 4A | 2A-</div>
+                <p class="edu-subtext">Achieved Straight A's in SPM; awarded for outstanding academic excellence.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Work Experience Section -->
+    <section class="section section-alt" id="experience">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Enterprise IT Operations</span>
+          <h2 class="section-title">Work Experience</h2>
+          <div class="title-bar"></div>
+        </div>
+
+        <div class="experience-card tilt-card" data-tilt>
+          <div class="exp-header">
+            <div class="exp-company-logo">
+              <span>EDAG</span>
+            </div>
+            <div class="exp-title-group">
+              <h3 class="exp-role">IT Intern</h3>
+              <p class="exp-company">EDAG Holding Sdn. Bhd.</p>
+            </div>
+            <div class="exp-period">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+              March 2026 – Present
+            </div>
+          </div>
+
+          <p class="exp-intro">
+            Supporting enterprise IT operations through system administration, security access control, and technical troubleshooting across multi-platform environments.
+          </p>
+
+          <div class="exp-responsibilities">
+            <div class="resp-item">
+              <div class="resp-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div>
+                <h4>Active Directory & Access Control</h4>
+                <p>Administer Active Directory user accounts, group policies, and access permissions to enforce secure identity management and role-based access control.</p>
+              </div>
+            </div>
+
+            <div class="resp-item">
+              <div class="resp-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+              </div>
+              <div>
+                <h4>Windows & Linux Systems Management</h4>
+                <p>Maintain OS environments (Windows 10/11, Ubuntu, Rocky Linux, Kali Linux), performing system configuration, security patching, and server support.</p>
+              </div>
+            </div>
+
+            <div class="resp-item">
+              <div class="resp-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              </div>
+              <div>
+                <h4>IT Service Desk & Incident Resolution</h4>
+                <p>Resolve IT support tickets, investigate hardware/software/network issues, minimizing operational service disruptions while meeting SLA response times.</p>
+              </div>
+            </div>
+
+            <div class="resp-item">
+              <div class="resp-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div>
+                <h4>TISAX & ISO 9001 Compliance Audit</h4>
+                <p>Participate in automotive security compliance (TISAX) and ISO 9001 quality audits through evidence collection, documentation, and process adherence verification.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Innovation & Engineering</span>
+          <h2 class="section-title">Featured Projects</h2>
+          <div class="title-bar"></div>
+        </div>
+
+        <!-- Project Filter Tabs -->
+        <div class="filter-tabs">
+          <button class="tab-btn active" data-filter="all">All Projects</button>
+          <button class="tab-btn" data-filter="ai">AI & Sentiment Analysis</button>
+          <button class="tab-btn" data-filter="hci">HCI & Smart Devices</button>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Project 1: SentRa -->
+          <div class="project-card tilt-card" data-tilt data-category="ai">
+            <div class="project-header-bar">
+              <span class="project-category-badge">Final Year Project</span>
+              <span class="project-year">2025/2026</span>
+            </div>
+
+            <div class="project-content">
+              <h3 class="project-title">SentRa: Bilingual Sentiment Analysis System</h3>
+              <p class="project-subtitle">Opinion Mining for Student Feedback on Lecturer Evaluations</p>
+              
+              <p class="project-description">
+                Developed a Python sentiment analysis platform designed for bilingual (Malay & English) lecturer evaluation comments. Uses custom domain lexicons, automated text preprocessing, and machine learning models.
+              </p>
+
+              <div class="project-tags">
+                <span class="tag">Python</span>
+                <span class="tag">Opinion Mining</span>
+                <span class="tag">Machine Learning</span>
+                <span class="tag">Bilingual NLP</span>
+                <span class="tag">Word Cloud Viz</span>
+              </div>
+
+              <div class="project-actions">
+                <button class="btn btn-sm btn-primary open-modal-btn" data-project="sentra">
+                  Explore Project Details
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2: S.M.A.R.T. Mirror -->
+          <div class="project-card tilt-card" data-tilt data-category="hci">
+            <div class="project-header-bar">
+              <span class="project-category-badge award-badge">InTeLex 2024 • Silver Award</span>
+              <span class="project-year">2024</span>
+            </div>
+
+            <div class="project-content">
+              <h3 class="project-title">S.M.A.R.T. Mirror Concept & Interactive Prototype</h3>
+              <p class="project-subtitle">AI-Powered Health Monitoring & Productivity Assistant</p>
+              
+              <p class="project-description">
+                Award-winning smart mirror concept engineered with HCI principles. Created a medium-fidelity interactive Figma prototype featuring personalized health metrics, AI voice controls, and accessible dashboard UI.
+              </p>
+
+              <div class="project-tags">
+                <span class="tag">Figma Prototype</span>
+                <span class="tag">HCI Design</span>
+                <span class="tag">UI/UX Navigation</span>
+                <span class="tag">Smart Health AI</span>
+              </div>
+
+              <div class="project-actions">
+                <button class="btn btn-sm btn-primary open-modal-btn" data-project="smartmirror">
+                  Explore Project Details
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Skills & Tools Section -->
+    <section class="section section-alt" id="skills">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Technical Competencies</span>
+          <h2 class="section-title">Skills & Toolset</h2>
+          <div class="title-bar"></div>
+        </div>
+
+        <div class="skills-categories-grid">
+          <!-- Programming -->
+          <div class="skill-category-card tilt-card" data-tilt>
+            <div class="skill-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <h3>Programming Languages</h3>
+            <div class="skill-badges">
+              <span class="skill-badge main-skill">Python</span>
+              <span class="skill-badge main-skill">Java (DrJava)</span>
+              <span class="skill-badge">PHP</span>
+              <span class="skill-badge">HTML5</span>
+              <span class="skill-badge">CSS3</span>
+              <span class="skill-badge">JavaScript</span>
+              <span class="skill-badge">C++</span>
+            </div>
+          </div>
+
+          <!-- Data & AI -->
+          <div class="skill-category-card tilt-card" data-tilt>
+            <div class="skill-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/><path d="M9 10a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-4z"/></svg>
+            </div>
+            <h3>Data Analytics & AI</h3>
+            <div class="skill-badges">
+              <span class="skill-badge main-skill">Data Analytics</span>
+              <span class="skill-badge main-skill">Machine Learning</span>
+              <span class="skill-badge">Anaconda Navigator</span>
+              <span class="skill-badge">Opinion Mining</span>
+              <span class="skill-badge">Lexicon Lexical Rules</span>
+            </div>
+          </div>
+
+          <!-- Systems & Security -->
+          <div class="skill-category-card tilt-card" data-tilt>
+            <div class="skill-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <h3>Systems & Security</h3>
+            <div class="skill-badges">
+              <span class="skill-badge main-skill">Active Directory</span>
+              <span class="skill-badge main-skill">MySQL Database</span>
+              <span class="skill-badge">Digital Forensics</span>
+              <span class="skill-badge">Kali Linux</span>
+              <span class="skill-badge">Ubuntu / Rocky Linux</span>
+              <span class="skill-badge">Windows Admin</span>
+            </div>
+          </div>
+
+          <!-- Tools & Cloud -->
+          <div class="skill-category-card tilt-card" data-tilt>
+            <div class="skill-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>
+            </div>
+            <h3>Tools, Cloud & DB</h3>
+            <div class="skill-badges">
+              <span class="skill-badge main-skill">VS Code</span>
+              <span class="skill-badge main-skill">Supabase</span>
+              <span class="skill-badge main-skill">Vercel</span>
+              <span class="skill-badge">GitHub</span>
+              <span class="skill-badge">XAMPP</span>
+              <span class="skill-badge">Figma</span>
+              <span class="skill-badge">Canva</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Certifications & Languages -->
+        <div class="cert-lang-grid">
+          <div class="cert-card tilt-card" data-tilt>
+            <h3>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15l-2 5l-2-2l-2 2l1-5"/><circle cx="12" cy="9" r="6"/></svg>
+              Certifications
+            </h3>
+            <div class="cert-list">
+              <div class="cert-item">
+                <span class="cert-badge">Google Certified</span>
+                <div>
+                  <h4>Technical Support Fundamentals</h4>
+                  <p>Google IT Support Professional Certificate Course</p>
+                </div>
+              </div>
+              <div class="cert-item">
+                <span class="cert-badge">Google Certified</span>
+                <div>
+                  <h4>The Bits and Bytes of Computer Networking</h4>
+                  <p>Computer Networking Protocols, TCP/IP & Network Routing</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lang-card tilt-card" data-tilt>
+            <h3>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              Language Proficiency
+            </h3>
+            <div class="lang-list">
+              <div class="lang-item">
+                <span class="lang-name">Malay</span>
+                <span class="lang-level">Native / Mother Tongue</span>
+              </div>
+              <div class="lang-item">
+                <span class="lang-name">English</span>
+                <span class="lang-level">Advanced (MUET Band 4.0)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Leadership & Awards Section -->
+    <section class="section" id="leadership">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Extracurricular & Honors</span>
+          <h2 class="section-title">Leadership & Awards</h2>
+          <div class="title-bar"></div>
+        </div>
+
+        <div class="leadership-grid">
+          <!-- Awards Column -->
+          <div class="awards-col">
+            <h3 class="col-title">Awards & Honors</h3>
+
+            <div class="award-item-card tilt-card" data-tilt>
+              <div class="award-trophy">🏆</div>
+              <div>
+                <h4>Dean's Award (4 Consecutive Semesters)</h4>
+                <p>Bachelor of Computer Science (Hons) • UPNM</p>
+                <span class="award-tag">Session 2023/2024 & 2024/2025</span>
+              </div>
+            </div>
+
+            <div class="award-item-card tilt-card" data-tilt>
+              <div class="award-trophy">🥈</div>
+              <div>
+                <h4>InTeLex 2024 Silver Award Winner</h4>
+                <p>S.M.A.R.T. Mirror HCI Health Monitoring Project</p>
+                <span class="award-tag">Innovation & Technology Exhibition</span>
+              </div>
+            </div>
+
+            <div class="award-item-card tilt-card" data-tilt>
+              <div class="award-trophy">⭐</div>
+              <div>
+                <h4>Excellent Academic Award (CGPA 3.57)</h4>
+                <p>Foundation in Medicine • UPNM</p>
+              </div>
+            </div>
+
+            <div class="award-item-card tilt-card" data-tilt>
+              <div class="award-trophy">🎓</div>
+              <div>
+                <h4>Straight A's SPM Academic Excellence</h4>
+                <p>SMK Yam Tuan Radin (3A+ 4A 2A-)</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Leadership Positions -->
+          <div class="leadership-col">
+            <h3 class="col-title">Club Leadership Roles</h3>
+
+            <div class="leader-card tilt-card" data-tilt>
+              <div class="leader-role-badge">Secretary</div>
+              <h4>UPNM Defence Science & Technology Club (DeSTeC)</h4>
+              <p class="leader-period">2024 – 2025 (Secretary) | 2023 – 2024 (Cultural Exco)</p>
+              <p class="leader-desc">Managed club administrative documentation, event proposals, official communications, and cultural activities for UPNM technology students.</p>
+            </div>
+
+            <div class="leader-card tilt-card" data-tilt>
+              <div class="leader-role-badge">Vice Secretary</div>
+              <h4>UPNM Chess Club</h4>
+              <p class="leader-period">2024 – 2025</p>
+              <p class="leader-desc">Co-organized campus-wide chess tournaments, managed player registrations and committee proceedings for the Grandmasters Cup.</p>
+            </div>
+
+            <div class="leader-card tilt-card" data-tilt>
+              <div class="leader-role-badge">Active Member</div>
+              <h4>UPNM Silat Cekak Pusaka Ustaz Hanafi Club</h4>
+              <p class="leader-period">2023 – 2024</p>
+              <p class="leader-desc">Participated in martial arts training, self-defense workshops, and cultural heritage demonstrations.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Co-curricular Programmes Grid -->
+        <div class="programmes-wrapper">
+          <h3 class="col-title">Event Leadership & Volunteer Work</h3>
+          <div class="programmes-grid">
+            <div class="programme-chip">
+              <span class="chip-role">Programme Director</span>
+              <span class="chip-title">Mastering EPP Skills 2.0 (MEPPS): Python Edition</span>
+            </div>
+            <div class="programme-chip">
+              <span class="chip-role">Deputy Director</span>
+              <span class="chip-title">Sinar Menuju Kejayaan Programme</span>
+            </div>
+            <div class="programme-chip">
+              <span class="chip-role">Secretary</span>
+              <span class="chip-title">Malaysia–Indonesia Academic & Cultural Exchange (MIACEP 2025)</span>
+            </div>
+            <div class="programme-chip">
+              <span class="chip-role">Secretary</span>
+              <span class="chip-title">FSTP Dean's Award Ceremony 2025</span>
+            </div>
+            <div class="programme-chip">
+              <span class="chip-role">Deputy Secretary</span>
+              <span class="chip-title">Grandmasters Cup Chess Tournament</span>
+            </div>
+            <div class="programme-chip">
+              <span class="chip-role">Volunteer</span>
+              <span class="chip-title">Humanitarian Relief Mission for Gaza</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact & Tech Ecosystem Section -->
+    <section class="section section-alt" id="contact">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Get In Touch</span>
+          <h2 class="section-title">Let's Connect & Work Together</h2>
+          <div class="title-bar"></div>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Left Info & Tech Ecosystem Badges -->
+          <div class="contact-info-col tilt-card" data-tilt>
+            <h3>Contact Information</h3>
+            <p>I am open to full-time IT positions, Software Engineering roles, and collaborative projects. Feel free to reach out via email or LinkedIn!</p>
+
+            <div class="contact-details">
+              <a href="mailto:nawwarah.zulkifli123@gmail.com" class="contact-item">
+                <div class="contact-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                </div>
+                <div>
+                  <span class="label">Email</span>
+                  <span class="value">nawwarah.zulkifli123@gmail.com</span>
+                </div>
+              </a>
+
+              <a href="tel:+601160934124" class="contact-item">
+                <div class="contact-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </div>
+                <div>
+                  <span class="label">Phone</span>
+                  <span class="value">+60 11-6093 4124</span>
+                </div>
+              </a>
+
+              <a href="https://www.linkedin.com/in/nawwarah-zulkifli" target="_blank" class="contact-item">
+                <div class="contact-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.74a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2Z"/></svg>
+                </div>
+                <div>
+                  <span class="label">LinkedIn</span>
+                  <span class="value">linkedin.com/in/nawwarah-zulkifli</span>
+                </div>
+              </a>
+            </div>
+
+            <!-- Tech Ecosystem Section -->
+            <div class="tech-ecosystem-box">
+              <h4>Deployment & Infrastructure</h4>
+              <div class="ecosystem-badges">
+                <div class="eco-badge">
+                  <svg width="18" height="18" viewBox="0 0 512 512" fill="currentColor"><path d="M256 48L496 464H16L256 48Z"/></svg>
+                  <span>Hosted on <strong>Vercel</strong></span>
+                </div>
+                <div class="eco-badge">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg>
+                  <span>Code on <strong>GitHub</strong></span>
+                </div>
+                <div class="eco-badge">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21.362 9.354H12.003L19.467.525A.5.5 0 0 0 19.083 0H9.503a.5.5 0 0 0-.46.304l-6.5 15a.5.5 0 0 0 .46.696h9.359l-7.464 8.829a.5.5 0 0 0 .384.825h9.58a.5.5 0 0 0 .46-.304l6.5-15a.5.5 0 0 0-.46-.696z"/></svg>
+                  <span>Database via <strong>Supabase</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="contact-form-card tilt-card" data-tilt>
+            <form id="contact-form" class="contact-form">
+              <h3>Send Me a Message</h3>
+              
+              <div class="form-group">
+                <label for="form-name">Your Name</label>
+                <input type="text" id="form-name" placeholder="e.g. Sarah Ahmad" required>
+              </div>
+
+              <div class="form-group">
+                <label for="form-email">Your Email</label>
+                <input type="email" id="form-email" placeholder="name@company.com" required>
+              </div>
+
+              <div class="form-group">
+                <label for="form-subject">Subject</label>
+                <input type="text" id="form-subject" placeholder="Job Opportunity / Project Inquiry" required>
+              </div>
+
+              <div class="form-group">
+                <label for="form-message">Message</label>
+                <textarea id="form-message" rows="4" placeholder="Write your message here..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block" id="submit-btn">
+                <span>Send Message</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" x2="11" y1="2" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <p>© 2026 Nawwarah Binti Zulkifli. Designed & Built with Precision.</p>
+      <div class="footer-links">
+        <a href="#hero">Back to Top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Project Details Modal Container -->
+  <div class="modal-overlay" id="project-modal">
+    <div class="modal-card">
+      <button class="modal-close" id="modal-close-btn">&times;</button>
+      <div id="modal-body">
+        <!-- Dynamic modal content loaded via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <span class="toast-icon">✓</span>
+    <span id="toast-message">Message sent successfully!</span>
+  </div>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
