@@ -1,13 +1,12 @@
 /**
  * Nawwarah Zulkifli Portfolio - Main Interactive Logic
- * Dark/Light Mode Engine, Vibrant 3D Liquid Motion, Cursor Physics, 3D Card Tilt, Project Filters, Modal Viewer.
+ * Osu! Style Cursor Trail Engine, Theme Toggle, Skills Matrix, Modal Viewer, and Mobile Responsiveness.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   initThemeToggle();
-  initCursorTracker();
-  init3DTilt();
-  initProjectFilters();
+  initOsuCursorTrail();
+  initSkillsFilter();
   initModals();
   initContactForm();
   initNavigation();
@@ -21,7 +20,6 @@ function initThemeToggle() {
   const btn = document.getElementById('theme-toggle');
   const html = document.documentElement;
 
-  // 1. Determine initial theme
   const savedTheme = localStorage.getItem('portfolio-theme');
   if (savedTheme === 'dark' || savedTheme === 'light') {
     html.setAttribute('data-theme', savedTheme);
@@ -32,7 +30,6 @@ function initThemeToggle() {
 
   if (!btn) return;
 
-  // 2. Click Event Listener
   btn.addEventListener('click', (e) => {
     e.preventDefault();
     const currentTheme = html.getAttribute('data-theme') || 'light';
@@ -42,7 +39,6 @@ function initThemeToggle() {
     localStorage.setItem('portfolio-theme', nextTheme);
   });
 
-  // 3. Listen for system theme changes if no manual preference set
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
     if (!localStorage.getItem('portfolio-theme')) {
       html.setAttribute('data-theme', e.matches ? 'dark' : 'light');
@@ -51,104 +47,114 @@ function initThemeToggle() {
 }
 
 /* ==========================================================================
-   1. CURSOR TRACKER & SPOTLIGHT ENGINE (60 FPS LERP PHYSICS)
+   1. OSU! STYLE INTERACTIVE CURSOR TRAIL ENGINE (60 FPS CANVAS PHYSICS)
    ========================================================================== */
-function initCursorTracker() {
+function initOsuCursorTrail() {
   const dot = document.getElementById('cursor-dot');
   const ring = document.getElementById('cursor-ring');
-  const spotlight = document.getElementById('cursor-spotlight');
+  const canvas = document.getElementById('osu-cursor-canvas');
 
-  if (!dot || !ring || !spotlight) return;
+  if (!dot || !ring || !canvas) return;
 
-  let mouseX = window.innerWidth / 2;
-  let mouseY = window.innerHeight / 2;
+  const ctx = canvas.getContext('2d');
+  let width = (canvas.width = window.innerWidth);
+  let height = (canvas.height = window.innerHeight);
+
+  window.addEventListener('resize', () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  });
+
+  let mouseX = width / 2;
+  let mouseY = height / 2;
   let ringX = mouseX;
   let ringY = mouseY;
+
+  const particles = [];
 
   window.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
 
     dot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
-    spotlight.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+
+    // Spawn Osu! glowing trail particles
+    for (let i = 0; i < 2; i++) {
+      particles.push({
+        x: mouseX + (Math.random() - 0.5) * 4,
+        y: mouseY + (Math.random() - 0.5) * 4,
+        radius: Math.random() * 6 + 4,
+        alpha: 0.85,
+        decay: Math.random() * 0.03 + 0.025,
+        color: '#38BDF8'
+      });
+    }
   });
 
-  // Smooth lerp physics for cursor ring
-  function animateRing() {
+  // Render loop
+  function renderTrail() {
+    ctx.clearRect(0, 0, width, height);
+
+    // Smooth lerp for outer ring
     ringX += (mouseX - ringX) * 0.18;
     ringY += (mouseY - ringY) * 0.18;
-
     ring.style.transform = `translate(${ringX}px, ${ringY}px)`;
-    requestAnimationFrame(animateRing);
+
+    // Draw and decay Osu! trail particles
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.alpha -= p.decay;
+      p.radius *= 0.95;
+
+      if (p.alpha <= 0 || p.radius <= 0.5) {
+        particles.splice(i, 1);
+        continue;
+      }
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(56, 189, 248, ${p.alpha})`;
+      ctx.shadowBlur = 12;
+      ctx.shadowColor = '#38BDF8';
+      ctx.fill();
+      ctx.restore();
+    }
+
+    requestAnimationFrame(renderTrail);
   }
-  animateRing();
 
-  // Hover animations for interactive elements
-  const interactiveElements = document.querySelectorAll(
-    'a, button, .tilt-card, input, textarea, .tab-btn, .programme-chip, .skill-badge, .contact-item'
-  );
+  renderTrail();
 
-  interactiveElements.forEach((el) => {
-    el.addEventListener('mouseenter', () => {
-      ring.classList.add('active');
-    });
-    el.addEventListener('mouseleave', () => {
-      ring.classList.remove('active');
-    });
+  // Hover effect over interactive elements
+  const interactiveEls = document.querySelectorAll('a, button, .skill-chip-item, .contact-item, input, textarea');
+  interactiveEls.forEach((el) => {
+    el.addEventListener('mouseenter', () => ring.classList.add('active'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('active'));
   });
 }
 
 /* ==========================================================================
-   2. 3D PERSPECTIVE CARD TILT EFFECT
+   2. SKILLS CATEGORY FILTER
    ========================================================================== */
-function init3DTilt() {
-  const tiltCards = document.querySelectorAll('.tilt-card');
+function initSkillsFilter() {
+  const tabs = document.querySelectorAll('.skill-tab-btn');
+  const items = document.querySelectorAll('.skill-chip-item');
 
-  tiltCards.forEach((card) => {
-    if (card.hasAttribute('data-tilt-disabled')) return;
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      tabs.forEach((t) => t.classList.remove('active'));
+      tab.classList.add('active');
 
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      const cat = tab.getAttribute('data-skill-cat');
 
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-
-      const rotateX = ((y - centerY) / centerY) * -8; // Max 8 deg rotation
-      const rotateY = ((x - centerX) / centerX) * 8;
-
-      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.01, 1.01, 1.01)`;
-    });
-
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-    });
-  });
-}
-
-/* ==========================================================================
-   3. PROJECT FILTER TABS
-   ========================================================================== */
-function initProjectFilters() {
-  const filterBtns = document.querySelectorAll('.filter-tabs .tab-btn');
-  const projectCards = document.querySelectorAll('.projects-grid .project-card');
-
-  filterBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      // Remove active from all
-      filterBtns.forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const filterValue = btn.getAttribute('data-filter');
-
-      projectCards.forEach((card) => {
-        const category = card.getAttribute('data-category');
-        if (filterValue === 'all' || category === filterValue) {
-          card.style.display = 'flex';
-          card.style.animation = 'fadeIn 0.4s ease forwards';
+      items.forEach((item) => {
+        const itemCat = item.getAttribute('data-cat');
+        if (cat === 'all' || itemCat === cat) {
+          item.style.display = 'inline-flex';
+          item.style.animation = 'fadeIn 0.3s ease forwards';
         } else {
-          card.style.display = 'none';
+          item.style.display = 'none';
         }
       });
     });
@@ -156,7 +162,7 @@ function initProjectFilters() {
 }
 
 /* ==========================================================================
-   4. MODAL POPUP FOR PROJECT DETAILS
+   3. MODAL POPUP FOR PROJECT DETAILS
    ========================================================================== */
 const projectData = {
   sentra: {
@@ -175,7 +181,7 @@ const projectData = {
         <li><strong>Actionable Management Insights:</strong> Equips faculty deans and department heads with quantitative feedback dashboards to improve teaching delivery.</li>
       </ul>
 
-      <div style="background: var(--accent-light); padding: 1rem; border-radius: 12px; border-left: 4px solid var(--primary); margin-top: 1rem; color: var(--text-main);">
+      <div style="background: var(--accent-light); padding: 1rem; border-radius: 12px; border-left: 4px solid var(--secondary); margin-top: 1rem; color: var(--text-main);">
         <strong style="color: var(--heading-color);">Tech Stack:</strong> Python, NLTK/Scikit-learn, Anaconda Navigator, Pandas/NumPy, Matplotlib/WordCloud, HTML5/CSS3.
       </div>
     `
@@ -196,7 +202,7 @@ const projectData = {
         <li><strong>Stakeholder Pitching:</strong> Presented design rationale, user testing results, and operational feasibility to academic and industry judges.</li>
       </ul>
 
-      <div style="background: var(--accent-light); padding: 1rem; border-radius: 12px; border-left: 4px solid var(--secondary); margin-top: 1rem; color: var(--text-main);">
+      <div style="background: var(--accent-light); padding: 1rem; border-radius: 12px; border-left: 4px solid var(--accent); margin-top: 1rem; color: var(--text-main);">
         <strong style="color: var(--heading-color);">Design Tools:</strong> Figma, Adobe Illustrator, HCI Evaluation Heuristics, Canva.
       </div>
     `
@@ -218,7 +224,7 @@ function initModals() {
 
       if (data) {
         modalBody.innerHTML = `
-          <span style="display:inline-block; background: var(--accent-light); color: var(--primary); font-size: 0.75rem; font-weight:700; padding: 0.25rem 0.65rem; border-radius: 9999px; margin-bottom: 0.5rem;">
+          <span style="display:inline-block; background: var(--accent-light); color: var(--secondary); font-size: 0.75rem; font-weight:700; padding: 0.25rem 0.65rem; border-radius: 9999px; margin-bottom: 0.5rem;">
             ${data.category}
           </span>
           <h2 style="font-size: 1.6rem; color: var(--heading-color); margin-bottom: 0.25rem;">${data.title}</h2>
@@ -243,7 +249,7 @@ function initModals() {
 }
 
 /* ==========================================================================
-   5. CONTACT FORM & SUPABASE READY HANDLING
+   4. CONTACT FORM & SUPABASE HANDLING
    ========================================================================== */
 function initContactForm() {
   const form = document.getElementById('contact-form');
@@ -259,11 +265,9 @@ function initContactForm() {
     const subject = document.getElementById('form-subject').value;
     const message = document.getElementById('form-message').value;
 
-    // Button loading state
     submitBtn.disabled = true;
     submitBtn.innerHTML = `<span>Sending...</span>`;
 
-    // Simulated network delay & Supabase payload log
     setTimeout(() => {
       console.log('Sending message to Supabase database:', { name, email, subject, message, timestamp: new Date().toISOString() });
 
@@ -293,7 +297,7 @@ function showToast(message) {
 }
 
 /* ==========================================================================
-   6. MOBILE NAVIGATION & SCROLL OBSERVER
+   5. MOBILE NAVIGATION & SCROLL OBSERVER
    ========================================================================== */
 function initNavigation() {
   const toggleBtn = document.getElementById('mobile-toggle');
@@ -305,7 +309,6 @@ function initNavigation() {
       navMenu.classList.toggle('active');
     });
 
-    // Close menu when clicking links
     navMenu.querySelectorAll('.nav-link').forEach((link) => {
       link.addEventListener('click', () => {
         navMenu.classList.remove('active');
@@ -313,7 +316,6 @@ function initNavigation() {
     });
   }
 
-  // Sticky Navbar style on scroll
   window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
       navbar.classList.add('scrolled');
@@ -324,7 +326,7 @@ function initNavigation() {
 }
 
 /* ==========================================================================
-   7. RESUME CV DOWNLOAD & PRINT
+   6. RESUME CV DOWNLOAD & PRINT
    ========================================================================== */
 function initResumeDownload() {
   const cvBtn = document.getElementById('download-cv-btn');
@@ -338,10 +340,10 @@ function initResumeDownload() {
       <head>
         <title>Nawwarah Binti Zulkifli - Resume</title>
         <style>
-          body { font-family: sans-serif; line-height: 1.5; color: #0F1F21; padding: 2rem; max-width: 800px; margin: 0 auto; }
-          h1 { color: #3148F2; margin-bottom: 0.2rem; }
-          h2 { color: #983AF5; font-size: 1.1rem; border-bottom: 2px solid #E5E7EB; padding-bottom: 0.3rem; margin-top: 1.5rem; }
-          .contact { font-size: 0.9rem; color: #64748B; margin-bottom: 1.5rem; }
+          body { font-family: sans-serif; line-height: 1.5; color: #1F2937; padding: 2rem; max-width: 800px; margin: 0 auto; }
+          h1 { color: #1E3A8A; margin-bottom: 0.2rem; }
+          h2 { color: #3B82F6; font-size: 1.1rem; border-bottom: 2px solid #E2E8F0; padding-bottom: 0.3rem; margin-top: 1.5rem; }
+          .contact { font-size: 0.9rem; color: #4B5563; margin-bottom: 1.5rem; }
           ul { padding-left: 1.2rem; }
           li { margin-bottom: 0.3rem; }
         </style>

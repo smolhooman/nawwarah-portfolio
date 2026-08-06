@@ -14,28 +14,14 @@
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <!-- Vibrant 3D Liquid Metaball & Lava Lamp Background -->
-  <div id="liquid-3d-bg" aria-hidden="true">
-    <!-- 3D Liquid Dumbbells & Morphing Blobs -->
-    <div class="liquid-shape liquid-dumbbell-1"></div>
-    <div class="liquid-shape liquid-dumbbell-2"></div>
-    <div class="liquid-shape liquid-blob-3"></div>
-    <div class="liquid-shape liquid-orb-4"></div>
-    <div class="liquid-shape liquid-orb-5"></div>
-
-    <!-- Floating 3D Micro Droplets -->
-    <div class="liquid-droplet drop-1"></div>
-    <div class="liquid-droplet drop-2"></div>
-    <div class="liquid-droplet drop-3"></div>
-    <div class="liquid-droplet drop-4"></div>
-    <div class="liquid-droplet drop-5"></div>
-    <div class="liquid-droplet drop-6"></div>
-  </div>
-
-  <!-- Custom Mouse Cursor Elements -->
+  <!-- OSU! Style Interactive Cursor Canvas -->
   <div class="cursor-dot" id="cursor-dot"></div>
   <div class="cursor-ring" id="cursor-ring"></div>
-  <div class="cursor-spotlight" id="cursor-spotlight"></div>
+  <canvas id="osu-cursor-canvas"></canvas>
+
+  <!-- Ambient Glow Background Blobs -->
+  <div class="ambient-glow bg-glow-1"></div>
+  <div class="ambient-glow bg-glow-2"></div>
 
   <!-- Navigation Header -->
   <header class="navbar" id="navbar">
@@ -52,6 +38,7 @@
 
       <nav class="nav-menu" id="nav-menu">
         <a href="#about" class="nav-link">About</a>
+        <a href="#education" class="nav-link">Education</a>
         <a href="#experience" class="nav-link">Experience</a>
         <a href="#projects" class="nav-link">Projects</a>
         <a href="#skills" class="nav-link">Skills</a>
@@ -61,7 +48,6 @@
 
       <!-- Dark / Light Theme Toggle -->
       <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle Dark / Light Mode" title="Toggle Theme">
-        <!-- Sun icon (shown in light mode) -->
         <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="5"/>
           <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
@@ -69,7 +55,6 @@
           <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
           <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
         </svg>
-        <!-- Moon icon (shown in dark mode) -->
         <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
         </svg>
@@ -88,7 +73,7 @@
     <section class="hero-section" id="hero">
       <div class="container hero-grid">
         <!-- Hero Text Column -->
-        <div class="hero-content" data-tilt-disabled>
+        <div class="hero-content">
           <div class="hero-pill-tag">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
             Computer Science (Hons) Student • CGPA 3.79
@@ -131,11 +116,9 @@
           </div>
         </div>
 
-        <!-- Hero Card / Profile Feature Visual -->
+        <!-- Hero Feature Card -->
         <div class="hero-visual-wrapper">
-          <div class="hero-card tilt-card" data-tilt>
-            <div class="card-glow-overlay"></div>
-            
+          <div class="hero-card">
             <div class="hero-card-header">
               <div class="avatar-box">
                 <span class="avatar-initials">NZ</span>
@@ -176,86 +159,59 @@
               <span class="tech-tag">Supabase</span>
             </div>
           </div>
-
-          <!-- Floating Badges -->
-          <div class="floating-badge badge-top-right">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            Google Certified Technical Support
-          </div>
-          <div class="floating-badge badge-bottom-left">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-            TISAX & ISO 9001 Audit Ready
-          </div>
         </div>
       </div>
     </section>
 
-    <!-- About & Education Section -->
+    <!-- About Me Section (Clean Minimalist: Photo Left + Direct Text Right) -->
     <section class="section" id="about">
       <div class="container">
         <div class="section-header">
-          <span class="section-subtitle">Academic Excellence</span>
-          <h2 class="section-title">Education & Background</h2>
+          <span class="section-subtitle">Get to Know Me</span>
+          <h2 class="section-title">About Me</h2>
           <div class="title-bar"></div>
         </div>
 
-        <div class="about-grid">
-          <div class="about-bio-card tilt-card" data-tilt>
-            <div class="bio-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-            </div>
-            <h3>Professional Profile</h3>
-            <p>
-              I am a dedicated Computer Science student with a strong academic standing of <strong>CGPA 3.79</strong> at National Defence University of Malaysia (UPNM). Combined with practical IT enterprise experience at <strong>EDAG Holding Sdn. Bhd.</strong>, I bridge the gap between technical infrastructure, database architecture, and user-centric software development.
-            </p>
-            
-            <div class="bio-highlights">
-              <div class="highlight-item">
-                <span class="highlight-num">100%</span>
-                <span class="highlight-desc">Commitment to IT Operations & Compliance</span>
-              </div>
-              <div class="highlight-item">
-                <span class="highlight-num">4</span>
-                <span class="highlight-desc">Consecutive Dean's Award Semesters</span>
+        <div class="about-minimal-grid">
+          <!-- Profile Photo Frame Left -->
+          <div class="about-photo-wrapper">
+            <div class="photo-frame">
+              <img src="./images/profile.png" alt="Nawwarah Zulkifli Profile" class="profile-photo">
+              <div class="photo-badge">
+                <span class="badge-icon">🎓</span>
+                <span>CGPA 3.79 Recipient</span>
               </div>
             </div>
           </div>
 
-          <div class="education-timeline">
-            <!-- Degree -->
-            <div class="edu-card tilt-card" data-tilt>
-              <div class="edu-year">2023 - Present</div>
-              <div class="edu-details">
-                <h3>Bachelor's Degree in Computer Science (Honours)</h3>
-                <p class="edu-institution">Universiti Pertahanan Nasional Malaysia (UPNM)</p>
-                <div class="edu-cgpa-pill">CGPA: 3.79 / 4.00</div>
-                <ul class="edu-bullet-list">
-                  <li>Dean's Award Recipient (Semester 1 & 2 Session 2023/2024)</li>
-                  <li>Dean's Award Recipient (Semester 1 & 2 Session 2024/2025)</li>
-                  <li>Relevant Coursework: Web Programming, Data Structures, OOP, Database Systems, Operating Systems, Big Data Analytics, Software Engineering, Digital Forensics.</li>
-                </ul>
-              </div>
-            </div>
+          <!-- Description Text Right (No Bulky Container) -->
+          <div class="about-text-content">
+            <h3 class="about-heading">Passionate Computer Scientist & Technical Administrator</h3>
+            
+            <p class="about-paragraph">
+              I am a final-year <strong>Bachelor of Computer Science (Hons)</strong> student at Universiti Pertahanan Nasional Malaysia (UPNM) with a strong academic standing of <strong>CGPA 3.79</strong>. 
+            </p>
+            
+            <p class="about-paragraph">
+              Currently working as an <strong>IT Intern at EDAG Holding Sdn. Bhd.</strong>, I support enterprise IT operations, administer Active Directory environments, troubleshoot Windows and Linux servers, and assist in TISAX and ISO 9001 security compliance audits.
+            </p>
 
-            <!-- Foundation -->
-            <div class="edu-card tilt-card" data-tilt>
-              <div class="edu-year">2022 - 2023</div>
-              <div class="edu-details">
-                <h3>Foundation in Medicine</h3>
-                <p class="edu-institution">Universiti Pertahanan Nasional Malaysia (UPNM)</p>
-                <div class="edu-cgpa-pill">CGPA: 3.57 / 4.00</div>
-                <p class="edu-subtext">Awarded Excellent Academic Award for high academic performance.</p>
-              </div>
-            </div>
+            <p class="about-paragraph">
+              My technical expertise spans full-stack web development, Python data analytics, sentiment analysis machine learning, and system infrastructure.
+            </p>
 
-            <!-- SPM -->
-            <div class="edu-card tilt-card" data-tilt>
-              <div class="edu-year">2019 - 2021</div>
-              <div class="edu-details">
-                <h3>Malayan Certificate of Education (SPM)</h3>
-                <p class="edu-institution">SMK Yam Tuan Radin, Negeri Sembilan</p>
-                <div class="edu-cgpa-pill">Result: 3A+ | 4A | 2A-</div>
-                <p class="edu-subtext">Achieved Straight A's in SPM; awarded for outstanding academic excellence.</p>
+            <div class="about-stats-inline">
+              <div class="inline-stat">
+                <span class="stat-val">3.79</span>
+                <span class="stat-lbl">Academic CGPA</span>
+              </div>
+              <div class="inline-stat">
+                <span class="stat-val">4x</span>
+                <span class="stat-lbl">Dean's List Award</span>
+              </div>
+              <div class="inline-stat">
+                <span class="stat-val">100%</span>
+                <span class="stat-lbl">System Reliability</span>
               </div>
             </div>
           </div>
@@ -263,8 +219,67 @@
       </div>
     </section>
 
-    <!-- Work Experience Section -->
-    <section class="section section-alt" id="experience">
+    <!-- Education Section (Chronological Timeline) -->
+    <section class="section section-alt" id="education">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Academic Journey</span>
+          <h2 class="section-title">Chronological Education Timeline</h2>
+          <div class="title-bar"></div>
+        </div>
+
+        <div class="education-chronological-timeline">
+          <!-- Item 1: Degree -->
+          <div class="timeline-item">
+            <div class="timeline-marker">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-date">2023 – Present</div>
+              <h3 class="timeline-title">Bachelor's Degree in Computer Science (Honours)</h3>
+              <p class="timeline-institution">Universiti Pertahanan Nasional Malaysia (UPNM)</p>
+              <div class="timeline-cgpa">CGPA: 3.79 / 4.00</div>
+              <ul class="timeline-bullets">
+                <li>Dean's Award Recipient (Semester 1 & 2 Academic Session 2023/2024)</li>
+                <li>Dean's Award Recipient (Semester 1 & 2 Academic Session 2024/2025)</li>
+                <li>Core Focus: Web Programming, Data Structures, OOP, Database Systems, Operating Systems, Big Data Analytics, Software Engineering, Digital Forensics.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Item 2: Foundation -->
+          <div class="timeline-item">
+            <div class="timeline-marker">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-date">2022 – 2023</div>
+              <h3 class="timeline-title">Foundation in Medicine</h3>
+              <p class="timeline-institution">Universiti Pertahanan Nasional Malaysia (UPNM)</p>
+              <div class="timeline-cgpa">CGPA: 3.57 / 4.00</div>
+              <p class="timeline-subtext">Awarded Excellent Academic Award for high academic performance.</p>
+            </div>
+          </div>
+
+          <!-- Item 3: SPM -->
+          <div class="timeline-item">
+            <div class="timeline-marker">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8 21 12 17 16 21"/></svg>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-date">2019 – 2021</div>
+              <h3 class="timeline-title">Malayan Certificate of Education (SPM)</h3>
+              <p class="timeline-institution">SMK Yam Tuan Radin, Negeri Sembilan</p>
+              <div class="timeline-cgpa">Result: Straight A's (3A+ | 4A | 2A-)</div>
+              <p class="timeline-subtext">Awarded for outstanding academic performance and straight A achievements.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Work Experience Section (Maintained Intact) -->
+    <section class="section" id="experience">
       <div class="container">
         <div class="section-header">
           <span class="section-subtitle">Enterprise IT Operations</span>
@@ -272,7 +287,7 @@
           <div class="title-bar"></div>
         </div>
 
-        <div class="experience-card tilt-card" data-tilt>
+        <div class="experience-card">
           <div class="exp-header">
             <div class="exp-company-logo">
               <span>EDAG</span>
@@ -336,8 +351,8 @@
       </div>
     </section>
 
-    <!-- Projects Section -->
-    <section class="section" id="projects">
+    <!-- Featured Projects Section (Clean Layout with Interactive Picture Slides) -->
+    <section class="section section-alt" id="projects">
       <div class="container">
         <div class="section-header">
           <span class="section-subtitle">Innovation & Engineering</span>
@@ -345,40 +360,28 @@
           <div class="title-bar"></div>
         </div>
 
-        <!-- Project Filter Tabs -->
-        <div class="filter-tabs">
-          <button class="tab-btn active" data-filter="all">All Projects</button>
-          <button class="tab-btn" data-filter="ai">AI & Sentiment Analysis</button>
-          <button class="tab-btn" data-filter="hci">HCI & Smart Devices</button>
-        </div>
-
         <div class="projects-grid">
           <!-- Project 1: SentRa -->
-          <div class="project-card tilt-card" data-tilt data-category="ai">
+          <div class="project-card">
             <div class="project-header-bar">
               <span class="project-category-badge">Final Year Project</span>
               <span class="project-year">2025/2026</span>
             </div>
 
-            <div class="project-content">
+            <!-- Picture Slide Carousel -->
+            <div class="project-slider-wrapper" id="slider-sentra">
+              <div class="slider-track">
+                <img src="./images/sentra.png" alt="SentRa Sentiment Dashboard" class="slide-img active">
+              </div>
+            </div>
+
+            <div class="project-content-compact">
               <h3 class="project-title">SentRa: Bilingual Sentiment Analysis System</h3>
               <p class="project-subtitle">Opinion Mining for Student Feedback on Lecturer Evaluations</p>
-              
-              <p class="project-description">
-                Developed a Python sentiment analysis platform designed for bilingual (Malay & English) lecturer evaluation comments. Uses custom domain lexicons, automated text preprocessing, and machine learning models.
-              </p>
-
-              <div class="project-tags">
-                <span class="tag">Python</span>
-                <span class="tag">Opinion Mining</span>
-                <span class="tag">Machine Learning</span>
-                <span class="tag">Bilingual NLP</span>
-                <span class="tag">Word Cloud Viz</span>
-              </div>
 
               <div class="project-actions">
                 <button class="btn btn-sm btn-primary open-modal-btn" data-project="sentra">
-                  Explore Project Details
+                  Explore Details
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </button>
               </div>
@@ -386,30 +389,26 @@
           </div>
 
           <!-- Project 2: S.M.A.R.T. Mirror -->
-          <div class="project-card tilt-card" data-tilt data-category="hci">
+          <div class="project-card">
             <div class="project-header-bar">
               <span class="project-category-badge award-badge">InTeLex 2024 • Silver Award</span>
               <span class="project-year">2024</span>
             </div>
 
-            <div class="project-content">
+            <!-- Picture Slide Carousel -->
+            <div class="project-slider-wrapper" id="slider-smartmirror">
+              <div class="slider-track">
+                <img src="./images/smartmirror.png" alt="S.M.A.R.T. Mirror Prototype" class="slide-img active">
+              </div>
+            </div>
+
+            <div class="project-content-compact">
               <h3 class="project-title">S.M.A.R.T. Mirror Concept & Interactive Prototype</h3>
               <p class="project-subtitle">AI-Powered Health Monitoring & Productivity Assistant</p>
-              
-              <p class="project-description">
-                Award-winning smart mirror concept engineered with HCI principles. Created a medium-fidelity interactive Figma prototype featuring personalized health metrics, AI voice controls, and accessible dashboard UI.
-              </p>
-
-              <div class="project-tags">
-                <span class="tag">Figma Prototype</span>
-                <span class="tag">HCI Design</span>
-                <span class="tag">UI/UX Navigation</span>
-                <span class="tag">Smart Health AI</span>
-              </div>
 
               <div class="project-actions">
                 <button class="btn btn-sm btn-primary open-modal-btn" data-project="smartmirror">
-                  Explore Project Details
+                  Explore Details
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </button>
               </div>
@@ -419,8 +418,8 @@
       </div>
     </section>
 
-    <!-- Technical Skills & Tools Section -->
-    <section class="section section-alt" id="skills">
+    <!-- Technical Skills & Tools Section (Innovative Non-Container Tech Cloud) -->
+    <section class="section" id="skills">
       <div class="container">
         <div class="section-header">
           <span class="section-subtitle">Technical Competencies</span>
@@ -428,229 +427,224 @@
           <div class="title-bar"></div>
         </div>
 
-        <div class="skills-categories-grid">
+        <!-- Category Selector Pills -->
+        <div class="skills-category-selector">
+          <button class="skill-tab-btn active" data-skill-cat="all">All Tools & Tech</button>
+          <button class="skill-tab-btn" data-skill-cat="prog">Programming</button>
+          <button class="skill-tab-btn" data-skill-cat="data">Data & AI</button>
+          <button class="skill-tab-btn" data-skill-cat="sys">Systems & Security</button>
+          <button class="skill-tab-btn" data-skill-cat="tools">Tools & Cloud</button>
+        </div>
+
+        <!-- Dynamic Skill Badge Cloud -->
+        <div class="skills-cloud-matrix" id="skills-matrix">
           <!-- Programming -->
-          <div class="skill-category-card tilt-card" data-tilt>
-            <div class="skill-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-            </div>
-            <h3>Programming Languages</h3>
-            <div class="skill-badges">
-              <span class="skill-badge main-skill">Python</span>
-              <span class="skill-badge main-skill">Java (DrJava)</span>
-              <span class="skill-badge">PHP</span>
-              <span class="skill-badge">HTML5</span>
-              <span class="skill-badge">CSS3</span>
-              <span class="skill-badge">JavaScript</span>
-              <span class="skill-badge">C++</span>
-            </div>
+          <div class="skill-chip-item" data-cat="prog">
+            <span class="chip-icon">🐍</span>
+            <span class="chip-label">Python</span>
+            <span class="chip-level">Advanced</span>
+          </div>
+          <div class="skill-chip-item" data-cat="prog">
+            <span class="chip-icon">☕</span>
+            <span class="chip-label">Java (DrJava)</span>
+            <span class="chip-level">Intermediate</span>
+          </div>
+          <div class="skill-chip-item" data-cat="prog">
+            <span class="chip-icon">🐘</span>
+            <span class="chip-label">PHP</span>
+            <span class="chip-level">Intermediate</span>
+          </div>
+          <div class="skill-chip-item" data-cat="prog">
+            <span class="chip-icon">🌐</span>
+            <span class="chip-label">HTML5 / CSS3</span>
+            <span class="chip-level">Advanced</span>
+          </div>
+          <div class="skill-chip-item" data-cat="prog">
+            <span class="chip-icon">⚡</span>
+            <span class="chip-label">JavaScript</span>
+            <span class="chip-level">Intermediate</span>
+          </div>
+          <div class="skill-chip-item" data-cat="prog">
+            <span class="chip-icon">⚙️</span>
+            <span class="chip-label">C++</span>
+            <span class="chip-level">Foundational</span>
           </div>
 
           <!-- Data & AI -->
-          <div class="skill-category-card tilt-card" data-tilt>
-            <div class="skill-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/><path d="M9 10a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-4z"/></svg>
-            </div>
-            <h3>Data Analytics & AI</h3>
-            <div class="skill-badges">
-              <span class="skill-badge main-skill">Data Analytics</span>
-              <span class="skill-badge main-skill">Machine Learning</span>
-              <span class="skill-badge">Anaconda Navigator</span>
-              <span class="skill-badge">Opinion Mining</span>
-              <span class="skill-badge">Lexicon Lexical Rules</span>
-            </div>
+          <div class="skill-chip-item" data-cat="data">
+            <span class="chip-icon">📊</span>
+            <span class="chip-label">Data Analytics</span>
+            <span class="chip-level">Advanced</span>
+          </div>
+          <div class="skill-chip-item" data-cat="data">
+            <span class="chip-icon">🤖</span>
+            <span class="chip-label">Machine Learning</span>
+            <span class="chip-level">Intermediate</span>
+          </div>
+          <div class="skill-chip-item" data-cat="data">
+            <span class="chip-icon">🐍</span>
+            <span class="chip-label">Anaconda Navigator</span>
+            <span class="chip-level">Advanced</span>
+          </div>
+          <div class="skill-chip-item" data-cat="data">
+            <span class="chip-icon">💬</span>
+            <span class="chip-label">Opinion Mining NLP</span>
+            <span class="chip-level">Advanced</span>
           </div>
 
           <!-- Systems & Security -->
-          <div class="skill-category-card tilt-card" data-tilt>
-            <div class="skill-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            </div>
-            <h3>Systems & Security</h3>
-            <div class="skill-badges">
-              <span class="skill-badge main-skill">Active Directory</span>
-              <span class="skill-badge main-skill">MySQL Database</span>
-              <span class="skill-badge">Digital Forensics</span>
-              <span class="skill-badge">Kali Linux</span>
-              <span class="skill-badge">Ubuntu / Rocky Linux</span>
-              <span class="skill-badge">Windows Admin</span>
-            </div>
+          <div class="skill-chip-item" data-cat="sys">
+            <span class="chip-icon">🔑</span>
+            <span class="chip-label">Active Directory</span>
+            <span class="chip-level">Internship Admin</span>
+          </div>
+          <div class="skill-chip-item" data-cat="sys">
+            <span class="chip-icon">🐬</span>
+            <span class="chip-label">MySQL Database</span>
+            <span class="chip-level">Advanced</span>
+          </div>
+          <div class="skill-chip-item" data-cat="sys">
+            <span class="chip-icon">🛡️</span>
+            <span class="chip-label">Digital Forensics</span>
+            <span class="chip-level">Academic</span>
+          </div>
+          <div class="skill-chip-item" data-cat="sys">
+            <span class="chip-icon">🐉</span>
+            <span class="chip-label">Kali Linux</span>
+            <span class="chip-level">Intermediate</span>
+          </div>
+          <div class="skill-chip-item" data-cat="sys">
+            <span class="chip-icon">🐧</span>
+            <span class="chip-label">Ubuntu & Rocky Linux</span>
+            <span class="chip-level">Intermediate</span>
           </div>
 
           <!-- Tools & Cloud -->
-          <div class="skill-category-card tilt-card" data-tilt>
-            <div class="skill-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>
-            </div>
-            <h3>Tools, Cloud & DB</h3>
-            <div class="skill-badges">
-              <span class="skill-badge main-skill">VS Code</span>
-              <span class="skill-badge main-skill">Supabase</span>
-              <span class="skill-badge main-skill">Vercel</span>
-              <span class="skill-badge">GitHub</span>
-              <span class="skill-badge">XAMPP</span>
-              <span class="skill-badge">Figma</span>
-              <span class="skill-badge">Canva</span>
-            </div>
+          <div class="skill-chip-item" data-cat="tools">
+            <span class="chip-icon">💙</span>
+            <span class="chip-label">VS Code</span>
+            <span class="chip-level">Daily Driver</span>
+          </div>
+          <div class="skill-chip-item" data-cat="tools">
+            <span class="chip-icon">⚡</span>
+            <span class="chip-label">Supabase</span>
+            <span class="chip-level">Cloud DB</span>
+          </div>
+          <div class="skill-chip-item" data-cat="tools">
+            <span class="chip-icon">▲</span>
+            <span class="chip-label">Vercel</span>
+            <span class="chip-level">Deployment</span>
+          </div>
+          <div class="skill-chip-item" data-cat="tools">
+            <span class="chip-icon">🐙</span>
+            <span class="chip-label">GitHub</span>
+            <span class="chip-level">Version Control</span>
+          </div>
+          <div class="skill-chip-item" data-cat="tools">
+            <span class="chip-icon">🎨</span>
+            <span class="chip-label">Figma</span>
+            <span class="chip-level">UI/UX Prototype</span>
           </div>
         </div>
 
-        <!-- Certifications & Languages -->
-        <div class="cert-lang-grid">
-          <div class="cert-card tilt-card" data-tilt>
-            <h3>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15l-2 5l-2-2l-2 2l1-5"/><circle cx="12" cy="9" r="6"/></svg>
-              Certifications
-            </h3>
-            <div class="cert-list">
-              <div class="cert-item">
-                <span class="cert-badge">Google Certified</span>
-                <div>
-                  <h4>Technical Support Fundamentals</h4>
-                  <p>Google IT Support Professional Certificate Course</p>
-                </div>
-              </div>
-              <div class="cert-item">
-                <span class="cert-badge">Google Certified</span>
-                <div>
-                  <h4>The Bits and Bytes of Computer Networking</h4>
-                  <p>Computer Networking Protocols, TCP/IP & Network Routing</p>
-                </div>
-              </div>
-            </div>
+        <!-- Certifications & Languages Stream Row -->
+        <div class="skills-meta-stream">
+          <div class="stream-group">
+            <span class="stream-title">Certifications:</span>
+            <span class="stream-pill">Google: Technical Support Fundamentals</span>
+            <span class="stream-pill">Google: Bits and Bytes of Networking</span>
           </div>
-
-          <div class="lang-card tilt-card" data-tilt>
-            <h3>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-              Language Proficiency
-            </h3>
-            <div class="lang-list">
-              <div class="lang-item">
-                <span class="lang-name">Malay</span>
-                <span class="lang-level">Native / Mother Tongue</span>
-              </div>
-              <div class="lang-item">
-                <span class="lang-name">English</span>
-                <span class="lang-level">Advanced (MUET Band 4.0)</span>
-              </div>
-            </div>
+          <div class="stream-group">
+            <span class="stream-title">Languages:</span>
+            <span class="stream-pill">Malay (Native)</span>
+            <span class="stream-pill">English (Advanced - MUET Band 4.0)</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Leadership & Awards Section -->
-    <section class="section" id="leadership">
+    <!-- Leadership & Events Section (Vertical Timeline with Sliding Picture Carousels) -->
+    <section class="section section-alt" id="leadership">
       <div class="container">
         <div class="section-header">
-          <span class="section-subtitle">Extracurricular & Honors</span>
-          <h2 class="section-title">Leadership & Awards</h2>
+          <span class="section-subtitle">Extracurricular & Organization</span>
+          <h2 class="section-title">Leadership Roles & Event Timeline</h2>
           <div class="title-bar"></div>
         </div>
 
-        <div class="leadership-grid">
-          <!-- Awards Column -->
-          <div class="awards-col">
-            <h3 class="col-title">Awards & Honors</h3>
+        <div class="leadership-sliding-timeline">
+          <!-- Timeline Card 1: DeSTeC Secretary -->
+          <div class="lead-timeline-card">
+            <div class="lead-card-header">
+              <span class="lead-role-pill">Secretary</span>
+              <h3 class="lead-card-title">UPNM Defence Science & Technology Club (DeSTeC)</h3>
+              <p class="lead-card-period">2024 – 2025 (Secretary) | 2023 – 2024 (Cultural Exco)</p>
+            </div>
 
-            <div class="award-item-card tilt-card" data-tilt>
-              <div class="award-trophy">🏆</div>
-              <div>
-                <h4>Dean's Award (4 Consecutive Semesters)</h4>
-                <p>Bachelor of Computer Science (Hons) • UPNM</p>
-                <span class="award-tag">Session 2023/2024 & 2024/2025</span>
+            <!-- Picture Carousel Slide -->
+            <div class="lead-carousel-wrapper" id="lead-carousel-1">
+              <div class="lead-carousel-track">
+                <div class="lead-slide active">
+                  <img src="./images/leadership.png" alt="DeSTeC Event Workshop" class="lead-slide-img">
+                  <div class="lead-slide-caption">MEPPS 2.0: Python Edition Programme Workshop</div>
+                </div>
               </div>
             </div>
 
-            <div class="award-item-card tilt-card" data-tilt>
-              <div class="award-trophy">🥈</div>
-              <div>
-                <h4>InTeLex 2024 Silver Award Winner</h4>
-                <p>S.M.A.R.T. Mirror HCI Health Monitoring Project</p>
-                <span class="award-tag">Innovation & Technology Exhibition</span>
-              </div>
-            </div>
-
-            <div class="award-item-card tilt-card" data-tilt>
-              <div class="award-trophy">⭐</div>
-              <div>
-                <h4>Excellent Academic Award (CGPA 3.57)</h4>
-                <p>Foundation in Medicine • UPNM</p>
-              </div>
-            </div>
-
-            <div class="award-item-card tilt-card" data-tilt>
-              <div class="award-trophy">🎓</div>
-              <div>
-                <h4>Straight A's SPM Academic Excellence</h4>
-                <p>SMK Yam Tuan Radin (3A+ 4A 2A-)</p>
-              </div>
-            </div>
+            <p class="lead-card-desc">
+              Managed club administrative documentation, event proposals, official communications, and co-directed high-impact student technical workshops.
+            </p>
           </div>
 
-          <!-- Leadership Positions -->
-          <div class="leadership-col">
-            <h3 class="col-title">Club Leadership Roles</h3>
-
-            <div class="leader-card tilt-card" data-tilt>
-              <div class="leader-role-badge">Secretary</div>
-              <h4>UPNM Defence Science & Technology Club (DeSTeC)</h4>
-              <p class="leader-period">2024 – 2025 (Secretary) | 2023 – 2024 (Cultural Exco)</p>
-              <p class="leader-desc">Managed club administrative documentation, event proposals, official communications, and cultural activities for UPNM technology students.</p>
+          <!-- Timeline Card 2: Chess Club Vice Secretary -->
+          <div class="lead-timeline-card">
+            <div class="lead-card-header">
+              <span class="lead-role-pill">Vice Secretary</span>
+              <h3 class="lead-card-title">UPNM Chess Club</h3>
+              <p class="lead-card-period">2024 – 2025</p>
             </div>
 
-            <div class="leader-card tilt-card" data-tilt>
-              <div class="leader-role-badge">Vice Secretary</div>
-              <h4>UPNM Chess Club</h4>
-              <p class="leader-period">2024 – 2025</p>
-              <p class="leader-desc">Co-organized campus-wide chess tournaments, managed player registrations and committee proceedings for the Grandmasters Cup.</p>
-            </div>
-
-            <div class="leader-card tilt-card" data-tilt>
-              <div class="leader-role-badge">Active Member</div>
-              <h4>UPNM Silat Cekak Pusaka Ustaz Hanafi Club</h4>
-              <p class="leader-period">2023 – 2024</p>
-              <p class="leader-desc">Participated in martial arts training, self-defense workshops, and cultural heritage demonstrations.</p>
-            </div>
+            <p class="lead-card-desc">
+              Co-organized campus-wide chess tournaments, managed player registrations, and served as Deputy Secretary for the Grandmasters Cup Tournament.
+            </p>
           </div>
-        </div>
 
-        <!-- Co-curricular Programmes Grid -->
-        <div class="programmes-wrapper">
-          <h3 class="col-title">Event Leadership & Volunteer Work</h3>
-          <div class="programmes-grid">
-            <div class="programme-chip">
-              <span class="chip-role">Programme Director</span>
-              <span class="chip-title">Mastering EPP Skills 2.0 (MEPPS): Python Edition</span>
+          <!-- Timeline Card 3: Event Management Grid -->
+          <div class="lead-timeline-card">
+            <div class="lead-card-header">
+              <span class="lead-role-pill">Event Management & Volunteer Work</span>
+              <h3 class="lead-card-title">Programmes & Committees</h3>
             </div>
-            <div class="programme-chip">
-              <span class="chip-role">Deputy Director</span>
-              <span class="chip-title">Sinar Menuju Kejayaan Programme</span>
-            </div>
-            <div class="programme-chip">
-              <span class="chip-role">Secretary</span>
-              <span class="chip-title">Malaysia–Indonesia Academic & Cultural Exchange (MIACEP 2025)</span>
-            </div>
-            <div class="programme-chip">
-              <span class="chip-role">Secretary</span>
-              <span class="chip-title">FSTP Dean's Award Ceremony 2025</span>
-            </div>
-            <div class="programme-chip">
-              <span class="chip-role">Deputy Secretary</span>
-              <span class="chip-title">Grandmasters Cup Chess Tournament</span>
-            </div>
-            <div class="programme-chip">
-              <span class="chip-role">Volunteer</span>
-              <span class="chip-title">Humanitarian Relief Mission for Gaza</span>
+
+            <div class="programmes-grid-compact">
+              <div class="programme-chip">
+                <span class="chip-role">Programme Director</span>
+                <span class="chip-title">Mastering EPP Skills 2.0 (MEPPS): Python Edition</span>
+              </div>
+              <div class="programme-chip">
+                <span class="chip-role">Deputy Director</span>
+                <span class="chip-title">Sinar Menuju Kejayaan Programme</span>
+              </div>
+              <div class="programme-chip">
+                <span class="chip-role">Secretary</span>
+                <span class="chip-title">Malaysia–Indonesia Academic & Cultural Exchange (MIACEP 2025)</span>
+              </div>
+              <div class="programme-chip">
+                <span class="chip-role">Secretary</span>
+                <span class="chip-title">Faculty Dean's Award Ceremony 2025</span>
+              </div>
+              <div class="programme-chip">
+                <span class="chip-role">Volunteer</span>
+                <span class="chip-title">Humanitarian Relief Mission for Gaza</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Contact & Tech Ecosystem Section -->
-    <section class="section section-alt" id="contact">
+    <!-- Contact Section (Mobile Portrait Optimized) -->
+    <section class="section" id="contact">
       <div class="container">
         <div class="section-header">
           <span class="section-subtitle">Get In Touch</span>
@@ -660,7 +654,7 @@
 
         <div class="contact-grid">
           <!-- Left Info & Tech Ecosystem Badges -->
-          <div class="contact-info-col tilt-card" data-tilt>
+          <div class="contact-info-col">
             <h3>Contact Information</h3>
             <p>I am open to full-time IT positions, Software Engineering roles, and collaborative projects. Feel free to reach out via email or LinkedIn!</p>
 
@@ -717,7 +711,7 @@
           </div>
 
           <!-- Contact Form -->
-          <div class="contact-form-card tilt-card" data-tilt>
+          <div class="contact-form-card">
             <form id="contact-form" class="contact-form">
               <h3>Send Me a Message</h3>
               
