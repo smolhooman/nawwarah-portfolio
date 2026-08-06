@@ -4,6 +4,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initThemeToggle();
   initCursorTracker();
   init3DTilt();
   initProjectFilters();
@@ -12,6 +13,39 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavigation();
   initResumeDownload();
 });
+
+/* ==========================================================================
+   0. DARK / LIGHT THEME TOGGLE
+   ========================================================================== */
+function initThemeToggle() {
+  const btn = document.getElementById('theme-toggle');
+  const html = document.documentElement;
+
+  // Determine initial theme: localStorage > system preference
+  const saved = localStorage.getItem('portfolio-theme');
+  if (saved) {
+    html.setAttribute('data-theme', saved);
+  } else {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    html.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+  }
+
+  if (!btn) return;
+
+  btn.addEventListener('click', () => {
+    const current = html.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('portfolio-theme', next);
+  });
+
+  // Also listen for OS-level changes (if user hasn't manually toggled)
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    if (!localStorage.getItem('portfolio-theme')) {
+      html.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+    }
+  });
+}
 
 /* ==========================================================================
    1. CURSOR TRACKER & SPOTLIGHT ENGINE (60 FPS LERP PHYSICS)
@@ -23,42 +57,40 @@ function initCursorTracker() {
 
   if (!dot || !ring || !spotlight) return;
 
-  // Position state variables
   let mouseX = window.innerWidth / 2;
   let mouseY = window.innerHeight / 2;
-  
   let ringX = mouseX;
   let ringY = mouseY;
 
-  // Track mouse coordinates
   window.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
-
-    // Instant update for dot and spotlight
-    dot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
-    spotlight.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+    dot.style.transform = `translate(${mouseX - 3}px, ${mouseY - 3}px)`;
+    spotlight.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
   });
 
-  // Smooth lerp physics for cursor ring
+  // Smooth lerp for ring
   function animateRing() {
-    ringX += (mouseX - ringX) * 0.18;
-    ringY += (mouseY - ringY) * 0.18;
-
-    ring.style.transform = `translate(${ringX}px, ${ringY}px)`;
+    ringX += (mouseX - ringX) * 0.16;
+    ringY += (mouseY - ringY) * 0.16;
+    ring.style.transform = `translate(${ringX - 19}px, ${ringY - 19}px)`;
     requestAnimationFrame(animateRing);
   }
   animateRing();
 
-  // Hover animations for interactive elements
-  const interactiveElements = document.querySelectorAll('a, button, .tilt-card, input, textarea, .tab-btn');
+  // Interactive elements — activate Apple Glass state
+  const interactiveEls = document.querySelectorAll(
+    'a, button, .tilt-card, input, textarea, .tab-btn, .programme-chip, .skill-badge, .contact-item'
+  );
 
-  interactiveElements.forEach((el) => {
+  interactiveEls.forEach((el) => {
     el.addEventListener('mouseenter', () => {
       ring.classList.add('active');
+      dot.classList.add('active');
     });
     el.addEventListener('mouseleave', () => {
       ring.classList.remove('active');
+      dot.classList.remove('active');
     });
   });
 }
