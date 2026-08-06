@@ -1,6 +1,6 @@
 /**
  * Nawwarah Zulkifli Portfolio - Main Interactive Logic
- * Dark/Light Mode Engine, Vivid 3D Lava Motion, Cursor Physics, 3D Card Tilt, Project Filters, Modal Viewer.
+ * Dark/Light Mode Engine, Vibrant 3D Liquid Motion, Cursor Physics, 3D Card Tilt, Project Filters, Modal Viewer.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -175,7 +175,7 @@ const projectData = {
         <li><strong>Actionable Management Insights:</strong> Equips faculty deans and department heads with quantitative feedback dashboards to improve teaching delivery.</li>
       </ul>
 
-      <div style="background: var(--bg-surface-alt); padding: 1rem; border-radius: 12px; border-left: 4px solid var(--secondary); margin-top: 1rem; color: var(--text-main);">
+      <div style="background: var(--accent-light); padding: 1rem; border-radius: 12px; border-left: 4px solid var(--primary); margin-top: 1rem; color: var(--text-main);">
         <strong style="color: var(--heading-color);">Tech Stack:</strong> Python, NLTK/Scikit-learn, Anaconda Navigator, Pandas/NumPy, Matplotlib/WordCloud, HTML5/CSS3.
       </div>
     `
@@ -196,7 +196,7 @@ const projectData = {
         <li><strong>Stakeholder Pitching:</strong> Presented design rationale, user testing results, and operational feasibility to academic and industry judges.</li>
       </ul>
 
-      <div style="background: var(--bg-surface-alt); padding: 1rem; border-radius: 12px; border-left: 4px solid var(--accent); margin-top: 1rem; color: var(--text-main);">
+      <div style="background: var(--accent-light); padding: 1rem; border-radius: 12px; border-left: 4px solid var(--secondary); margin-top: 1rem; color: var(--text-main);">
         <strong style="color: var(--heading-color);">Design Tools:</strong> Figma, Adobe Illustrator, HCI Evaluation Heuristics, Canva.
       </div>
     `
@@ -218,7 +218,7 @@ function initModals() {
 
       if (data) {
         modalBody.innerHTML = `
-          <span style="display:inline-block; background: var(--accent-light); color: var(--secondary); font-size: 0.75rem; font-weight:700; padding: 0.25rem 0.65rem; border-radius: 9999px; margin-bottom: 0.5rem;">
+          <span style="display:inline-block; background: var(--accent-light); color: var(--primary); font-size: 0.75rem; font-weight:700; padding: 0.25rem 0.65rem; border-radius: 9999px; margin-bottom: 0.5rem;">
             ${data.category}
           </span>
           <h2 style="font-size: 1.6rem; color: var(--heading-color); margin-bottom: 0.25rem;">${data.title}</h2>
@@ -338,10 +338,10 @@ function initResumeDownload() {
       <head>
         <title>Nawwarah Binti Zulkifli - Resume</title>
         <style>
-          body { font-family: sans-serif; line-height: 1.5; color: #1F2937; padding: 2rem; max-width: 800px; margin: 0 auto; }
-          h1 { color: #1E3A8A; margin-bottom: 0.2rem; }
-          h2 { color: #3B82F6; font-size: 1.1rem; border-bottom: 2px solid #E2E8F0; padding-bottom: 0.3rem; margin-top: 1.5rem; }
-          .contact { font-size: 0.9rem; color: #4B5563; margin-bottom: 1.5rem; }
+          body { font-family: sans-serif; line-height: 1.5; color: #0F1F21; padding: 2rem; max-width: 800px; margin: 0 auto; }
+          h1 { color: #3148F2; margin-bottom: 0.2rem; }
+          h2 { color: #983AF5; font-size: 1.1rem; border-bottom: 2px solid #E5E7EB; padding-bottom: 0.3rem; margin-top: 1.5rem; }
+          .contact { font-size: 0.9rem; color: #64748B; margin-bottom: 1.5rem; }
           ul { padding-left: 1.2rem; }
           li { margin-bottom: 0.3rem; }
         </style>
