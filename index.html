@@ -14,40 +14,22 @@
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <!-- Hidden SVG filter for lava lamp metaball merge effect -->
-  <svg class="lava-svg-filter" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <filter id="lava-filter" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
-        <feGaussianBlur in="SourceGraphic" stdDeviation="28" result="blur" />
-        <feColorMatrix in="blur" mode="matrix"
-          values="1 0 0 0 0
-                  0 1 0 0 0
-                  0 0 1 0 0
-                  0 0 0 22 -9"
-          result="lava" />
-        <feBlend in="SourceGraphic" in2="lava" mode="normal" />
-      </filter>
-    </defs>
-  </svg>
+  <!-- Vivid 3D Lava Lamp Animated Background -->
+  <div id="lava-3d-bg" aria-hidden="true">
+    <!-- 3D Volumetric Lava Orbs -->
+    <div class="lava-orb lava-orb-1"></div>
+    <div class="lava-orb lava-orb-2"></div>
+    <div class="lava-orb lava-orb-3"></div>
+    <div class="lava-orb lava-orb-4"></div>
+    <div class="lava-orb lava-orb-5"></div>
 
-  <!-- Lava Lamp Animated Background -->
-  <div id="lava-bg" aria-hidden="true">
-    <!-- Main morphing blobs -->
-    <div class="lava-blob lava-blob-1"></div>
-    <div class="lava-blob lava-blob-2"></div>
-    <div class="lava-blob lava-blob-3"></div>
-    <div class="lava-blob lava-blob-4"></div>
-    <div class="lava-blob lava-blob-5"></div>
-    <div class="lava-blob lava-blob-6"></div>
-    <!-- Floating bubbles -->
-    <div class="lava-bubble bubble-1"></div>
-    <div class="lava-bubble bubble-2 lava-bubble-filled"></div>
-    <div class="lava-bubble bubble-3"></div>
-    <div class="lava-bubble bubble-4 lava-bubble-filled"></div>
-    <div class="lava-bubble bubble-5"></div>
-    <div class="lava-bubble bubble-6"></div>
-    <div class="lava-bubble bubble-7"></div>
-    <div class="lava-bubble bubble-8 lava-bubble-filled"></div>
+    <!-- Floating 3D Micro Droplets -->
+    <div class="lava-droplet drop-1"></div>
+    <div class="lava-droplet drop-2"></div>
+    <div class="lava-droplet drop-3"></div>
+    <div class="lava-droplet drop-4"></div>
+    <div class="lava-droplet drop-5"></div>
+    <div class="lava-droplet drop-6"></div>
   </div>
 
   <!-- Custom Mouse Cursor Elements -->
@@ -78,7 +60,7 @@
       </nav>
 
       <!-- Dark / Light Theme Toggle -->
-      <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle dark/light mode">
+      <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle Dark / Light Mode" title="Toggle Theme">
         <!-- Sun icon (shown in light mode) -->
         <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="5"/>
@@ -796,6 +778,6 @@
     <span id="toast-message">Message sent successfully!</span>
   </div>
 
-  <script src="./main.js"></script>
+  <script type="module" src="./main.js"></script>
 </body>
 </html>

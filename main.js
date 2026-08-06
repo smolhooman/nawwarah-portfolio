@@ -1,6 +1,6 @@
 /**
  * Nawwarah Zulkifli Portfolio - Main Interactive Logic
- * Cursor Tracking, 3D Card Tilt, Project Filters, Modal Viewer, and Supabase Integration.
+ * Dark/Light Mode Engine, Vivid 3D Lava Motion, Cursor Physics, 3D Card Tilt, Project Filters, Modal Viewer.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -15,16 +15,16 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ==========================================================================
-   0. DARK / LIGHT THEME TOGGLE
+   0. DARK / LIGHT THEME TOGGLE ENGINE
    ========================================================================== */
 function initThemeToggle() {
   const btn = document.getElementById('theme-toggle');
   const html = document.documentElement;
 
-  // Determine initial theme: localStorage > system preference
-  const saved = localStorage.getItem('portfolio-theme');
-  if (saved) {
-    html.setAttribute('data-theme', saved);
+  // 1. Determine initial theme
+  const savedTheme = localStorage.getItem('portfolio-theme');
+  if (savedTheme === 'dark' || savedTheme === 'light') {
+    html.setAttribute('data-theme', savedTheme);
   } else {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     html.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
@@ -32,14 +32,17 @@ function initThemeToggle() {
 
   if (!btn) return;
 
-  btn.addEventListener('click', () => {
-    const current = html.getAttribute('data-theme');
-    const next = current === 'dark' ? 'light' : 'dark';
-    html.setAttribute('data-theme', next);
-    localStorage.setItem('portfolio-theme', next);
+  // 2. Click Event Listener
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const currentTheme = html.getAttribute('data-theme') || 'light';
+    const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    html.setAttribute('data-theme', nextTheme);
+    localStorage.setItem('portfolio-theme', nextTheme);
   });
 
-  // Also listen for OS-level changes (if user hasn't manually toggled)
+  // 3. Listen for system theme changes if no manual preference set
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
     if (!localStorage.getItem('portfolio-theme')) {
       html.setAttribute('data-theme', e.matches ? 'dark' : 'light');
@@ -65,32 +68,32 @@ function initCursorTracker() {
   window.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
-    dot.style.transform = `translate(${mouseX - 3}px, ${mouseY - 3}px)`;
-    spotlight.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+
+    dot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+    spotlight.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
   });
 
-  // Smooth lerp for ring
+  // Smooth lerp physics for cursor ring
   function animateRing() {
-    ringX += (mouseX - ringX) * 0.16;
-    ringY += (mouseY - ringY) * 0.16;
-    ring.style.transform = `translate(${ringX - 19}px, ${ringY - 19}px)`;
+    ringX += (mouseX - ringX) * 0.18;
+    ringY += (mouseY - ringY) * 0.18;
+
+    ring.style.transform = `translate(${ringX}px, ${ringY}px)`;
     requestAnimationFrame(animateRing);
   }
   animateRing();
 
-  // Interactive elements — activate Apple Glass state
-  const interactiveEls = document.querySelectorAll(
+  // Hover animations for interactive elements
+  const interactiveElements = document.querySelectorAll(
     'a, button, .tilt-card, input, textarea, .tab-btn, .programme-chip, .skill-badge, .contact-item'
   );
 
-  interactiveEls.forEach((el) => {
+  interactiveElements.forEach((el) => {
     el.addEventListener('mouseenter', () => {
       ring.classList.add('active');
-      dot.classList.add('active');
     });
     el.addEventListener('mouseleave', () => {
       ring.classList.remove('active');
-      dot.classList.remove('active');
     });
   });
 }
@@ -163,8 +166,8 @@ const projectData = {
     description: `
       <p>SentRa is an intelligent sentiment analysis system specifically developed to evaluate bilingual (Malay and English) student feedback collected during university lecturer evaluations.</p>
       
-      <h4 style="margin: 1.25rem 0 0.5rem; color: #1E3A8A;">Key Architectural Features:</h4>
-      <ul style="padding-left: 1.2rem; margin-bottom: 1rem; color: #4B5563;">
+      <h4 style="margin: 1.25rem 0 0.5rem; color: var(--heading-color);">Key Architectural Features:</h4>
+      <ul style="padding-left: 1.2rem; margin-bottom: 1rem; color: var(--text-muted);">
         <li><strong>Bilingual Text Preprocessing:</strong> Custom automated text pipeline handling slang normalization, Malay/English tokenization, stop-word removal, and lemmatization.</li>
         <li><strong>Domain-Specific Lexicon:</strong> Engineered an academic feedback domain lexicon mapping specific Malaysian higher education evaluation terms to sentiment weights.</li>
         <li><strong>Machine Learning Algorithms:</strong> Trained Naïve Bayes, SVM, and Lexicon-based classifiers to detect Positive, Neutral, and Negative sentiments with high accuracy.</li>
@@ -172,8 +175,8 @@ const projectData = {
         <li><strong>Actionable Management Insights:</strong> Equips faculty deans and department heads with quantitative feedback dashboards to improve teaching delivery.</li>
       </ul>
 
-      <div style="background: #F1F5F9; padding: 1rem; border-radius: 12px; border-left: 4px solid #3B82F6; margin-top: 1rem;">
-        <strong style="color: #1E3A8A;">Tech Stack:</strong> Python, NLTK/Scikit-learn, Anaconda Navigator, Pandas/NumPy, Matplotlib/WordCloud, HTML5/CSS3.
+      <div style="background: var(--bg-surface-alt); padding: 1rem; border-radius: 12px; border-left: 4px solid var(--secondary); margin-top: 1rem; color: var(--text-main);">
+        <strong style="color: var(--heading-color);">Tech Stack:</strong> Python, NLTK/Scikit-learn, Anaconda Navigator, Pandas/NumPy, Matplotlib/WordCloud, HTML5/CSS3.
       </div>
     `
   },
@@ -184,8 +187,8 @@ const projectData = {
     description: `
       <p>The S.M.A.R.T. Mirror is an innovative IoT & AI conceptual mirror designed to integrate daily health monitoring into standard morning routines while optimizing productivity.</p>
       
-      <h4 style="margin: 1.25rem 0 0.5rem; color: #1E3A8A;">Key Features & Accomplishments:</h4>
-      <ul style="padding-left: 1.2rem; margin-bottom: 1rem; color: #4B5563;">
+      <h4 style="margin: 1.25rem 0 0.5rem; color: var(--heading-color);">Key Features & Accomplishments:</h4>
+      <ul style="padding-left: 1.2rem; margin-bottom: 1rem; color: var(--text-muted);">
         <li><strong>InTeLex 2024 Silver Award:</strong> Recognized at the Innovation & Technology Exhibition for creative HCI problem-solving and realistic design execution.</li>
         <li><strong>Medium-Fidelity Figma Prototype:</strong> Developed comprehensive interactive UI component libraries, responsive navigation flows, and dynamic widgets.</li>
         <li><strong>HCI Principles Implementation:</strong> Applied spatial ergonomics, high-contrast visual hierarchy for reflective surfaces, and glanceable dashboard design.</li>
@@ -193,8 +196,8 @@ const projectData = {
         <li><strong>Stakeholder Pitching:</strong> Presented design rationale, user testing results, and operational feasibility to academic and industry judges.</li>
       </ul>
 
-      <div style="background: #F1F5F9; padding: 1rem; border-radius: 12px; border-left: 4px solid #38BDF8; margin-top: 1rem;">
-        <strong style="color: #1E3A8A;">Design Tools:</strong> Figma, Adobe Illustrator, HCI Evaluation Heuristics, Canva.
+      <div style="background: var(--bg-surface-alt); padding: 1rem; border-radius: 12px; border-left: 4px solid var(--accent); margin-top: 1rem; color: var(--text-main);">
+        <strong style="color: var(--heading-color);">Design Tools:</strong> Figma, Adobe Illustrator, HCI Evaluation Heuristics, Canva.
       </div>
     `
   }
@@ -215,12 +218,12 @@ function initModals() {
 
       if (data) {
         modalBody.innerHTML = `
-          <span style="display:inline-block; background: #E0F2FE; color: #1E3A8A; font-size: 0.75rem; font-weight:700; padding: 0.25rem 0.65rem; border-radius: 9999px; margin-bottom: 0.5rem;">
+          <span style="display:inline-block; background: var(--accent-light); color: var(--secondary); font-size: 0.75rem; font-weight:700; padding: 0.25rem 0.65rem; border-radius: 9999px; margin-bottom: 0.5rem;">
             ${data.category}
           </span>
-          <h2 style="font-size: 1.6rem; color: #1E3A8A; margin-bottom: 0.25rem;">${data.title}</h2>
-          <p style="font-size: 0.9rem; color: #3B82F6; font-weight:600; margin-bottom: 1.25rem;">${data.subtitle}</p>
-          <hr style="border: none; border-top: 1px solid #E2E8F0; margin-bottom: 1.25rem;" />
+          <h2 style="font-size: 1.6rem; color: var(--heading-color); margin-bottom: 0.25rem;">${data.title}</h2>
+          <p style="font-size: 0.9rem; color: var(--secondary); font-weight:600; margin-bottom: 1.25rem;">${data.subtitle}</p>
+          <hr style="border: none; border-top: 1px solid var(--border-light); margin-bottom: 1.25rem;" />
           <div style="line-height: 1.6;">${data.description}</div>
         `;
         modalOverlay.classList.add('active');
@@ -245,8 +248,6 @@ function initModals() {
 function initContactForm() {
   const form = document.getElementById('contact-form');
   const submitBtn = document.getElementById('submit-btn');
-  const toast = document.getElementById('toast');
-  const toastMsg = document.getElementById('toast-message');
 
   if (!form) return;
 
@@ -330,7 +331,6 @@ function initResumeDownload() {
   if (!cvBtn) return;
 
   cvBtn.addEventListener('click', () => {
-    // Open print preview window formatted nicely for Nawwarah's resume
     const printWindow = window.open('', '_blank');
     printWindow.document.write(`
       <!DOCTYPE html>
