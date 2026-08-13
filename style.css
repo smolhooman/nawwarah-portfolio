@@ -1,93 +1,89 @@
 /* ==========================================================================
-   nawwaSpace - Y2K / 2000s Retro Cyber Aesthetic & Palette
-   Featuring: Y2K Metallic Cyan, Hot Bubblegum Pink, Electric Aqua, Cyber Lavender,
-   Chakra Petch & Space Mono Typography, and Circular Sticker Avatar.
+   nawwaSpace - Custom Retro Palette & Y2K Design System
+   Color Palette: #F36A83 #AD24BF #D080F2 #0900DC #EFF29B
+   Fonts: 'Press Start 2P' for Buttons & Titlebars, 'Chakra Petch' for Content.
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   1. Theme Variables & Y2K Color Palettes
+   1. Theme Variables & Exact Palette Setup
    -------------------------------------------------------------------------- */
 
-/* Light Mode (Y2K Metallic Cyber Aqua, Hot Pink, Holographic Ice, Lavender) */
+/* Light Mode */
 :root, [data-theme="light"] {
-  --bg-color: #F0F4FF;
-  --bg-pattern-color: rgba(0, 245, 255, 0.2);
+  --bg-color: #F8F5FB;
+  --bg-pattern-color: rgba(208, 128, 242, 0.2);
   --container-bg: #FFFFFF;
-  --window-bg: #F5EBFB;
-  --window-header-bg: linear-gradient(90deg, #FF007F, #9932CC, #00D2FF);
+  --window-bg: #F4EBFB;
+  --window-header-bg: linear-gradient(90deg, #0900DC, #AD24BF, #F36A83);
   --window-header-text: #FFFFFF;
-  --text-main: #120A2A;
-  --text-muted: #7B1FA2;
-  --border-color: #4A148C;
-  --shadow-color: rgba(18, 10, 42, 0.25);
+  --text-main: #0900DC;
+  --text-muted: #AD24BF;
+  --border-color: #0900DC;
+  --shadow-color: rgba(9, 0, 220, 0.25);
   
-  --accent-pink: #FF007F;
-  --accent-purple: #9932CC;
-  --accent-cyan: #00D2FF;
-  --accent-yellow: #FFF700;
-  --accent-green: #00FF66;
-  --accent-peach: #FF6600;
+  --accent-pink: #F36A83;
+  --accent-purple: #AD24BF;
+  --accent-lavender: #D080F2;
+  --accent-blue: #0900DC;
+  --accent-yellow: #EFF29B;
 
-  --badge-bg: #FCE4EC;
-  --badge-border: #FF4081;
-  --badge-text: #880E4F;
+  --badge-bg: #FDE8ED;
+  --badge-border: #F36A83;
+  --badge-text: #0900DC;
 
-  --btn-bg: #E0F7FA;
-  --btn-hover: #80DEEA;
-  --btn-text: #004D40;
+  --btn-bg: #EFF29B;
+  --btn-hover: #D080F2;
+  --btn-text: #0900DC;
 
-  --nav-bg: #1A003B;
+  --nav-bg: #0900DC;
   --nav-text: #FFFFFF;
 
-  --trail-gradient-1: #FF007F;
-  --trail-gradient-2: #FF6600;
-  --trail-gradient-3: #FFF700;
-  --trail-gradient-4: #00FF66;
-  --trail-gradient-5: #00D2FF;
-  --trail-gradient-6: #9932CC;
+  --snake-color-1: #F36A83;
+  --snake-color-2: #AD24BF;
+  --snake-color-3: #D080F2;
+  --snake-color-4: #0900DC;
+  --snake-color-5: #EFF29B;
 }
 
-/* Dark Mode (Y2K Cyberpunk Night, Neon Magenta, Holographic Cyan, Deep Space) */
+/* Dark Mode */
 [data-theme="dark"] {
-  --bg-color: #0A001A;
-  --bg-pattern-color: rgba(255, 0, 127, 0.2);
-  --container-bg: #160033;
-  --window-bg: #1C033F;
-  --window-header-bg: linear-gradient(90deg, #8A2BE2, #FF007F, #00F5FF);
+  --bg-color: #050038;
+  --bg-pattern-color: rgba(173, 36, 191, 0.25);
+  --container-bg: #0B0066;
+  --window-bg: #110080;
+  --window-header-bg: linear-gradient(90deg, #0900DC, #AD24BF, #F36A83);
   --window-header-text: #FFFFFF;
-  --text-main: #F0F4FF;
-  --text-muted: #FF80AB;
-  --border-color: #A020F0;
+  --text-main: #F8F5FB;
+  --text-muted: #D080F2;
+  --border-color: #D080F2;
   --shadow-color: rgba(0, 0, 0, 0.8);
 
-  --accent-pink: #FF1493;
-  --accent-purple: #B19FF9;
-  --accent-cyan: #00F5FF;
-  --accent-yellow: #FFF700;
-  --accent-green: #39FF14;
-  --accent-peach: #FF9900;
+  --accent-pink: #F36A83;
+  --accent-purple: #AD24BF;
+  --accent-lavender: #D080F2;
+  --accent-blue: #0900DC;
+  --accent-yellow: #EFF29B;
 
-  --badge-bg: #310066;
-  --badge-border: #FF007F;
-  --badge-text: #E0BBE4;
+  --badge-bg: #1F0059;
+  --badge-border: #D080F2;
+  --badge-text: #EFF29B;
 
-  --btn-bg: #320066;
-  --btn-hover: #4C0099;
+  --btn-bg: #AD24BF;
+  --btn-hover: #F36A83;
   --btn-text: #FFFFFF;
 
-  --nav-bg: #05000F;
-  --nav-text: #F0F4FF;
+  --nav-bg: #030024;
+  --nav-text: #F8F5FB;
 
-  --trail-gradient-1: #FF1493;
-  --trail-gradient-2: #FF9900;
-  --trail-gradient-3: #FFF700;
-  --trail-gradient-4: #39FF14;
-  --trail-gradient-5: #00F5FF;
-  --trail-gradient-6: #B19FF9;
+  --snake-color-1: #F36A83;
+  --snake-color-2: #AD24BF;
+  --snake-color-3: #D080F2;
+  --snake-color-4: #0900DC;
+  --snake-color-5: #EFF29B;
 }
 
 /* --------------------------------------------------------------------------
-   2. Y2K Typography & Reset
+   2. Typography & Reset
    -------------------------------------------------------------------------- */
 * {
   box-sizing: border-box;
@@ -105,7 +101,7 @@ html {
 }
 
 body {
-  font-family: 'Chakra Petch', 'Space Mono', 'VT323', sans-serif;
+  font-family: 'Chakra Petch', 'Space Mono', sans-serif;
   background-color: var(--bg-color);
   background-image: 
     radial-gradient(var(--bg-pattern-color) 2px, transparent 2px),
@@ -133,50 +129,34 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   3. Gradient Rainbow Star Cursor Trail System
-   Inspired by: https://i.ytimg.com/vi/5icFcPkVzMg/maxresdefault.jpg
+   3. Continuous Snake Cursor Trail Canvas
    -------------------------------------------------------------------------- */
-#osu-cursor-dot, #osu-cursor-ring {
-  display: none;
-}
-
-.gradient-trail-particle {
+#snake-trail-canvas {
   position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   pointer-events: none;
   z-index: 99998;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 0 8px currentColor;
-  animation: fadeGradientParticle 0.5s ease-out forwards;
 }
 
-@keyframes fadeGradientParticle {
-  0% {
-    opacity: 0.95;
-    transform: translate(-50%, -50%) scale(1) rotate(0deg);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.1) rotate(180deg);
-  }
-}
-
-/* Hitburst Click Animation ("300!", "100!", "PERFECT!") */
+/* Hitburst Click Animation ("300!", "100!", "PERFECT!") - Restricted to Arcade Box */
 .hitburst-text {
-  position: fixed;
-  font-family: 'Press Start 2P', monospace;
-  font-size: 14px;
-  color: var(--accent-pink);
-  text-shadow: 2px 2px 0px #000, 0 0 10px var(--accent-cyan);
+  position: absolute;
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 13px;
+  color: var(--accent-yellow);
+  text-shadow: 2px 2px 0px #000, 0 0 10px var(--accent-pink);
   pointer-events: none;
-  z-index: 100001;
+  z-index: 100;
   animation: hitburstAnim 0.6s ease-out forwards;
 }
 
 @keyframes hitburstAnim {
   0% { opacity: 1; transform: translate(-50%, -50%) scale(0.8) translateY(0); }
-  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.3) translateY(-25px); }
-  100% { opacity: 0; transform: translate(-50%, -50%) scale(1) translateY(-45px); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.3) translateY(-20px); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1) translateY(-40px); }
 }
 
 /* --------------------------------------------------------------------------
@@ -188,7 +168,7 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(10, 0, 26, 0.9);
+  background: rgba(5, 0, 56, 0.9);
   backdrop-filter: blur(4px);
   z-index: 90000;
   display: flex;
@@ -215,7 +195,7 @@ body {
 }
 
 .loader-window .window-titlebar {
-  background: linear-gradient(90deg, #FF007F, #9932CC, #00D2FF);
+  background: linear-gradient(90deg, #0900DC, #AD24BF, #F36A83);
   color: #FFF;
 }
 
@@ -265,8 +245,8 @@ body {
   width: 0%;
   background: repeating-linear-gradient(
     90deg,
-    #FF007F,
-    #FF007F 12px,
+    #AD24BF,
+    #AD24BF 12px,
     #FFF 12px,
     #FFF 14px
   );
@@ -287,13 +267,12 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   5. Pixel Buttons & Retro Window System
+   5. Buttons (Restored to 'Press Start 2P') & Retro Window System
    -------------------------------------------------------------------------- */
 .pixel-btn {
-  font-family: 'Chakra Petch', monospace;
-  font-weight: 700;
-  font-size: 12px;
-  padding: 8px 14px;
+  font-family: 'Press Start 2P', monospace !important; /* User requested Press Start 2P for buttons */
+  font-size: 10px !important;
+  padding: 8px 12px;
   background: var(--btn-bg);
   color: var(--btn-text);
   border: 2px solid var(--border-color);
@@ -308,6 +287,7 @@ body {
 
 .pixel-btn:hover {
   background: var(--btn-hover);
+  color: #FFF;
   transform: translate(-1px, -1px);
   box-shadow: 4px 4px 0px var(--border-color);
 }
@@ -323,8 +303,8 @@ body {
 }
 
 .pixel-btn.btn-sm {
-  font-size: 10px;
-  padding: 4px 8px;
+  font-size: 8px !important;
+  padding: 5px 8px;
 }
 
 .pixel-btn.btn-action {
@@ -349,13 +329,14 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: 'Press Start 2P', monospace;
+  font-family: 'Press Start 2P', monospace !important;
   font-size: 11px;
   border-bottom: 3px solid var(--border-color);
   user-select: none;
 }
 
 .titlebar-text {
+  font-family: 'Press Start 2P', monospace !important;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -370,7 +351,7 @@ body {
 }
 
 .win-btn {
-  font-family: 'Press Start 2P', monospace;
+  font-family: 'Press Start 2P', monospace !important;
   font-size: 10px;
   width: 18px;
   height: 18px;
@@ -417,8 +398,8 @@ body {
 }
 
 .myspace-logo {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 16px;
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 15px;
   color: #FFF;
   text-decoration: none;
   display: flex;
@@ -441,9 +422,10 @@ body {
 }
 
 .logo-badge {
-  font-size: 9px;
-  background: var(--accent-cyan);
-  color: #000;
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 8px;
+  background: var(--accent-yellow);
+  color: #0900DC;
   padding: 2px 5px;
   border-radius: 2px;
 }
@@ -478,12 +460,12 @@ body {
 }
 
 .user-status-pill {
-  font-family: 'Press Start 2P', monospace;
+  font-family: 'Press Start 2P', monospace !important;
   font-size: 9px;
   background: rgba(0, 0, 0, 0.3);
   padding: 6px 10px;
   border: 1px solid var(--border-color);
-  color: var(--accent-green);
+  color: var(--accent-yellow);
   display: flex;
   align-items: center;
   gap: 6px;
@@ -492,9 +474,9 @@ body {
 .status-dot.online {
   width: 8px;
   height: 8px;
-  background: var(--accent-green);
+  background: var(--accent-yellow);
   border-radius: 50%;
-  box-shadow: 0 0 6px var(--accent-green);
+  box-shadow: 0 0 6px var(--accent-yellow);
   animation: pulseDot 1.5s infinite alternate;
 }
 
@@ -514,8 +496,8 @@ body {
 }
 
 .subnav-link {
-  font-family: 'Silkscreen', monospace;
-  font-size: 12px;
+  font-family: 'Press Start 2P', monospace !important; /* Restored Press Start 2P */
+  font-size: 9px;
   color: var(--nav-text);
   text-decoration: none;
   transition: color 0.2s;
@@ -529,14 +511,14 @@ body {
 /* Marquee Banner */
 .retro-marquee-container {
   background: var(--accent-yellow);
-  color: #120A2A;
+  color: #0900DC;
   border: 3px solid var(--border-color);
   box-shadow: 4px 4px 0px var(--border-color);
   padding: 6px 0;
   overflow: hidden;
   margin-bottom: 20px;
-  font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 9px;
   white-space: nowrap;
 }
 
@@ -570,11 +552,11 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   8. Left Column Component Styling & Circular Sticker Avatar (No Square Frame!)
+   8. Left Column Component Styling & Pure Circle Avatar (NO BORDER FRAME!)
    -------------------------------------------------------------------------- */
 .profile-name {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 14px;
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 13px;
   color: var(--text-main);
   text-align: center;
   margin-bottom: 16px;
@@ -586,27 +568,31 @@ body {
   margin-bottom: 18px;
 }
 
-/* Circular Sticker Avatar Container (No Square Border Frame!) */
+/* Pure Circle Avatar Container (User requested: NO BORDER FRAME AT ALL, JUST CIRCLE!) */
 .circle-pfp-container {
   position: relative;
-  width: 190px;
-  height: 190px;
+  width: 180px;
+  height: 180px;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 .profile-circle-img {
   width: 180px;
   height: 180px;
-  border-radius: 50%;
+  border-radius: 50% !important;
   object-fit: cover;
   display: block;
   image-rendering: pixelated;
-  box-shadow: 0 0 15px var(--accent-pink), 0 0 25px var(--accent-cyan);
+  border: none !important; /* NO BORDER ON CIRCLE */
+  box-shadow: none !important; /* NO BOX SHADOW ON CIRCLE */
 }
 
-/* Floating Stickers placed directly around the Circular Outline */
+/* Floating Stickers directly around the Circular Outline */
 .circle-sticker {
   position: absolute;
   font-size: 22px;
@@ -630,10 +616,10 @@ body {
   position: absolute;
   bottom: 0px;
   right: 10px;
-  background: var(--accent-green);
-  color: #120A2A;
-  font-family: 'Press Start 2P', monospace;
-  font-size: 8px;
+  background: var(--accent-yellow);
+  color: #0900DC;
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 7px;
   padding: 3px 6px;
   border: 2px solid var(--border-color);
   box-shadow: 2px 2px 0px #000;
@@ -700,10 +686,12 @@ body {
 
 .highlight-badge {
   background: var(--accent-yellow);
-  color: #120A2A;
+  color: #0900DC;
   padding: 2px 6px;
   border: 1px solid var(--border-color);
   font-weight: bold;
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 8px;
 }
 
 /* Interests Window */
@@ -712,8 +700,8 @@ body {
 }
 
 .interest-heading {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 9px;
   color: var(--accent-pink);
   margin-bottom: 4px;
 }
@@ -773,8 +761,8 @@ body {
 }
 
 .blurb-title {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 12px;
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 11px;
   color: var(--accent-purple);
   margin-bottom: 8px;
   border-bottom: 2px solid var(--border-color);
@@ -815,15 +803,15 @@ body {
   left: 4px;
   background: var(--accent-pink);
   color: #FFF;
-  font-family: 'Press Start 2P', monospace;
+  font-family: 'Press Start 2P', monospace !important;
   font-size: 8px;
   padding: 2px 4px;
   border: 1px solid var(--border-color);
 }
 
 .friend-name {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 9px;
   color: var(--text-main);
   margin-bottom: 8px;
   margin-top: 6px;
@@ -853,13 +841,13 @@ body {
 }
 
 .exp-logo-box {
-  background: linear-gradient(135deg, #160033, #4A148C);
+  background: linear-gradient(135deg, #0900DC, #AD24BF);
 }
 
 .pixel-exp-logo {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 18px;
-  color: var(--accent-cyan);
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 16px;
+  color: var(--accent-yellow);
   text-shadow: 2px 2px 0 #000;
 }
 
@@ -917,7 +905,7 @@ body {
 
 .cassette-label {
   background: var(--accent-yellow);
-  color: #120A2A;
+  color: #0900DC;
   padding: 6px 10px;
   border: 2px solid #000;
   text-align: center;
@@ -926,8 +914,8 @@ body {
 }
 
 .cassette-title {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 8px;
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 7px;
   display: block;
   margin-bottom: 4px;
 }
@@ -950,7 +938,7 @@ body {
 .eq-bar {
   width: 12px;
   height: 4px;
-  background: var(--accent-green);
+  background: var(--accent-yellow);
   transition: height 0.1s ease;
 }
 
@@ -964,8 +952,8 @@ body {
 .cassette-deck.playing .eq-bar:nth-child(8) { animation: eqAnim 0.3s infinite alternate 0.08s; }
 
 @keyframes eqAnim {
-  0% { height: 4px; background: var(--accent-green); }
-  50% { height: 18px; background: var(--accent-yellow); }
+  0% { height: 4px; background: var(--accent-yellow); }
+  50% { height: 18px; background: var(--accent-lavender); }
   100% { height: 30px; background: var(--accent-pink); }
 }
 
@@ -999,14 +987,14 @@ body {
 }
 
 .timeline-year {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 9px;
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 8px;
   color: var(--text-muted);
 }
 
 .timeline-degree {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 11px;
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 10px;
   color: var(--text-main);
   margin: 4px 0;
 }
@@ -1031,11 +1019,11 @@ body {
   font-weight: bold;
 }
 
-.pixel-badge.gold { background: #FFF700; color: #120A2A; }
-.pixel-badge.purple { background: #9932CC; color: #FFF; }
-.pixel-badge.blue { background: #00D2FF; color: #FFF; }
-.pixel-badge.green { background: #00FF66; color: #120A2A; }
-.pixel-badge.red { background: #FF007F; color: #FFF; }
+.pixel-badge.gold { background: #EFF29B; color: #0900DC; }
+.pixel-badge.purple { background: #AD24BF; color: #FFF; }
+.pixel-badge.blue { background: #D080F2; color: #0900DC; }
+.pixel-badge.green { background: #F36A83; color: #FFF; }
+.pixel-badge.red { background: #F36A83; color: #FFF; }
 
 /* Blog Window */
 .blog-entry {
@@ -1052,8 +1040,8 @@ body {
 }
 
 .blog-subject {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 11px;
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 10px;
   color: var(--accent-pink);
   margin-bottom: 4px;
 }
@@ -1102,8 +1090,8 @@ body {
 
 .input-group label {
   display: block;
-  font-family: 'Press Start 2P', monospace;
-  font-size: 9px;
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 8px;
   margin-bottom: 4px;
 }
 
@@ -1161,8 +1149,8 @@ body {
 }
 
 .comment-author {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 9px;
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 8px;
   color: var(--accent-purple);
 }
 
@@ -1190,15 +1178,15 @@ body {
   background: var(--badge-bg);
   border: 2px solid var(--border-color);
   padding: 8px 12px;
-  font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 9px;
   margin-bottom: 12px;
 }
 
 .arcade-canvas-box {
   width: 100%;
   height: 240px;
-  background: #0A001A;
+  background: #050038;
   border: 3px inset var(--border-color);
   position: relative;
   overflow: hidden;
@@ -1210,15 +1198,15 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(10, 0, 26, 0.85);
+  background: rgba(5, 0, 56, 0.85);
   color: var(--accent-yellow);
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   padding: 20px;
-  font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 9px;
   line-height: 1.8;
 }
 
@@ -1246,8 +1234,8 @@ body {
   box-shadow: 5px 5px 0px var(--border-color);
   padding: 16px;
   text-align: center;
-  font-family: 'Press Start 2P', monospace;
-  font-size: 9px;
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 8px;
   line-height: 1.8;
 }
 
@@ -1264,7 +1252,7 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(10, 0, 26, 0.85);
+  background: rgba(5, 0, 56, 0.85);
   backdrop-filter: blur(3px);
   z-index: 80000;
   display: flex;

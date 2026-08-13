@@ -1,6 +1,6 @@
 /* ==========================================================================
    nawwaSpace - Interactive JS Engine
-   Handles: 3s Boot Loader, OSU Custom Cursor, Chiptune Audio Synthesizer,
+   Handles: 3s Boot Loader, Continuous Snake Cursor Trail, Audio Synthesizer,
    Theme Switcher, Guestbook LocalStorage, Mood Switcher, Arcade Game & Modals.
    ========================================================================== */
 
@@ -130,89 +130,107 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ------------------------------------------------------------------------
-  // 3. Smooth Palette Gradient Cursor Trail Engine & Hitbursts
-  // Inspired by: https://i.ytimg.com/vi/5icFcPkVzMg/maxresdefault.jpg
+  // 3. Continuous Snake Cursor Trail Engine (Canvas Smooth Gradient Snake)
   // ------------------------------------------------------------------------
-  const trailContainer = document.getElementById('osu-trail-container');
-  const hitburstContainer = document.getElementById('hitburst-container');
+  const canvas = document.getElementById('snake-trail-canvas');
+  let ctx = null;
+
+  if (canvas) {
+    ctx = canvas.getContext('2d');
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+  }
+
+  const snakeColors = ['#F36A83', '#AD24BF', '#D080F2', '#0900DC', '#EFF29B'];
+  const snakePoints = [];
+  const maxPoints = 28;
 
   let mouseX = window.innerWidth / 2;
   let mouseY = window.innerHeight / 2;
-  let lastTrailTime = 0;
-  let colorIndex = 0;
-
-  // Spectrum gradient colors from the user palette
-  const paletteGradientColors = [
-    '#FF758F', // Neon Pink
-    '#FF9F1C', // Sunset Orange/Peach
-    '#FFE66D', // Butter Yellow
-    '#57CC99', // Mint Green
-    '#2EC4B6', // Electric Cyan
-    '#A663CC'  // Vivid Purple
-  ];
 
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
-
-    const now = Date.now();
-    if (now - lastTrailTime > 20) { // High frequency smooth trail
-      spawnGradientTrail(mouseX, mouseY);
-      lastTrailTime = now;
+    snakePoints.push({ x: mouseX, y: mouseY });
+    if (snakePoints.length > maxPoints) {
+      snakePoints.shift();
     }
   });
 
-  function spawnGradientTrail(x, y) {
-    if (!trailContainer) return;
-    const dot = document.createElement('div');
-    dot.className = 'gradient-trail-particle';
-    
-    // Cycle through palette gradient colors
-    const currentColor = paletteGradientColors[colorIndex % paletteGradientColors.length];
-    colorIndex++;
+  function renderSnakeTrail() {
+    if (ctx && canvas) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    const size = Math.floor(Math.random() * 6) + 8; // 8px to 14px smooth glowing dots
-    dot.style.width = `${size}px`;
-    dot.style.height = `${size}px`;
-    dot.style.backgroundColor = currentColor;
-    dot.style.color = currentColor;
-    dot.style.left = `${x}px`;
-    dot.style.top = `${y}px`;
+      if (snakePoints.length > 1) {
+        for (let i = 0; i < snakePoints.length - 1; i++) {
+          const pt1 = snakePoints[i];
+          const pt2 = snakePoints[i + 1];
 
-    trailContainer.appendChild(dot);
-    setTimeout(() => dot.remove(), 500);
+          ctx.beginPath();
+          ctx.moveTo(pt1.x, pt1.y);
+          ctx.lineTo(pt2.x, pt2.y);
+
+          const progress = i / snakePoints.length;
+          const colorIdx = Math.floor(progress * snakeColors.length);
+          const strokeColor = snakeColors[colorIdx % snakeColors.length];
+
+          ctx.strokeStyle = strokeColor;
+          ctx.lineWidth = Math.max(1, progress * 10);
+          ctx.lineCap = 'round';
+          ctx.lineJoin = 'round';
+          ctx.globalAlpha = Math.max(0.1, progress);
+
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(renderSnakeTrail);
   }
+  renderSnakeTrail();
 
+
+  // ------------------------------------------------------------------------
+  // 4. Hitburst Spawner (Restricted EXCLUSIVELY to Mini Arcade Box!)
+  // ------------------------------------------------------------------------
   const hitburstTexts = ['300!', '300!', 'PERFECT!', '100!', 'GREAT!', '300!'];
 
-  function triggerHitburst(x, y) {
-    if (hitburstContainer) {
-      const text = document.createElement('div');
-      text.className = 'hitburst-text';
-      text.textContent = hitburstTexts[Math.floor(Math.random() * hitburstTexts.length)];
-      text.style.left = `${x}px`;
-      text.style.top = `${y}px`;
-      hitburstContainer.appendChild(text);
-      playHitburstSound();
-      setTimeout(() => text.remove(), 600);
-    }
+  function triggerArcadeHitburst(x, y) {
+    const arcadeBox = document.getElementById('arcade-box');
+    if (!arcadeBox) return;
+
+    const rect = arcadeBox.getBoundingClientRect();
+    const relX = x - rect.left;
+    const relY = y - rect.top;
+
+    const text = document.createElement('div');
+    text.className = 'hitburst-text';
+    text.textContent = hitburstTexts[Math.floor(Math.random() * hitburstTexts.length)];
+    text.style.left = `${relX}px`;
+    text.style.top = `${relY}px`;
+
+    arcadeBox.appendChild(text);
+    playHitburstSound();
+    setTimeout(() => text.remove(), 600);
   }
 
-  document.addEventListener('mousedown', (e) => {
+  // Play click sound on general buttons (NO HITBURST OUTSIDE ARCADE)
+  document.addEventListener('mousedown', () => {
     playClickSound();
-    triggerHitburst(e.clientX, e.clientY);
   });
 
 
   // ------------------------------------------------------------------------
-  // 4. Theme Toggler (Light / Dark Mode)
+  // 5. Theme Toggler (Light / Dark Mode)
   // ------------------------------------------------------------------------
   const themeToggleBtn = document.getElementById('theme-toggle-btn');
   const themeIcon = document.getElementById('theme-icon');
   const themeText = document.getElementById('theme-text');
   const htmlEl = document.documentElement;
 
-  // Saved theme or default to light
   const savedTheme = localStorage.getItem('nawwaspace_theme') || 'light';
   setTheme(savedTheme);
 
@@ -239,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ------------------------------------------------------------------------
-  // 5. Interactive Chiptune Audio Player (Web Audio API Synthesized Music)
+  // 6. Interactive Chiptune Audio Player (Web Audio API Synthesized Music)
   // ------------------------------------------------------------------------
   const tracks = [
     { name: "Track 1: 8-Bit Arcade Chill", notes: [261.63, 329.63, 392.00, 523.25, 392.00, 329.63] },
@@ -321,7 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ------------------------------------------------------------------------
-  // 6. Mood Switcher Widget
+  // 7. Mood Switcher Widget
   // ------------------------------------------------------------------------
   const moods = [
     { emoji: '🎧', text: 'In The Zone / Coding' },
@@ -346,12 +364,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ------------------------------------------------------------------------
-  // 7. Interactive Guestbook (LocalStorage Persistence)
+  // 8. Interactive Guestbook (LocalStorage Persistence)
   // ------------------------------------------------------------------------
   const guestbookForm = document.getElementById('guestbook-form');
   const guestbookList = document.getElementById('guestbook-list');
 
-  // Load stored comments
   function loadGuestbook() {
     const savedComments = JSON.parse(localStorage.getItem('nawwaspace_guestbook') || '[]');
     savedComments.forEach(comment => {
@@ -406,12 +423,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     renderComment(newComment, true);
 
-    // Save to localStorage
     const savedComments = JSON.parse(localStorage.getItem('nawwaspace_guestbook') || '[]');
     savedComments.unshift(newComment);
     localStorage.setItem('nawwaspace_guestbook', JSON.stringify(savedComments));
 
-    // Reset form
     nameInput.value = '';
     messageInput.value = '';
   });
@@ -420,7 +435,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ------------------------------------------------------------------------
-  // 8. Mini Pixel Arcade Game (Pixel Star Catcher)
+  // 9. Mini Pixel Arcade Game (Star Catcher + Hitburst ONLY inside Arcade)
   // ------------------------------------------------------------------------
   const startGameBtn = document.getElementById('start-game-btn');
   const arcadeBox = document.getElementById('arcade-box');
@@ -444,14 +459,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (gameScoreEl) gameScoreEl.textContent = gameScore;
     if (arcadeOverlay) arcadeOverlay.style.display = 'none';
 
-    // Spawn star every 800ms for 15 seconds
     spawnIntervalId = setInterval(() => {
       spawnArcadeStar();
     }, 800);
 
     setTimeout(() => {
       endArcadeGame();
-    }, 15000); // 15 second round
+    }, 15000);
   });
 
   function spawnArcadeStar() {
@@ -467,7 +481,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!isGameRunning) return;
       gameScore += 100;
       if (gameScoreEl) gameScoreEl.textContent = gameScore;
-      triggerHitburst(e.clientX, e.clientY);
+      
+      // Trigger Hitburst text ONLY inside the arcade box!
+      triggerArcadeHitburst(e.clientX, e.clientY);
       star.remove();
     });
 
@@ -493,7 +509,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ------------------------------------------------------------------------
-  // 9. Modals for Top Projects & Info Cards
+  // 10. Modals for Top Projects & Info Cards
   // ------------------------------------------------------------------------
   const projectModal = document.getElementById('project-modal');
   const modalTitle = document.getElementById('modal-title');
@@ -535,7 +551,7 @@ document.addEventListener('DOMContentLoaded', () => {
     edag: {
       title: "EDAG Holding — Enterprise IT Internship",
       html: `
-        <div style="text-align: center; margin-bottom: 12px; font-family: 'Press Start 2P'; font-size: 24px; color: var(--accent-cyan);">
+        <div style="text-align: center; margin-bottom: 12px; font-family: 'Press Start 2P'; font-size: 18px; color: var(--accent-pink);">
           EDAG HOLDING
         </div>
         <p><strong>Period:</strong> March 2026 – Present</p>
@@ -591,7 +607,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ------------------------------------------------------------------------
-  // 10. Interactive Buttons (Add Friend, Bookmark)
+  // 11. Interactive Buttons (Add Friend, Bookmark)
   // ------------------------------------------------------------------------
   document.getElementById('add-friend-btn')?.addEventListener('click', () => {
     playClickSound();
