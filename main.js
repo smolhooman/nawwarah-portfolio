@@ -130,57 +130,57 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ------------------------------------------------------------------------
-  // 3. OSU! Custom Cursor Engine & Hitbursts
+  // 3. Smooth Palette Gradient Cursor Trail Engine & Hitbursts
+  // Inspired by: https://i.ytimg.com/vi/5icFcPkVzMg/maxresdefault.jpg
   // ------------------------------------------------------------------------
-  const cursorDot = document.getElementById('osu-cursor-dot');
-  const cursorRing = document.getElementById('osu-cursor-ring');
   const trailContainer = document.getElementById('osu-trail-container');
   const hitburstContainer = document.getElementById('hitburst-container');
 
   let mouseX = window.innerWidth / 2;
   let mouseY = window.innerHeight / 2;
-  let ringX = mouseX;
-  let ringY = mouseY;
   let lastTrailTime = 0;
+  let colorIndex = 0;
+
+  // Spectrum gradient colors from the user palette
+  const paletteGradientColors = [
+    '#FF758F', // Neon Pink
+    '#FF9F1C', // Sunset Orange/Peach
+    '#FFE66D', // Butter Yellow
+    '#57CC99', // Mint Green
+    '#2EC4B6', // Electric Cyan
+    '#A663CC'  // Vivid Purple
+  ];
 
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
 
-    if (cursorDot) {
-      cursorDot.style.left = `${mouseX}px`;
-      cursorDot.style.top = `${mouseY}px`;
-    }
-
-    // Spawn trail dot
     const now = Date.now();
-    if (now - lastTrailTime > 30) {
-      spawnTrail(mouseX, mouseY);
+    if (now - lastTrailTime > 20) { // High frequency smooth trail
+      spawnGradientTrail(mouseX, mouseY);
       lastTrailTime = now;
     }
   });
 
-  function animateRing() {
-    ringX += (mouseX - ringX) * 0.25;
-    ringY += (mouseY - ringY) * 0.25;
-
-    if (cursorRing) {
-      cursorRing.style.left = `${ringX}px`;
-      cursorRing.style.top = `${ringY}px`;
-    }
-
-    requestAnimationFrame(animateRing);
-  }
-  animateRing();
-
-  function spawnTrail(x, y) {
+  function spawnGradientTrail(x, y) {
     if (!trailContainer) return;
     const dot = document.createElement('div');
-    dot.className = 'osu-trail-dot';
+    dot.className = 'gradient-trail-particle';
+    
+    // Cycle through palette gradient colors
+    const currentColor = paletteGradientColors[colorIndex % paletteGradientColors.length];
+    colorIndex++;
+
+    const size = Math.floor(Math.random() * 6) + 8; // 8px to 14px smooth glowing dots
+    dot.style.width = `${size}px`;
+    dot.style.height = `${size}px`;
+    dot.style.backgroundColor = currentColor;
+    dot.style.color = currentColor;
     dot.style.left = `${x}px`;
     dot.style.top = `${y}px`;
+
     trailContainer.appendChild(dot);
-    setTimeout(() => dot.remove(), 400);
+    setTimeout(() => dot.remove(), 500);
   }
 
   const hitburstTexts = ['300!', '300!', 'PERFECT!', '100!', 'GREAT!', '300!'];
