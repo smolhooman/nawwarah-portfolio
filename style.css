@@ -1,90 +1,106 @@
 /* ==========================================================================
-   nawwaSpace - Retro Pixel Theme Design System
-   Color Palette: #1D1C38, #2D2B55, #5C3D88, #8B50A4, #A663CC, #E85D75, 
-   #FF758F, #FF9F1C, #FFE66D, #2EC4B6, #57CC99, #F8F9FA
-   Fresh Titlebar Gradient: #2EC4B6 -> #8B50A4 -> #FF758F
+   nawwaSpace - Grunge Retro Pixel Theme
+   Palette: Rust #B85020, Dirty Gold #C8A230, Olive #687830, Brick #943030,
+            Dark Teal #286858, Ash #503868, Charcoal #0F0D0A, Parchment #CFC4A8
+   No gradients — all solid, all flat, all grunge.
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
    1. Theme Variables & Color Palettes
    -------------------------------------------------------------------------- */
 
-/* Light Mode */
+/* Light Mode — Aged Parchment */
 :root, [data-theme="light"] {
-  --bg-color: #F8F9FA;
-  --bg-pattern-color: rgba(166, 99, 204, 0.15);
-  --container-bg: #FFFFFF;
-  --window-bg: #EDF2F4;
-  --window-header-bg: linear-gradient(90deg, #2EC4B6, #8B50A4, #FF758F);
-  --window-header-text: #FFFFFF;
-  --text-main: #1D1C38;
-  --text-muted: #5C3D88;
-  --border-color: #2D2B55;
-  --shadow-color: rgba(29, 28, 56, 0.25);
-  
-  --accent-pink: #FF758F;
-  --accent-purple: #8B50A4;
-  --accent-cyan: #2EC4B6;
-  --accent-yellow: #FFE66D;
-  --accent-green: #57CC99;
-  --accent-peach: #FF9F1C;
+  --bg-color: #EDE5D0;
+  --bg-pattern-color: rgba(104, 120, 48, 0.12);
+  --container-bg: #E2D9C0;
+  --window-bg: #D8CEBC;
+  --window-header-bg: #2E2518;
+  --window-header-text: #C8A230;
+  --text-main: #1C1408;
+  --text-muted: #6B5040;
+  --border-color: #7A5C38;
+  --shadow-color: rgba(30, 20, 8, 0.35);
 
-  --badge-bg: #F8E8F5;
-  --badge-border: #A663CC;
-  --badge-text: #2D2B55;
+  --accent-rust:   #B85020;
+  --accent-gold:   #C8A230;
+  --accent-olive:  #687830;
+  --accent-brick:  #943030;
+  --accent-teal:   #286858;
+  --accent-ash:    #503868;
 
-  --btn-bg: #EFF29B;
-  --btn-hover: #FF758F;
-  --btn-text: #1D1C38;
+  /* legacy aliases kept so existing rules don't break */
+  --accent-pink:   #B85020;
+  --accent-purple: #503868;
+  --accent-cyan:   #286858;
+  --accent-yellow: #C8A230;
+  --accent-green:  #687830;
+  --accent-peach:  #C87840;
 
-  --nav-bg: #2D2B55;
-  --nav-text: #FFFFFF;
+  --badge-bg:     #D8CEBC;
+  --badge-border: #7A5C38;
+  --badge-text:   #1C1408;
 
-  --snake-color-1: #FF758F;
-  --snake-color-2: #FF9F1C;
-  --snake-color-3: #FFE66D;
-  --snake-color-4: #57CC99;
-  --snake-color-5: #2EC4B6;
-  --snake-color-6: #8B50A4;
+  --btn-bg:    #C8A230;
+  --btn-hover: #B85020;
+  --btn-text:  #1C1408;
+
+  --nav-bg:   #2E2518;
+  --nav-text: #C8A230;
+
+  --snake-color-1: #B85020;
+  --snake-color-2: #C8A230;
+  --snake-color-3: #687830;
+  --snake-color-4: #943030;
+  --snake-color-5: #286858;
+  --snake-color-6: #503868;
 }
 
-/* Dark Mode */
+/* Dark Mode — Industrial Charcoal */
 [data-theme="dark"] {
-  --bg-color: #1D1C38;
-  --bg-pattern-color: rgba(139, 80, 164, 0.25);
-  --container-bg: #2D2B55;
-  --window-bg: #232242;
-  --window-header-bg: linear-gradient(90deg, #2EC4B6, #A663CC, #FF758F);
-  --window-header-text: #F8F9FA;
-  --text-main: #F8F9FA;
-  --text-muted: #FF9EAA;
-  --border-color: #8B50A4;
+  --bg-color: #0F0D0A;
+  --bg-pattern-color: rgba(184, 80, 32, 0.10);
+  --container-bg: #1C1810;
+  --window-bg: #252018;
+  --window-header-bg: #1A1208;
+  --window-header-text: #C8A230;
+  --text-main: #CFC4A8;
+  --text-muted: #887060;
+  --border-color: #4A3C28;
   --shadow-color: rgba(0, 0, 0, 0.7);
 
-  --accent-pink: #FF758F;
-  --accent-purple: #A663CC;
-  --accent-cyan: #2EC4B6;
-  --accent-yellow: #FFE66D;
-  --accent-green: #57CC99;
-  --accent-peach: #FFBF69;
+  --accent-rust:   #C85828;
+  --accent-gold:   #C8A230;
+  --accent-olive:  #7A8C38;
+  --accent-brick:  #A83838;
+  --accent-teal:   #307870;
+  --accent-ash:    #604880;
 
-  --badge-bg: #3E3B70;
-  --badge-border: #8B50A4;
-  --badge-text: #FFE66D;
+  /* legacy aliases */
+  --accent-pink:   #C85828;
+  --accent-purple: #604880;
+  --accent-cyan:   #307870;
+  --accent-yellow: #C8A230;
+  --accent-green:  #7A8C38;
+  --accent-peach:  #C87840;
 
-  --btn-bg: #5C3D88;
-  --btn-hover: #8B50A4;
-  --btn-text: #FFFFFF;
+  --badge-bg:     #2E2818;
+  --badge-border: #4A3C28;
+  --badge-text:   #C8A230;
 
-  --nav-bg: #15142B;
-  --nav-text: #F8F9FA;
+  --btn-bg:    #3A3020;
+  --btn-hover: #B85020;
+  --btn-text:  #CFC4A8;
 
-  --snake-color-1: #FF758F;
-  --snake-color-2: #FF9F1C;
-  --snake-color-3: #FFE66D;
-  --snake-color-4: #57CC99;
-  --snake-color-5: #2EC4B6;
-  --snake-color-6: #A663CC;
+  --nav-bg:   #0A0804;
+  --nav-text: #C8A230;
+
+  --snake-color-1: #C85828;
+  --snake-color-2: #C8A230;
+  --snake-color-3: #7A8C38;
+  --snake-color-4: #A83838;
+  --snake-color-5: #307870;
+  --snake-color-6: #604880;
 }
 
 /* --------------------------------------------------------------------------
@@ -108,10 +124,7 @@ html {
 body {
   font-family: 'Chakra Petch', 'Space Mono', sans-serif;
   background-color: var(--bg-color);
-  background-image: 
-    radial-gradient(var(--bg-pattern-color) 2px, transparent 2px),
-    linear-gradient(to bottom, transparent 95%, rgba(0, 0, 0, 0.05) 100%);
-  background-size: 16px 16px, 100% 32px;
+  background-image: none;
   color: var(--text-main);
   line-height: 1.6;
   min-height: 100vh;
@@ -120,18 +133,8 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Retro CRT Overlay */
-.crt-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 99999;
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.04) 50%);
-  background-size: 100% 4px;
-}
+/* No CRT overlay needed in grunge mode */
+.crt-overlay { display: none; }
 
 /* --------------------------------------------------------------------------
    3. Continuous Snake Cursor Trail Canvas & Floating Back to Top Button
@@ -228,8 +231,8 @@ body {
 }
 
 .loader-window .window-titlebar {
-  background: linear-gradient(90deg, #2EC4B6, #8B50A4, #FF758F);
-  color: #FFF;
+  background: #1A1208;
+  color: #C8A230;
 }
 
 .loader-body {
@@ -276,13 +279,7 @@ body {
 .progress-bar-fill {
   height: 100%;
   width: 0%;
-  background: repeating-linear-gradient(
-    90deg,
-    #8B50A4,
-    #8B50A4 12px,
-    #FFF 12px,
-    #FFF 14px
-  );
+  background: #943030;
   transition: width 0.1s linear;
 }
 
@@ -875,7 +872,7 @@ body {
 }
 
 .exp-logo-box {
-  background: linear-gradient(135deg, #2D2B55, #8B50A4);
+  background: #1A1208;
 }
 
 .pixel-exp-logo {
@@ -923,7 +920,7 @@ body {
 .spool {
   width: 44px;
   height: 44px;
-  background: radial-gradient(circle, #FFF 30%, #999 35%, #111 40%);
+  background: #444;
   border: 3px solid #777;
   border-radius: 50%;
 }
