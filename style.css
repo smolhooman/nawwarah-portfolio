@@ -33,7 +33,7 @@
   --badge-border: #A663CC;
   --badge-text: #2D2B55;
 
-  --btn-bg: #FFE66D;
+  --btn-bg: #EFF29B;
   --btn-hover: #FF758F;
   --btn-text: #1D1C38;
 
@@ -543,7 +543,7 @@ body {
 
 /* Marquee Banner */
 .retro-marquee-container {
-  background: var(--accent-yellow);
+  background: #FFF700;
   color: #1D1C38;
   border: 3px solid var(--border-color);
   box-shadow: 4px 4px 0px var(--border-color);
