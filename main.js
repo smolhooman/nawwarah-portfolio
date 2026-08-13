@@ -185,25 +185,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const hitburstTexts = ['300!', '300!', 'PERFECT!', '100!', 'GREAT!', '300!'];
 
-  document.addEventListener('mousedown', (e) => {
-    if (cursorRing) cursorRing.classList.add('clicking');
-    playClickSound();
-
-    // Spawn hitburst text
+  function triggerHitburst(x, y) {
     if (hitburstContainer) {
       const text = document.createElement('div');
       text.className = 'hitburst-text';
       text.textContent = hitburstTexts[Math.floor(Math.random() * hitburstTexts.length)];
-      text.style.left = `${e.clientX}px`;
-      text.style.top = `${e.clientY}px`;
+      text.style.left = `${x}px`;
+      text.style.top = `${y}px`;
       hitburstContainer.appendChild(text);
       playHitburstSound();
       setTimeout(() => text.remove(), 600);
     }
-  });
+  }
 
-  document.addEventListener('mouseup', () => {
-    if (cursorRing) cursorRing.classList.remove('clicking');
+  document.addEventListener('mousedown', (e) => {
+    playClickSound();
+    triggerHitburst(e.clientX, e.clientY);
   });
 
 
@@ -466,11 +463,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const leftPos = Math.random() * (arcadeBox.clientWidth - 30);
     star.style.left = `${leftPos}px`;
 
-    star.addEventListener('click', () => {
+    star.addEventListener('click', (e) => {
       if (!isGameRunning) return;
       gameScore += 100;
       if (gameScoreEl) gameScoreEl.textContent = gameScore;
-      playTone(1000, 0.08, 'square', 0.15);
+      triggerHitburst(e.clientX, e.clientY);
       star.remove();
     });
 
