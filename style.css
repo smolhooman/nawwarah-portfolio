@@ -146,11 +146,11 @@ body {
   z-index: 99998;
 }
 
-/* Bottom Left Floating Back-to-Top Button */
+/* Bottom Right Floating Back-to-Top Button */
 .back-to-top-btn {
   position: fixed;
   bottom: 20px;
-  left: 20px;
+  right: 20px;
   z-index: 9999;
   font-family: 'Press Start 2P', monospace !important;
   font-size: 10px !important;
@@ -1308,6 +1308,190 @@ body {
   max-height: 85vh;
   overflow-y: auto;
 }
+
+/* ==========================================================================
+   11. Slideshow Component (Hobby Section + Project Modal)
+   ========================================================================== */
+
+/* --- Generic Slideshow Wrapper --- */
+.pixel-slideshow {
+  position: relative;
+  width: 100%;
+  background: #000;
+  border: 3px solid var(--border-color);
+  overflow: hidden;
+  user-select: none;
+}
+
+.pixel-slideshow .slide-img-wrap {
+  width: 100%;
+  height: 260px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pixel-slideshow .slide-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  image-rendering: pixelated;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.pixel-slideshow .slide-img.active {
+  opacity: 1;
+}
+
+/* Prev / Next buttons */
+.slide-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(29, 28, 56, 0.78);
+  color: #EFF29B;
+  border: 2px solid var(--border-color);
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 11px;
+  padding: 8px 10px;
+  cursor: pointer !important;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.slide-btn:hover {
+  background: var(--accent-pink);
+  color: #fff;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.slide-btn.slide-prev { left: 6px; }
+.slide-btn.slide-next { right: 6px; }
+
+/* Dot indicators */
+.slide-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 0;
+  background: var(--window-bg);
+}
+
+.slide-dot {
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--border-color);
+  background: transparent;
+  cursor: pointer !important;
+  transition: background 0.2s;
+  border-radius: 0; /* keep pixel style */
+  image-rendering: pixelated;
+}
+
+.slide-dot.active {
+  background: var(--accent-pink);
+}
+
+/* Caption bar */
+.slide-caption {
+  background: rgba(29, 28, 56, 0.85);
+  color: #EFF29B;
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 8px;
+  text-align: center;
+  padding: 6px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+}
+
+/* --- Modal slideshow --- */
+.modal-slideshow {
+  position: relative;
+  margin-bottom: 14px;
+}
+
+.modal-slide-wrap {
+  width: 100%;
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  border: 2px solid var(--border-color);
+}
+
+.modal-slide-img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  image-rendering: pixelated;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.modal-slide-img.active { opacity: 1; }
+
+.modal-slide-counter {
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 8px;
+  text-align: center;
+  padding: 4px;
+  color: var(--text-muted);
+}
+
+/* --- Project card auto-cycle image box --- */
+.friend-img-box {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-slide-img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.card-slide-img.active { opacity: 1; }
+
+/* --- Hobby Gaming Window --- */
+.hobby-window .hobby-intro {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+.hobby-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.hobby-tag {
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 7px;
+  padding: 4px 8px;
+  border: 2px solid var(--border-color);
+  background: var(--badge-bg);
+  color: var(--badge-text);
+}
+
+.hobby-section-title {
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 9px;
+  color: var(--accent-pink);
+  margin-bottom: 10px;
+}
+
 
 /* ==========================================================================
    11. RESPONSIVE DESIGN — Tablet, Mobile-Large, Mobile-Small

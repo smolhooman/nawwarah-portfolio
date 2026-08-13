@@ -114,6 +114,7 @@
         <a href="#education" class="subnav-link">Education</a>
         <a href="#music-player" class="subnav-link">Chiptune Jukebox</a>
         <a href="#blog" class="subnav-link">Journal</a>
+        <a href="#gaming" class="subnav-link">Gaming 🎮</a>
         <a href="#guestbook" class="subnav-link">Guestbook</a>
         <a href="#arcade" class="subnav-link">Arcade Game</a>
       </nav>
@@ -354,8 +355,8 @@
               <div class="top-friend-card">
                 <div class="friend-rank">#1</div>
                 <div class="friend-name">SentRa AI</div>
-                <div class="friend-img-box">
-                  <img src="./images/sentra.png" alt="SentRa Sentiment Analysis">
+                <div class="friend-img-box" data-images="./images/sentra.png">
+                  <img src="./images/sentra.png" alt="SentRa Sentiment Analysis" class="card-slide-img active">
                 </div>
                 <div class="friend-desc">Bilingual Malay/English NLP Sentiment Analysis for Student Evaluations.</div>
                 <button class="pixel-btn btn-sm view-project-btn" data-modal="sentra">View System</button>
@@ -365,8 +366,8 @@
               <div class="top-friend-card">
                 <div class="friend-rank">#2</div>
                 <div class="friend-name">SMART Mirror</div>
-                <div class="friend-img-box">
-                  <img src="./images/smartmirror.png" alt="SMART Mirror Project">
+                <div class="friend-img-box" data-images="./images/smartmirror.png">
+                  <img src="./images/smartmirror.png" alt="SMART Mirror Project" class="card-slide-img active">
                 </div>
                 <div class="friend-desc">InTeLex 2024 Silver Award AI Health & Productivity Assistant.</div>
                 <button class="pixel-btn btn-sm view-project-btn" data-modal="smartmirror">View System</button>
@@ -376,7 +377,7 @@
               <div class="top-friend-card" id="experience">
                 <div class="friend-rank">#3</div>
                 <div class="friend-name">EDAG IT Ops</div>
-                <div class="friend-img-box exp-logo-box">
+                <div class="friend-img-box exp-logo-box" data-images="">
                   <span class="pixel-exp-logo">EDAG</span>
                 </div>
                 <div class="friend-desc">Active Directory, Ubuntu/Linux admin, Helpdesk & TISAX Audit.</div>
@@ -387,8 +388,8 @@
               <div class="top-friend-card">
                 <div class="friend-rank">#4</div>
                 <div class="friend-name">DeSTeC Club</div>
-                <div class="friend-img-box">
-                  <img src="./images/leadership.png" alt="DeSTeC Leadership & Events">
+                <div class="friend-img-box" data-images="./images/leadership.png">
+                  <img src="./images/leadership.png" alt="DeSTeC Leadership & Events" class="card-slide-img active">
                 </div>
                 <div class="friend-desc">Secretary for UPNM Defence Science & Tech Club & Event Director.</div>
                 <button class="pixel-btn btn-sm view-project-btn" data-modal="leadership">View Leadership</button>
@@ -602,6 +603,53 @@
           </div>
         </section>
 
+        <!-- Gaming Hobby Window (with Pixel Slideshow) -->
+        <section class="retro-window hobby-window" id="gaming">
+          <div class="window-titlebar">
+            <div class="titlebar-text">
+              <span class="pixel-icon">🎮</span> Nawwa's Gaming Corner
+            </div>
+            <div class="titlebar-controls">
+              <button class="win-btn win-min">_</button>
+            </div>
+          </div>
+
+          <div class="window-body">
+            <p class="hobby-intro">
+              When I'm not coding or studying, I'm probably grinding ranked matches or vibing to lo-fi beats while playing.
+              Gaming is my way to decompress — I love rhythm games (osu!), RPGs, and mobile gacha titles. ✨
+            </p>
+
+            <div class="hobby-tags">
+              <span class="hobby-tag">🎵 osu!</span>
+              <span class="hobby-tag">⚔️ RPG</span>
+              <span class="hobby-tag">📱 Mobile</span>
+              <span class="hobby-tag">🃏 Gacha</span>
+              <span class="hobby-tag">♟️ Chess</span>
+              <span class="hobby-tag">🕹️ Casual</span>
+            </div>
+
+            <p class="hobby-section-title">📸 Gaming Gallery:</p>
+
+            <!-- Pixel Slideshow -->
+            <div class="pixel-slideshow" id="gaming-slideshow">
+              <div class="slide-img-wrap">
+                <img src="./images/gaming1.png" alt="Gaming Setup" class="slide-img active" data-caption="My Dream Gaming Setup 🖥️">
+                <img src="./images/gaming2.png" alt="osu! Gameplay" class="slide-img" data-caption="osu! Rhythm Game Session 🎵">
+                <img src="./images/gaming3.png" alt="Cozy Gaming" class="slide-img" data-caption="Late Night Gaming Vibes 🌙">
+                <div class="slide-caption" id="gaming-caption">My Dream Gaming Setup 🖥️</div>
+              </div>
+              <button class="slide-btn slide-prev" id="gaming-prev">◀</button>
+              <button class="slide-btn slide-next" id="gaming-next">▶</button>
+              <div class="slide-dots" id="gaming-dots">
+                <span class="slide-dot active" data-idx="0"></span>
+                <span class="slide-dot" data-idx="1"></span>
+                <span class="slide-dot" data-idx="2"></span>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <!-- Mini Pixel Arcade Window (Surprise Interactive Feature!) -->
         <section class="retro-window arcade-window" id="arcade">
           <div class="window-titlebar">
@@ -657,7 +705,7 @@
     </div>
   </div>
 
-  <!-- Floating Back to Top Button (Bottom Left) -->
+  <!-- Floating Back to Top Button (Bottom Right) -->
   <button id="back-to-top-btn" class="pixel-btn back-to-top-btn" title="Scroll to Top">
     ▲ TOP
   </button>

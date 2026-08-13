@@ -130,67 +130,87 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ------------------------------------------------------------------------
-  // 3. Continuous Snake Cursor Trail Engine (Canvas Smooth Gradient Snake)
+  // 3. Continuous Snake Cursor Trail Engine — Smooth + Fade + Mobile Disabled
   // ------------------------------------------------------------------------
+  const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
   const canvas = document.getElementById('snake-trail-canvas');
   let ctx = null;
 
-  if (canvas) {
+  if (!isTouchDevice && canvas) {
+    // Hide canvas on touch devices
     ctx = canvas.getContext('2d');
+
     function resizeCanvas() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     }
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
-  }
 
-  const snakeColors = ['#F36A83', '#AD24BF', '#D080F2', '#0900DC', '#EFF29B'];
-  const snakePoints = [];
-  const maxPoints = 28;
+    const snakeColors = ['#FF758F', '#A663CC', '#D080F2', '#2EC4B6', '#EFF29B', '#FF9F1C'];
+    const snakePoints = [];
+    const maxPoints = 32;
+    let lastMoveTime = 0;
 
-  let mouseX = window.innerWidth / 2;
-  let mouseY = window.innerHeight / 2;
+    // Smooth lerp target
+    let targetX = window.innerWidth / 2;
+    let targetY = window.innerHeight / 2;
+    let smoothX = targetX;
+    let smoothY = targetY;
 
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    snakePoints.push({ x: mouseX, y: mouseY });
-    if (snakePoints.length > maxPoints) {
-      snakePoints.shift();
-    }
-  });
+    document.addEventListener('mousemove', (e) => {
+      targetX = e.clientX;
+      targetY = e.clientY;
+      lastMoveTime = performance.now();
+    });
 
-  function renderSnakeTrail() {
-    if (ctx && canvas) {
+    function renderSnakeTrail(now) {
+      if (!ctx || !canvas) { requestAnimationFrame(renderSnakeTrail); return; }
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+      // Lerp smoothly toward cursor
+      smoothX += (targetX - smoothX) * 0.22;
+      smoothY += (targetY - smoothY) * 0.22;
+
+      const timeSinceMove = now - lastMoveTime;
+
+      if (timeSinceMove < 60) {
+        // Mouse is moving — add new point
+        snakePoints.push({ x: smoothX, y: smoothY });
+        if (snakePoints.length > maxPoints) snakePoints.shift();
+      } else {
+        // Mouse stopped — drain tail gradually
+        if (snakePoints.length > 0) snakePoints.shift();
+      }
+
       if (snakePoints.length > 1) {
-        for (let i = 0; i < snakePoints.length - 1; i++) {
-          const pt1 = snakePoints[i];
-          const pt2 = snakePoints[i + 1];
+        for (let i = 1; i < snakePoints.length; i++) {
+          const pt1 = snakePoints[i - 1];
+          const pt2 = snakePoints[i];
+          const progress = i / snakePoints.length; // 0 (tail) → 1 (head)
+          const colorIdx = Math.floor(progress * snakeColors.length) % snakeColors.length;
 
           ctx.beginPath();
           ctx.moveTo(pt1.x, pt1.y);
           ctx.lineTo(pt2.x, pt2.y);
-
-          const progress = i / snakePoints.length;
-          const colorIdx = Math.floor(progress * snakeColors.length);
-          const strokeColor = snakeColors[colorIdx % snakeColors.length];
-
-          ctx.strokeStyle = strokeColor;
-          ctx.lineWidth = Math.max(1, progress * 10);
+          ctx.strokeStyle = snakeColors[colorIdx];
+          ctx.lineWidth = Math.max(1.5, progress * 9);
           ctx.lineCap = 'round';
           ctx.lineJoin = 'round';
-          ctx.globalAlpha = Math.max(0.1, progress);
-
+          ctx.globalAlpha = Math.max(0.05, progress * 0.85);
           ctx.stroke();
         }
+        ctx.globalAlpha = 1;
       }
+
+      requestAnimationFrame(renderSnakeTrail);
     }
     requestAnimationFrame(renderSnakeTrail);
+  } else if (canvas) {
+    // Touch device — hide the canvas entirely
+    canvas.style.display = 'none';
   }
-  renderSnakeTrail();
 
 
   // ------------------------------------------------------------------------
@@ -515,14 +535,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalTitle = document.getElementById('modal-title');
   const modalBody = document.getElementById('modal-body');
   const modalCloseBtn = document.getElementById('modal-close-btn');
-
   const projectDetails = {
     sentra: {
       title: "SentRa: Bilingual Sentiment Analysis System",
+      images: [
+        { src: './images/sentra.png', caption: 'SentRa Dashboard' }
+      ],
       html: `
-        <div style="text-align: center; margin-bottom: 12px;">
-          <img src="./images/sentra.png" style="width: 100%; max-height: 220px; object-fit: cover; border: 2px solid var(--border-color);" alt="SentRa">
-        </div>
         <p><strong>Category:</strong> Final Year Project (2025/2026)</p>
         <p><strong>Scope:</strong> Developed a machine learning and opinion mining tool that processes student evaluation text in both Malay and English.</p>
         <ul style="padding-left: 20px; margin: 10px 0;">
@@ -535,10 +554,10 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     smartmirror: {
       title: "S.M.A.R.T. Mirror Concept & Prototype",
+      images: [
+        { src: './images/smartmirror.png', caption: 'SMART Mirror Prototype' }
+      ],
       html: `
-        <div style="text-align: center; margin-bottom: 12px;">
-          <img src="./images/smartmirror.png" style="width: 100%; max-height: 220px; object-fit: cover; border: 2px solid var(--border-color);" alt="SMART Mirror">
-        </div>
         <p><strong>Award:</strong> InTeLex 2024 Silver Award Winner 🥈</p>
         <p><strong>Scope:</strong> Smart Ambient Mirror integrating facial recognition, daily productivity widgets, and real-time health metrics.</p>
         <ul style="padding-left: 20px; margin: 10px 0;">
@@ -550,27 +569,25 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     edag: {
       title: "EDAG Holding — Enterprise IT Internship",
+      images: [],
       html: `
-        <div style="text-align: center; margin-bottom: 12px; font-family: 'Press Start 2P'; font-size: 18px; color: var(--accent-pink);">
-          EDAG HOLDING
-        </div>
         <p><strong>Period:</strong> March 2026 – Present</p>
-        <p><strong>Role & Responsibilities:</strong></p>
+        <p><strong>Role &amp; Responsibilities:</strong></p>
         <ul style="padding-left: 20px; margin: 10px 0;">
           <li><strong>Active Directory:</strong> Identity provisioning, Group Policy, security permissions.</li>
-          <li><strong>Systems Administration:</strong> Managing Windows 10/11, Ubuntu, Rocky Linux & Kali Linux servers.</li>
-          <li><strong>Service Desk:</strong> SLA-compliant incident resolution & IT hardware troubleshooting.</li>
-          <li><strong>Compliance:</strong> Evidence gathering for TISAX automotive security & ISO 9001 quality audits.</li>
+          <li><strong>Systems Administration:</strong> Managing Windows 10/11, Ubuntu, Rocky Linux &amp; Kali Linux servers.</li>
+          <li><strong>Service Desk:</strong> SLA-compliant incident resolution &amp; IT hardware troubleshooting.</li>
+          <li><strong>Compliance:</strong> Evidence gathering for TISAX automotive security &amp; ISO 9001 quality audits.</li>
         </ul>
       `
     },
     leadership: {
       title: "UPNM DeSTeC Club & Event Leadership",
+      images: [
+        { src: './images/leadership.png', caption: 'DeSTeC Club Events' }
+      ],
       html: `
-        <div style="text-align: center; margin-bottom: 12px;">
-          <img src="./images/leadership.png" style="width: 100%; max-height: 220px; object-fit: cover; border: 2px solid var(--border-color);" alt="Leadership">
-        </div>
-        <p><strong>Roles:</strong> Secretary of DeSTeC Club (2024–2025) & Vice Secretary of UPNM Chess Club.</p>
+        <p><strong>Roles:</strong> Secretary of DeSTeC Club (2024–2025) &amp; Vice Secretary of UPNM Chess Club.</p>
         <p><strong>Key Highlights:</strong></p>
         <ul style="padding-left: 20px; margin: 10px 0;">
           <li>Directed <em>MEPPS 2.0: Python Edition Programme</em> workshop for 100+ students.</li>
@@ -581,6 +598,47 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  // Helper: build modal slideshow HTML
+  function buildModalSlideshow(images) {
+    if (!images || images.length === 0) return '';
+    const imgs = images.map((img, i) =>
+      `<img src="${img.src}" alt="${img.caption}" class="modal-slide-img${i === 0 ? ' active' : ''}" data-idx="${i}">`
+    ).join('');
+    const dots = images.length > 1 ? images.map((_, i) =>
+      `<span class="slide-dot${i === 0 ? ' active' : ''}" data-idx="${i}"></span>`
+    ).join('') : '';
+    return `
+      <div class="modal-slideshow" id="modal-ss">
+        <div class="modal-slide-wrap">
+          ${imgs}
+        </div>
+        ${images.length > 1 ? `
+          <button class="slide-btn slide-prev" id="mss-prev">◀</button>
+          <button class="slide-btn slide-next" id="mss-next">▶</button>
+        ` : ''}
+        <div class="slide-dots" style="justify-content:center;">${dots}</div>
+        <div class="modal-slide-counter" id="mss-counter">${images.length > 0 ? '1 / ' + images.length : ''}</div>
+      </div>
+    `;
+  }
+
+  // Modal slideshow state
+  let modalSsIdx = 0;
+  let modalSsImages = [];
+
+  function goModalSlide(dir) {
+    if (modalSsImages.length < 2) return;
+    const imgs = document.querySelectorAll('#modal-ss .modal-slide-img');
+    const dots = document.querySelectorAll('#modal-ss .slide-dot');
+    const counter = document.getElementById('mss-counter');
+    imgs[modalSsIdx]?.classList.remove('active');
+    dots[modalSsIdx]?.classList.remove('active');
+    modalSsIdx = (modalSsIdx + dir + modalSsImages.length) % modalSsImages.length;
+    imgs[modalSsIdx]?.classList.add('active');
+    dots[modalSsIdx]?.classList.add('active');
+    if (counter) counter.textContent = `${modalSsIdx + 1} / ${modalSsImages.length}`;
+  }
+
   document.querySelectorAll('.view-project-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       playClickSound();
@@ -588,7 +646,21 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = projectDetails[key];
       if (data && projectModal) {
         if (modalTitle) modalTitle.textContent = data.title;
-        if (modalBody) modalBody.innerHTML = data.html;
+        modalSsIdx = 0;
+        modalSsImages = data.images || [];
+        if (modalBody) {
+          modalBody.innerHTML = buildModalSlideshow(modalSsImages) + data.html;
+        }
+        // Wire up modal slideshow controls
+        document.getElementById('mss-prev')?.addEventListener('click', (e) => { e.stopPropagation(); playClickSound(); goModalSlide(-1); });
+        document.getElementById('mss-next')?.addEventListener('click', (e) => { e.stopPropagation(); playClickSound(); goModalSlide(1); });
+        document.querySelectorAll('#modal-ss .slide-dot').forEach(dot => {
+          dot.addEventListener('click', () => {
+            playClickSound();
+            const targetIdx = parseInt(dot.getAttribute('data-idx'));
+            goModalSlide(targetIdx - modalSsIdx);
+          });
+        });
         projectModal.classList.add('active');
       }
     });
@@ -604,7 +676,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (projectModal) projectModal.classList.remove('active');
     }
   });
-
 
   // ------------------------------------------------------------------------
   // 11. Interactive Buttons (Add Friend, Bookmark, Back to Top)
@@ -622,6 +693,92 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('bookmark-btn')?.addEventListener('click', () => {
     playClickSound();
     alert("⭐ NawwaSpace profile bookmarked to your browser favorites!");
+  });
+
+
+  // ------------------------------------------------------------------------
+  // 12. Gaming Hobby Slideshow Controller
+  // ------------------------------------------------------------------------
+  function initSlideshow(slideshowId, prevId, nextId, dotsId, captionId) {
+    const wrap = document.querySelector(`#${slideshowId} .slide-img-wrap`);
+    if (!wrap) return;
+
+    const slides = wrap.querySelectorAll('.slide-img');
+    const dots = document.querySelectorAll(`#${dotsId} .slide-dot`);
+    const captionEl = document.getElementById(captionId);
+    if (!slides.length) return;
+
+    let current = 0;
+    let autoTimer = null;
+
+    function goTo(idx) {
+      slides[current].classList.remove('active');
+      dots[current]?.classList.remove('active');
+      current = (idx + slides.length) % slides.length;
+      slides[current].classList.add('active');
+      dots[current]?.classList.add('active');
+      if (captionEl) captionEl.textContent = slides[current].getAttribute('data-caption') || '';
+    }
+
+    function startAuto() {
+      autoTimer = setInterval(() => goTo(current + 1), 3500);
+    }
+
+    function resetAuto() {
+      clearInterval(autoTimer);
+      startAuto();
+    }
+
+    document.getElementById(prevId)?.addEventListener('click', () => {
+      playClickSound(); goTo(current - 1); resetAuto();
+    });
+
+    document.getElementById(nextId)?.addEventListener('click', () => {
+      playClickSound(); goTo(current + 1); resetAuto();
+    });
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        playClickSound();
+        goTo(parseInt(dot.getAttribute('data-idx')));
+        resetAuto();
+      });
+    });
+
+    startAuto();
+  }
+
+  // Init the gaming hobby slideshow
+  initSlideshow('gaming-slideshow', 'gaming-prev', 'gaming-next', 'gaming-dots', 'gaming-caption');
+
+
+  // ------------------------------------------------------------------------
+  // 13. Project Card Image Auto-Cycle (cycles through images[] from projectDetails)
+  // ------------------------------------------------------------------------
+  document.querySelectorAll('.friend-img-box[data-images]').forEach(box => {
+    const key = box.closest('.top-friend-card')?.querySelector('.view-project-btn')?.getAttribute('data-modal');
+    if (!key) return;
+    const data = projectDetails[key];
+    if (!data || !data.images || data.images.length < 2) return;
+
+    // Build additional img elements for extra images
+    data.images.forEach((imgData, i) => {
+      if (i === 0) return; // first already exists in HTML
+      const img = document.createElement('img');
+      img.src = imgData.src;
+      img.alt = imgData.caption;
+      img.className = 'card-slide-img';
+      box.appendChild(img);
+    });
+
+    const cardImgs = box.querySelectorAll('.card-slide-img');
+    let cardIdx = 0;
+
+    setInterval(() => {
+      cardImgs[cardIdx].classList.remove('active');
+      cardIdx = (cardIdx + 1) % cardImgs.length;
+      cardImgs[cardIdx].classList.add('active');
+    }, 2500);
   });
 
 });
