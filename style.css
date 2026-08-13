@@ -90,7 +90,7 @@
 /* --------------------------------------------------------------------------
    2. Typography & Reset
    -------------------------------------------------------------------------- */
-* {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -479,7 +479,8 @@ body {
   border: none;
   outline: none;
   color: #FFF;
-  width: 220px;
+  flex: 1;
+  min-width: 0;
 }
 
 .myspace-search-bar input::placeholder {
@@ -1307,3 +1308,263 @@ body {
   max-height: 85vh;
   overflow-y: auto;
 }
+
+/* ==========================================================================
+   11. RESPONSIVE DESIGN — Tablet, Mobile-Large, Mobile-Small
+   ========================================================================== */
+
+/* ── Tablet / Small Laptop (≤ 900px) ─────────────────────────────────── */
+@media (max-width: 900px) {
+  .myspace-wrapper {
+    padding: 8px 12px 32px;
+  }
+
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .myspace-search-bar {
+    width: 100%;
+  }
+
+  .myspace-search-bar input {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .myspace-top-nav {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .myspace-columns {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .circle-pfp-container,
+  .profile-circle-img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .top-friends-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+}
+
+/* ── Mobile-Large (≤ 600px) ──────────────────────────────────────────── */
+@media (max-width: 600px) {
+  body {
+    font-size: 13px;
+  }
+
+  .myspace-logo {
+    font-size: 12px;
+  }
+
+  .logo-badge {
+    font-size: 7px;
+  }
+
+  .user-status-pill {
+    font-size: 8px;
+    padding: 4px 8px;
+  }
+
+  /* Hide button text labels, keep icons only */
+  .nav-action-btn .btn-text {
+    display: none;
+  }
+
+  .nav-action-btn {
+    padding: 6px 10px;
+    font-size: 9px !important;
+  }
+
+  .myspace-subnav {
+    padding: 6px 10px;
+    gap: 10px;
+  }
+
+  .subnav-link {
+    font-size: 7px;
+    white-space: nowrap;
+  }
+
+  .retro-marquee-container {
+    font-size: 8px;
+  }
+
+  /* Loader scales to screen */
+  .loader-window {
+    width: 95vw;
+    max-width: 95vw;
+  }
+
+  .loader-body {
+    padding: 12px;
+  }
+
+  .loader-top-info {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  /* Avatar */
+  .circle-pfp-container,
+  .profile-circle-img {
+    width: 130px;
+    height: 130px;
+  }
+
+  .profile-name {
+    font-size: 10px;
+  }
+
+  /* Window chrome */
+  .window-titlebar {
+    padding: 6px 8px;
+  }
+
+  .titlebar-text {
+    font-size: 8px !important;
+  }
+
+  .window-body {
+    padding: 10px;
+  }
+
+  /* Project / Friend cards */
+  .top-friends-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .friend-img-box {
+    height: 90px;
+  }
+
+  .friend-name {
+    font-size: 7px;
+  }
+
+  /* Guestbook: single column */
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* Cassette player */
+  .cassette-tape {
+    max-width: 100%;
+  }
+
+  .player-controls {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* Buttons */
+  .pixel-btn {
+    font-size: 8px !important;
+    padding: 8px 10px;
+  }
+
+  .back-to-top-btn {
+    font-size: 8px !important;
+    padding: 8px 10px;
+    bottom: 14px;
+    left: 14px;
+  }
+
+  /* Blog */
+  .blog-subject {
+    font-size: 8px;
+  }
+
+  .blog-content,
+  .blurbs-body {
+    font-size: 13px;
+  }
+
+  .blurb-title {
+    font-size: 9px;
+  }
+
+  /* Timeline */
+  .timeline-badge-row {
+    flex-wrap: wrap;
+  }
+
+  /* Arcade */
+  .arcade-canvas-box {
+    height: 200px;
+  }
+
+  /* Modal */
+  .modal-window {
+    width: 96%;
+    max-height: 90vh;
+  }
+
+  /* Misc */
+  .myspace-details-table {
+    font-size: 12px;
+  }
+
+  .pixel-tag {
+    font-size: 11px;
+  }
+}
+
+/* ── Mobile-Small / Tiny Phone (≤ 400px) ─────────────────────────────── */
+@media (max-width: 400px) {
+  .myspace-logo {
+    font-size: 10px;
+  }
+
+  .top-friends-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .friend-img-box {
+    height: 80px;
+  }
+
+  .circle-pfp-container,
+  .profile-circle-img {
+    width: 110px;
+    height: 110px;
+  }
+
+  .circle-sticker {
+    font-size: 16px;
+  }
+
+  .pixel-btn {
+    font-size: 7px !important;
+    padding: 7px 8px;
+  }
+
+  .myspace-search-bar input {
+    font-size: 12px;
+  }
+
+  .subnav-link {
+    font-size: 6px;
+  }
+
+  .arcade-canvas-box {
+    height: 160px;
+  }
+
+  .back-to-top-btn {
+    font-size: 7px !important;
+    padding: 6px 8px;
+  }
+}
+
