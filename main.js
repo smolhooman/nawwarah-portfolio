@@ -607,8 +607,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ------------------------------------------------------------------------
-  // 11. Interactive Buttons (Add Friend, Bookmark)
+  // 11. Interactive Buttons (Add Friend, Bookmark, Back to Top)
   // ------------------------------------------------------------------------
+  document.getElementById('back-to-top-btn')?.addEventListener('click', () => {
+    playClickSound();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
   document.getElementById('add-friend-btn')?.addEventListener('click', () => {
     playClickSound();
     alert("✨ Friend Request Sent to Nawwarah! You are now retro besties!");

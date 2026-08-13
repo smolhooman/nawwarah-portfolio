@@ -1,85 +1,90 @@
 /* ==========================================================================
-   nawwaSpace - Custom Retro Palette & Y2K Design System
-   Color Palette: #F36A83 #AD24BF #D080F2 #0900DC #EFF29B
-   Fonts: 'Press Start 2P' for Buttons & Titlebars, 'Chakra Petch' for Content.
+   nawwaSpace - Retro Pixel Theme Design System
+   Color Palette: #1D1C38, #2D2B55, #5C3D88, #8B50A4, #A663CC, #E85D75, 
+   #FF758F, #FF9F1C, #FFE66D, #2EC4B6, #57CC99, #F8F9FA
+   Fresh Titlebar Gradient: #2EC4B6 -> #8B50A4 -> #FF758F
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   1. Theme Variables & Exact Palette Setup
+   1. Theme Variables & Color Palettes
    -------------------------------------------------------------------------- */
 
 /* Light Mode */
 :root, [data-theme="light"] {
-  --bg-color: #F8F5FB;
-  --bg-pattern-color: rgba(208, 128, 242, 0.2);
+  --bg-color: #F8F9FA;
+  --bg-pattern-color: rgba(166, 99, 204, 0.15);
   --container-bg: #FFFFFF;
-  --window-bg: #F4EBFB;
-  --window-header-bg: linear-gradient(90deg, #0900DC, #AD24BF, #F36A83);
+  --window-bg: #EDF2F4;
+  --window-header-bg: linear-gradient(90deg, #2EC4B6, #8B50A4, #FF758F);
   --window-header-text: #FFFFFF;
-  --text-main: #0900DC;
-  --text-muted: #AD24BF;
-  --border-color: #0900DC;
-  --shadow-color: rgba(9, 0, 220, 0.25);
+  --text-main: #1D1C38;
+  --text-muted: #5C3D88;
+  --border-color: #2D2B55;
+  --shadow-color: rgba(29, 28, 56, 0.25);
   
-  --accent-pink: #F36A83;
-  --accent-purple: #AD24BF;
-  --accent-lavender: #D080F2;
-  --accent-blue: #0900DC;
-  --accent-yellow: #EFF29B;
+  --accent-pink: #FF758F;
+  --accent-purple: #8B50A4;
+  --accent-cyan: #2EC4B6;
+  --accent-yellow: #FFE66D;
+  --accent-green: #57CC99;
+  --accent-peach: #FF9F1C;
 
-  --badge-bg: #FDE8ED;
-  --badge-border: #F36A83;
-  --badge-text: #0900DC;
+  --badge-bg: #F8E8F5;
+  --badge-border: #A663CC;
+  --badge-text: #2D2B55;
 
-  --btn-bg: #EFF29B;
-  --btn-hover: #D080F2;
-  --btn-text: #0900DC;
+  --btn-bg: #FFE66D;
+  --btn-hover: #FF758F;
+  --btn-text: #1D1C38;
 
-  --nav-bg: #0900DC;
+  --nav-bg: #2D2B55;
   --nav-text: #FFFFFF;
 
-  --snake-color-1: #F36A83;
-  --snake-color-2: #AD24BF;
-  --snake-color-3: #D080F2;
-  --snake-color-4: #0900DC;
-  --snake-color-5: #EFF29B;
+  --snake-color-1: #FF758F;
+  --snake-color-2: #FF9F1C;
+  --snake-color-3: #FFE66D;
+  --snake-color-4: #57CC99;
+  --snake-color-5: #2EC4B6;
+  --snake-color-6: #8B50A4;
 }
 
 /* Dark Mode */
 [data-theme="dark"] {
-  --bg-color: #050038;
-  --bg-pattern-color: rgba(173, 36, 191, 0.25);
-  --container-bg: #0B0066;
-  --window-bg: #110080;
-  --window-header-bg: linear-gradient(90deg, #0900DC, #AD24BF, #F36A83);
-  --window-header-text: #FFFFFF;
-  --text-main: #F8F5FB;
-  --text-muted: #D080F2;
-  --border-color: #D080F2;
-  --shadow-color: rgba(0, 0, 0, 0.8);
+  --bg-color: #1D1C38;
+  --bg-pattern-color: rgba(139, 80, 164, 0.25);
+  --container-bg: #2D2B55;
+  --window-bg: #232242;
+  --window-header-bg: linear-gradient(90deg, #2EC4B6, #A663CC, #FF758F);
+  --window-header-text: #F8F9FA;
+  --text-main: #F8F9FA;
+  --text-muted: #FF9EAA;
+  --border-color: #8B50A4;
+  --shadow-color: rgba(0, 0, 0, 0.7);
 
-  --accent-pink: #F36A83;
-  --accent-purple: #AD24BF;
-  --accent-lavender: #D080F2;
-  --accent-blue: #0900DC;
-  --accent-yellow: #EFF29B;
+  --accent-pink: #FF758F;
+  --accent-purple: #A663CC;
+  --accent-cyan: #2EC4B6;
+  --accent-yellow: #FFE66D;
+  --accent-green: #57CC99;
+  --accent-peach: #FFBF69;
 
-  --badge-bg: #1F0059;
-  --badge-border: #D080F2;
-  --badge-text: #EFF29B;
+  --badge-bg: #3E3B70;
+  --badge-border: #8B50A4;
+  --badge-text: #FFE66D;
 
-  --btn-bg: #AD24BF;
-  --btn-hover: #F36A83;
+  --btn-bg: #5C3D88;
+  --btn-hover: #8B50A4;
   --btn-text: #FFFFFF;
 
-  --nav-bg: #030024;
-  --nav-text: #F8F5FB;
+  --nav-bg: #15142B;
+  --nav-text: #F8F9FA;
 
-  --snake-color-1: #F36A83;
-  --snake-color-2: #AD24BF;
-  --snake-color-3: #D080F2;
-  --snake-color-4: #0900DC;
-  --snake-color-5: #EFF29B;
+  --snake-color-1: #FF758F;
+  --snake-color-2: #FF9F1C;
+  --snake-color-3: #FFE66D;
+  --snake-color-4: #57CC99;
+  --snake-color-5: #2EC4B6;
+  --snake-color-6: #A663CC;
 }
 
 /* --------------------------------------------------------------------------
@@ -92,7 +97,7 @@
   cursor: default !important;
 }
 
-a, button, input, select, textarea, .pixel-btn, .win-btn, .top-friend-card, .falling-star {
+a, button, input, select, textarea, .pixel-btn, .win-btn, .top-friend-card, .falling-star, .back-to-top-btn {
   cursor: pointer !important;
 }
 
@@ -129,7 +134,7 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   3. Continuous Snake Cursor Trail Canvas
+   3. Continuous Snake Cursor Trail Canvas & Floating Back to Top Button
    -------------------------------------------------------------------------- */
 #snake-trail-canvas {
   position: fixed;
@@ -139,6 +144,34 @@ body {
   height: 100vh;
   pointer-events: none;
   z-index: 99998;
+}
+
+/* Bottom Left Floating Back-to-Top Button */
+.back-to-top-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9999;
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 10px !important;
+  padding: 10px 14px;
+  background: var(--accent-yellow);
+  color: #1D1C38;
+  border: 2px solid var(--border-color);
+  box-shadow: 3px 3px 0px var(--border-color);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.back-to-top-btn:hover {
+  background: var(--accent-pink);
+  color: #FFF;
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0px var(--border-color);
+}
+
+.back-to-top-btn:active {
+  transform: translateY(2px);
+  box-shadow: 1px 1px 0px var(--border-color);
 }
 
 /* Hitburst Click Animation ("300!", "100!", "PERFECT!") - Restricted to Arcade Box */
@@ -168,7 +201,7 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(5, 0, 56, 0.9);
+  background: rgba(29, 28, 56, 0.9);
   backdrop-filter: blur(4px);
   z-index: 90000;
   display: flex;
@@ -195,7 +228,7 @@ body {
 }
 
 .loader-window .window-titlebar {
-  background: linear-gradient(90deg, #0900DC, #AD24BF, #F36A83);
+  background: linear-gradient(90deg, #2EC4B6, #8B50A4, #FF758F);
   color: #FFF;
 }
 
@@ -245,8 +278,8 @@ body {
   width: 0%;
   background: repeating-linear-gradient(
     90deg,
-    #AD24BF,
-    #AD24BF 12px,
+    #8B50A4,
+    #8B50A4 12px,
     #FFF 12px,
     #FFF 14px
   );
@@ -267,10 +300,10 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   5. Buttons (Restored to 'Press Start 2P') & Retro Window System
+   5. Buttons (Press Start 2P) & Retro Window System
    -------------------------------------------------------------------------- */
 .pixel-btn {
-  font-family: 'Press Start 2P', monospace !important; /* User requested Press Start 2P for buttons */
+  font-family: 'Press Start 2P', monospace !important;
   font-size: 10px !important;
   padding: 8px 12px;
   background: var(--btn-bg);
@@ -425,7 +458,7 @@ body {
   font-family: 'Press Start 2P', monospace !important;
   font-size: 8px;
   background: var(--accent-yellow);
-  color: #0900DC;
+  color: #1D1C38;
   padding: 2px 5px;
   border-radius: 2px;
 }
@@ -496,7 +529,7 @@ body {
 }
 
 .subnav-link {
-  font-family: 'Press Start 2P', monospace !important; /* Restored Press Start 2P */
+  font-family: 'Press Start 2P', monospace !important;
   font-size: 9px;
   color: var(--nav-text);
   text-decoration: none;
@@ -511,7 +544,7 @@ body {
 /* Marquee Banner */
 .retro-marquee-container {
   background: var(--accent-yellow);
-  color: #0900DC;
+  color: #1D1C38;
   border: 3px solid var(--border-color);
   box-shadow: 4px 4px 0px var(--border-color);
   padding: 6px 0;
@@ -568,7 +601,7 @@ body {
   margin-bottom: 18px;
 }
 
-/* Pure Circle Avatar Container (User requested: NO BORDER FRAME AT ALL, JUST CIRCLE!) */
+/* Pure Circle Avatar Container (NO BORDER FRAME AT ALL, JUST CLEAN CROPPED CIRCLE!) */
 .circle-pfp-container {
   position: relative;
   width: 180px;
@@ -588,8 +621,8 @@ body {
   object-fit: cover;
   display: block;
   image-rendering: pixelated;
-  border: none !important; /* NO BORDER ON CIRCLE */
-  box-shadow: none !important; /* NO BOX SHADOW ON CIRCLE */
+  border: none !important;
+  box-shadow: none !important;
 }
 
 /* Floating Stickers directly around the Circular Outline */
@@ -617,7 +650,7 @@ body {
   bottom: 0px;
   right: 10px;
   background: var(--accent-yellow);
-  color: #0900DC;
+  color: #1D1C38;
   font-family: 'Press Start 2P', monospace !important;
   font-size: 7px;
   padding: 3px 6px;
@@ -686,7 +719,7 @@ body {
 
 .highlight-badge {
   background: var(--accent-yellow);
-  color: #0900DC;
+  color: #1D1C38;
   padding: 2px 6px;
   border: 1px solid var(--border-color);
   font-weight: bold;
@@ -841,7 +874,7 @@ body {
 }
 
 .exp-logo-box {
-  background: linear-gradient(135deg, #0900DC, #AD24BF);
+  background: linear-gradient(135deg, #2D2B55, #8B50A4);
 }
 
 .pixel-exp-logo {
@@ -905,7 +938,7 @@ body {
 
 .cassette-label {
   background: var(--accent-yellow);
-  color: #0900DC;
+  color: #1D1C38;
   padding: 6px 10px;
   border: 2px solid #000;
   text-align: center;
@@ -953,7 +986,7 @@ body {
 
 @keyframes eqAnim {
   0% { height: 4px; background: var(--accent-yellow); }
-  50% { height: 18px; background: var(--accent-lavender); }
+  50% { height: 18px; background: var(--accent-cyan); }
   100% { height: 30px; background: var(--accent-pink); }
 }
 
@@ -1019,11 +1052,11 @@ body {
   font-weight: bold;
 }
 
-.pixel-badge.gold { background: #EFF29B; color: #0900DC; }
-.pixel-badge.purple { background: #AD24BF; color: #FFF; }
-.pixel-badge.blue { background: #D080F2; color: #0900DC; }
-.pixel-badge.green { background: #F36A83; color: #FFF; }
-.pixel-badge.red { background: #F36A83; color: #FFF; }
+.pixel-badge.gold { background: #FFE66D; color: #1D1C38; }
+.pixel-badge.purple { background: #8B50A4; color: #FFF; }
+.pixel-badge.blue { background: #2EC4B6; color: #FFF; }
+.pixel-badge.green { background: #57CC99; color: #1D1C38; }
+.pixel-badge.red { background: #FF758F; color: #FFF; }
 
 /* Blog Window */
 .blog-entry {
@@ -1186,7 +1219,7 @@ body {
 .arcade-canvas-box {
   width: 100%;
   height: 240px;
-  background: #050038;
+  background: #1D1C38;
   border: 3px inset var(--border-color);
   position: relative;
   overflow: hidden;
@@ -1198,7 +1231,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(5, 0, 56, 0.85);
+  background: rgba(29, 28, 56, 0.85);
   color: var(--accent-yellow);
   display: flex;
   justify-content: center;
@@ -1252,7 +1285,7 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(5, 0, 56, 0.85);
+  background: rgba(29, 28, 56, 0.85);
   backdrop-filter: blur(3px);
   z-index: 80000;
   display: flex;
