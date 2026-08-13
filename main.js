@@ -1,383 +1,609 @@
-/**
- * Nawwarah Zulkifli Portfolio - Main Interactive Logic
- * Osu! Style Cursor Trail Engine, Theme Toggle, Skills Matrix, Modal Viewer, and Mobile Responsiveness.
- */
+/* ==========================================================================
+   nawwaSpace - Interactive JS Engine
+   Handles: 3s Boot Loader, OSU Custom Cursor, Chiptune Audio Synthesizer,
+   Theme Switcher, Guestbook LocalStorage, Mood Switcher, Arcade Game & Modals.
+   ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-  initThemeToggle();
-  initOsuCursorTrail();
-  initSkillsFilter();
-  initModals();
-  initContactForm();
-  initNavigation();
-  initResumeDownload();
-});
 
-/* ==========================================================================
-   0. DARK / LIGHT THEME TOGGLE ENGINE
-   ========================================================================== */
-function initThemeToggle() {
-  const btn = document.getElementById('theme-toggle');
-  const html = document.documentElement;
+  // ------------------------------------------------------------------------
+  // 1. Audio Synthesizer Engine (Web Audio API - No external sound assets needed!)
+  // ------------------------------------------------------------------------
+  let audioCtx = null;
+  let isSoundEnabled = true;
 
-  const savedTheme = localStorage.getItem('portfolio-theme');
-  if (savedTheme === 'dark' || savedTheme === 'light') {
-    html.setAttribute('data-theme', savedTheme);
-  } else {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    html.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+  function initAudio() {
+    if (!audioCtx) {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (AudioContext) {
+        audioCtx = new AudioContext();
+      }
+    }
   }
 
-  if (!btn) return;
+  function playTone(freq, duration, type = 'square', gainVal = 0.1) {
+    if (!isSoundEnabled) return;
+    initAudio();
+    if (!audioCtx) return;
 
-  btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    const currentTheme = html.getAttribute('data-theme') || 'light';
-    const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
-    html.setAttribute('data-theme', nextTheme);
-    localStorage.setItem('portfolio-theme', nextTheme);
-  });
+    try {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+      gain.gain.setValueAtTime(gainVal, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
 
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-    if (!localStorage.getItem('portfolio-theme')) {
-      html.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start();
+      osc.stop(audioCtx.currentTime + duration);
+    } catch (e) {
+      console.warn("Audio Context playback error:", e);
     }
+  }
+
+  function playClickSound() {
+    playTone(600, 0.05, 'square', 0.08);
+  }
+
+  function playHitburstSound() {
+    playTone(880, 0.08, 'triangle', 0.12);
+    setTimeout(() => playTone(1174.66, 0.1, 'square', 0.1), 50);
+  }
+
+  function playBootChime() {
+    const notes = [440, 554.37, 659.25, 880];
+    notes.forEach((note, i) => {
+      setTimeout(() => playTone(note, 0.15, 'triangle', 0.15), i * 100);
+    });
+  }
+
+  // Audio Toggle Button
+  const audioToggleBtn = document.getElementById('audio-toggle-btn');
+  const audioIcon = document.getElementById('audio-icon');
+  audioToggleBtn?.addEventListener('click', () => {
+    isSoundEnabled = !isSoundEnabled;
+    if (audioIcon) audioIcon.textContent = isSoundEnabled ? '🔊' : '🔇';
+    const textSpan = audioToggleBtn.querySelector('.btn-text');
+    if (textSpan) textSpan.textContent = isSoundEnabled ? 'Audio ON' : 'Audio OFF';
+    playClickSound();
   });
-}
 
-/* ==========================================================================
-   1. OSU! STYLE INTERACTIVE CURSOR TRAIL ENGINE (60 FPS CANVAS PHYSICS)
-   ========================================================================== */
-function initOsuCursorTrail() {
-  const dot = document.getElementById('cursor-dot');
-  const ring = document.getElementById('cursor-ring');
-  const canvas = document.getElementById('osu-cursor-canvas');
 
-  if (!dot || !ring || !canvas) return;
+  // ------------------------------------------------------------------------
+  // 2. 3-Second Retro OS Boot Loader
+  // ------------------------------------------------------------------------
+  const retroLoader = document.getElementById('retro-loader');
+  const loaderProgressFill = document.getElementById('loader-progress-fill');
+  const loadPercentText = document.getElementById('load-percent-text');
+  const loadTimer = document.getElementById('load-timer');
+  const skipLoadBtn = document.getElementById('skip-load-btn');
+  const loaderCloseBtn = document.getElementById('loader-close-btn');
 
-  const ctx = canvas.getContext('2d');
-  let width = (canvas.width = window.innerWidth);
-  let height = (canvas.height = window.innerHeight);
+  let loadProgress = 0;
+  let loadDuration = 3000; // 3 seconds
+  let intervalTime = 50; // update every 50ms
+  let totalSteps = loadDuration / intervalTime;
+  let currentStep = 0;
+  let loaderTimerId = null;
 
-  window.addEventListener('resize', () => {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
+  function runLoader() {
+    playBootChime();
+
+    loaderTimerId = setInterval(() => {
+      currentStep++;
+      loadProgress = Math.min(100, Math.round((currentStep / totalSteps) * 100));
+      
+      if (loaderProgressFill) loaderProgressFill.style.width = `${loadProgress}%`;
+      if (loadPercentText) loadPercentText.textContent = `${loadProgress}%`;
+
+      const remainingSecs = Math.max(0, Math.ceil((loadDuration - (currentStep * intervalTime)) / 1000));
+      if (loadTimer) loadTimer.textContent = remainingSecs;
+
+      if (loadProgress >= 100) {
+        clearInterval(loaderTimerId);
+        finishLoading();
+      }
+    }, intervalTime);
+  }
+
+  function finishLoading() {
+    if (retroLoader) {
+      retroLoader.classList.add('hidden');
+    }
+  }
+
+  skipLoadBtn?.addEventListener('click', () => {
+    clearInterval(loaderTimerId);
+    finishLoading();
+    playClickSound();
   });
 
-  let mouseX = width / 2;
-  let mouseY = height / 2;
+  loaderCloseBtn?.addEventListener('click', () => {
+    clearInterval(loaderTimerId);
+    finishLoading();
+  });
+
+  runLoader();
+
+
+  // ------------------------------------------------------------------------
+  // 3. OSU! Custom Cursor Engine & Hitbursts
+  // ------------------------------------------------------------------------
+  const cursorDot = document.getElementById('osu-cursor-dot');
+  const cursorRing = document.getElementById('osu-cursor-ring');
+  const trailContainer = document.getElementById('osu-trail-container');
+  const hitburstContainer = document.getElementById('hitburst-container');
+
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
   let ringX = mouseX;
   let ringY = mouseY;
+  let lastTrailTime = 0;
 
-  const particles = [];
-
-  window.addEventListener('mousemove', (e) => {
+  document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
 
-    dot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+    if (cursorDot) {
+      cursorDot.style.left = `${mouseX}px`;
+      cursorDot.style.top = `${mouseY}px`;
+    }
 
-    // Spawn Osu! glowing trail particles
-    for (let i = 0; i < 2; i++) {
-      particles.push({
-        x: mouseX + (Math.random() - 0.5) * 4,
-        y: mouseY + (Math.random() - 0.5) * 4,
-        radius: Math.random() * 6 + 4,
-        alpha: 0.85,
-        decay: Math.random() * 0.03 + 0.025,
-        color: '#38BDF8'
-      });
+    // Spawn trail dot
+    const now = Date.now();
+    if (now - lastTrailTime > 30) {
+      spawnTrail(mouseX, mouseY);
+      lastTrailTime = now;
     }
   });
 
-  // Render loop
-  function renderTrail() {
-    ctx.clearRect(0, 0, width, height);
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.25;
+    ringY += (mouseY - ringY) * 0.25;
 
-    // Smooth lerp for outer ring
-    ringX += (mouseX - ringX) * 0.18;
-    ringY += (mouseY - ringY) * 0.18;
-    ring.style.transform = `translate(${ringX}px, ${ringY}px)`;
-
-    // Draw and decay Osu! trail particles
-    for (let i = particles.length - 1; i >= 0; i--) {
-      const p = particles[i];
-      p.alpha -= p.decay;
-      p.radius *= 0.95;
-
-      if (p.alpha <= 0 || p.radius <= 0.5) {
-        particles.splice(i, 1);
-        continue;
-      }
-
-      ctx.save();
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(56, 189, 248, ${p.alpha})`;
-      ctx.shadowBlur = 12;
-      ctx.shadowColor = '#38BDF8';
-      ctx.fill();
-      ctx.restore();
+    if (cursorRing) {
+      cursorRing.style.left = `${ringX}px`;
+      cursorRing.style.top = `${ringY}px`;
     }
 
-    requestAnimationFrame(renderTrail);
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  function spawnTrail(x, y) {
+    if (!trailContainer) return;
+    const dot = document.createElement('div');
+    dot.className = 'osu-trail-dot';
+    dot.style.left = `${x}px`;
+    dot.style.top = `${y}px`;
+    trailContainer.appendChild(dot);
+    setTimeout(() => dot.remove(), 400);
   }
 
-  renderTrail();
+  const hitburstTexts = ['300!', '300!', 'PERFECT!', '100!', 'GREAT!', '300!'];
 
-  // Hover effect over interactive elements
-  const interactiveEls = document.querySelectorAll('a, button, .skill-chip-item, .contact-item, input, textarea');
-  interactiveEls.forEach((el) => {
-    el.addEventListener('mouseenter', () => ring.classList.add('active'));
-    el.addEventListener('mouseleave', () => ring.classList.remove('active'));
-  });
-}
+  document.addEventListener('mousedown', (e) => {
+    if (cursorRing) cursorRing.classList.add('clicking');
+    playClickSound();
 
-/* ==========================================================================
-   2. SKILLS CATEGORY FILTER
-   ========================================================================== */
-function initSkillsFilter() {
-  const tabs = document.querySelectorAll('.skill-tab-btn');
-  const items = document.querySelectorAll('.skill-chip-item');
-
-  tabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
-      tabs.forEach((t) => t.classList.remove('active'));
-      tab.classList.add('active');
-
-      const cat = tab.getAttribute('data-skill-cat');
-
-      items.forEach((item) => {
-        const itemCat = item.getAttribute('data-cat');
-        if (cat === 'all' || itemCat === cat) {
-          item.style.display = 'inline-flex';
-          item.style.animation = 'fadeIn 0.3s ease forwards';
-        } else {
-          item.style.display = 'none';
-        }
-      });
-    });
-  });
-}
-
-/* ==========================================================================
-   3. MODAL POPUP FOR PROJECT DETAILS
-   ========================================================================== */
-const projectData = {
-  sentra: {
-    title: "SentRa: Sentiment Analysis System for Lecturer Evaluation",
-    subtitle: "Final Year Project • Bachelor of Computer Science (Hons)",
-    category: "AI & Machine Learning | Python NLP",
-    description: `
-      <p>SentRa is an intelligent sentiment analysis system specifically developed to evaluate bilingual (Malay and English) student feedback collected during university lecturer evaluations.</p>
-      
-      <h4 style="margin: 1.25rem 0 0.5rem; color: var(--heading-color);">Key Architectural Features:</h4>
-      <ul style="padding-left: 1.2rem; margin-bottom: 1rem; color: var(--text-muted);">
-        <li><strong>Bilingual Text Preprocessing:</strong> Custom automated text pipeline handling slang normalization, Malay/English tokenization, stop-word removal, and lemmatization.</li>
-        <li><strong>Domain-Specific Lexicon:</strong> Engineered an academic feedback domain lexicon mapping specific Malaysian higher education evaluation terms to sentiment weights.</li>
-        <li><strong>Machine Learning Algorithms:</strong> Trained Naïve Bayes, SVM, and Lexicon-based classifiers to detect Positive, Neutral, and Negative sentiments with high accuracy.</li>
-        <li><strong>Analytical Visualizations:</strong> Embedded automated analytical charts, sentiment distribution tables, and dynamic word clouds highlighting key teaching performance factors.</li>
-        <li><strong>Actionable Management Insights:</strong> Equips faculty deans and department heads with quantitative feedback dashboards to improve teaching delivery.</li>
-      </ul>
-
-      <div style="background: var(--accent-light); padding: 1rem; border-radius: 12px; border-left: 4px solid var(--secondary); margin-top: 1rem; color: var(--text-main);">
-        <strong style="color: var(--heading-color);">Tech Stack:</strong> Python, NLTK/Scikit-learn, Anaconda Navigator, Pandas/NumPy, Matplotlib/WordCloud, HTML5/CSS3.
-      </div>
-    `
-  },
-  smartmirror: {
-    title: "S.M.A.R.T. Mirror: Health & Productivity Assistant",
-    subtitle: "InTeLex 2024 Silver Award Winner • HCI Project",
-    category: "Human-Computer Interaction (HCI) | UI/UX Prototype",
-    description: `
-      <p>The S.M.A.R.T. Mirror is an innovative IoT & AI conceptual mirror designed to integrate daily health monitoring into standard morning routines while optimizing productivity.</p>
-      
-      <h4 style="margin: 1.25rem 0 0.5rem; color: var(--heading-color);">Key Features & Accomplishments:</h4>
-      <ul style="padding-left: 1.2rem; margin-bottom: 1rem; color: var(--text-muted);">
-        <li><strong>InTeLex 2024 Silver Award:</strong> Recognized at the Innovation & Technology Exhibition for creative HCI problem-solving and realistic design execution.</li>
-        <li><strong>Medium-Fidelity Figma Prototype:</strong> Developed comprehensive interactive UI component libraries, responsive navigation flows, and dynamic widgets.</li>
-        <li><strong>HCI Principles Implementation:</strong> Applied spatial ergonomics, high-contrast visual hierarchy for reflective surfaces, and glanceable dashboard design.</li>
-        <li><strong>AI-Powered Features:</strong> Designed concept specs for personalized health metrics (posture analysis, heart rate via facial recognition, daily schedule sync) and voice-controlled interaction.</li>
-        <li><strong>Stakeholder Pitching:</strong> Presented design rationale, user testing results, and operational feasibility to academic and industry judges.</li>
-      </ul>
-
-      <div style="background: var(--accent-light); padding: 1rem; border-radius: 12px; border-left: 4px solid var(--accent); margin-top: 1rem; color: var(--text-main);">
-        <strong style="color: var(--heading-color);">Design Tools:</strong> Figma, Adobe Illustrator, HCI Evaluation Heuristics, Canva.
-      </div>
-    `
-  }
-};
-
-function initModals() {
-  const modalOverlay = document.getElementById('project-modal');
-  const modalBody = document.getElementById('modal-body');
-  const closeBtn = document.getElementById('modal-close-btn');
-  const openBtns = document.querySelectorAll('.open-modal-btn');
-
-  if (!modalOverlay || !modalBody || !closeBtn) return;
-
-  openBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const key = btn.getAttribute('data-project');
-      const data = projectData[key];
-
-      if (data) {
-        modalBody.innerHTML = `
-          <span style="display:inline-block; background: var(--accent-light); color: var(--secondary); font-size: 0.75rem; font-weight:700; padding: 0.25rem 0.65rem; border-radius: 9999px; margin-bottom: 0.5rem;">
-            ${data.category}
-          </span>
-          <h2 style="font-size: 1.6rem; color: var(--heading-color); margin-bottom: 0.25rem;">${data.title}</h2>
-          <p style="font-size: 0.9rem; color: var(--secondary); font-weight:600; margin-bottom: 1.25rem;">${data.subtitle}</p>
-          <hr style="border: none; border-top: 1px solid var(--border-light); margin-bottom: 1.25rem;" />
-          <div style="line-height: 1.6;">${data.description}</div>
-        `;
-        modalOverlay.classList.add('active');
-      }
-    });
-  });
-
-  closeBtn.addEventListener('click', () => {
-    modalOverlay.classList.remove('active');
-  });
-
-  modalOverlay.addEventListener('click', (e) => {
-    if (e.target === modalOverlay) {
-      modalOverlay.classList.remove('active');
+    // Spawn hitburst text
+    if (hitburstContainer) {
+      const text = document.createElement('div');
+      text.className = 'hitburst-text';
+      text.textContent = hitburstTexts[Math.floor(Math.random() * hitburstTexts.length)];
+      text.style.left = `${e.clientX}px`;
+      text.style.top = `${e.clientY}px`;
+      hitburstContainer.appendChild(text);
+      playHitburstSound();
+      setTimeout(() => text.remove(), 600);
     }
   });
-}
 
-/* ==========================================================================
-   4. CONTACT FORM & SUPABASE HANDLING
-   ========================================================================== */
-function initContactForm() {
-  const form = document.getElementById('contact-form');
-  const submitBtn = document.getElementById('submit-btn');
+  document.addEventListener('mouseup', () => {
+    if (cursorRing) cursorRing.classList.remove('clicking');
+  });
 
-  if (!form) return;
 
-  form.addEventListener('submit', async (e) => {
+  // ------------------------------------------------------------------------
+  // 4. Theme Toggler (Light / Dark Mode)
+  // ------------------------------------------------------------------------
+  const themeToggleBtn = document.getElementById('theme-toggle-btn');
+  const themeIcon = document.getElementById('theme-icon');
+  const themeText = document.getElementById('theme-text');
+  const htmlEl = document.documentElement;
+
+  // Saved theme or default to light
+  const savedTheme = localStorage.getItem('nawwaspace_theme') || 'light';
+  setTheme(savedTheme);
+
+  function setTheme(mode) {
+    htmlEl.setAttribute('data-theme', mode);
+    localStorage.setItem('nawwaspace_theme', mode);
+    if (themeIcon && themeText) {
+      if (mode === 'dark') {
+        themeIcon.textContent = '☀️';
+        themeText.textContent = 'Light Mode';
+      } else {
+        themeIcon.textContent = '🌙';
+        themeText.textContent = 'Dark Mode';
+      }
+    }
+  }
+
+  themeToggleBtn?.addEventListener('click', () => {
+    const currentMode = htmlEl.getAttribute('data-theme');
+    const newMode = currentMode === 'dark' ? 'light' : 'dark';
+    setTheme(newMode);
+    playClickSound();
+  });
+
+
+  // ------------------------------------------------------------------------
+  // 5. Interactive Chiptune Audio Player (Web Audio API Synthesized Music)
+  // ------------------------------------------------------------------------
+  const tracks = [
+    { name: "Track 1: 8-Bit Arcade Chill", notes: [261.63, 329.63, 392.00, 523.25, 392.00, 329.63] },
+    { name: "Track 2: Synthwave Midnight Run", notes: [220.00, 261.63, 329.63, 440.00, 329.63, 261.63] },
+    { name: "Track 3: Pixel Victory Fanfare", notes: [349.23, 440.00, 523.25, 698.46, 523.25, 440.00] }
+  ];
+
+  let currentTrackIdx = 0;
+  let isPlayingMusic = false;
+  let musicIntervalId = null;
+  let noteStep = 0;
+
+  const playPauseBtn = document.getElementById('play-pause-btn');
+  const prevTrackBtn = document.getElementById('prev-track-btn');
+  const nextTrackBtn = document.getElementById('next-track-btn');
+  const trackNameDisplay = document.getElementById('current-track-name');
+  const cassetteDeck = document.querySelector('.cassette-deck');
+  const spoolLeft = document.getElementById('spool-left');
+  const spoolRight = document.getElementById('spool-right');
+
+  function updateTrackUI() {
+    if (trackNameDisplay) {
+      trackNameDisplay.textContent = tracks[currentTrackIdx].name;
+    }
+  }
+
+  function startMusicPlayback() {
+    isPlayingMusic = true;
+    if (playPauseBtn) playPauseBtn.textContent = '⏸️ Pause';
+    if (cassetteDeck) cassetteDeck.classList.add('playing');
+    if (spoolLeft) spoolLeft.classList.add('spinning');
+    if (spoolRight) spoolRight.classList.add('spinning');
+
+    const currentNotes = tracks[currentTrackIdx].notes;
+    musicIntervalId = setInterval(() => {
+      const noteFreq = currentNotes[noteStep % currentNotes.length];
+      playTone(noteFreq, 0.18, 'square', 0.08);
+      noteStep++;
+    }, 220);
+  }
+
+  function stopMusicPlayback() {
+    isPlayingMusic = false;
+    clearInterval(musicIntervalId);
+    if (playPauseBtn) playPauseBtn.textContent = '▶️ Play Tune';
+    if (cassetteDeck) cassetteDeck.classList.remove('playing');
+    if (spoolLeft) spoolLeft.classList.remove('spinning');
+    if (spoolRight) spoolRight.classList.remove('spinning');
+  }
+
+  playPauseBtn?.addEventListener('click', () => {
+    playClickSound();
+    if (isPlayingMusic) {
+      stopMusicPlayback();
+    } else {
+      startMusicPlayback();
+    }
+  });
+
+  prevTrackBtn?.addEventListener('click', () => {
+    playClickSound();
+    currentTrackIdx = (currentTrackIdx - 1 + tracks.length) % tracks.length;
+    updateTrackUI();
+    if (isPlayingMusic) {
+      stopMusicPlayback();
+      startMusicPlayback();
+    }
+  });
+
+  nextTrackBtn?.addEventListener('click', () => {
+    playClickSound();
+    currentTrackIdx = (currentTrackIdx + 1) % tracks.length;
+    updateTrackUI();
+    if (isPlayingMusic) {
+      stopMusicPlayback();
+      startMusicPlayback();
+    }
+  });
+
+
+  // ------------------------------------------------------------------------
+  // 6. Mood Switcher Widget
+  // ------------------------------------------------------------------------
+  const moods = [
+    { emoji: '🎧', text: 'In The Zone / Coding' },
+    { emoji: '🎮', text: 'Gaming Arcade Mode' },
+    { emoji: '🧋', text: 'Drinking Boba Tea' },
+    { emoji: '💻', text: 'Building SentRa FYP' },
+    { emoji: '🛡️', text: 'EDAG IT Security Admin' },
+    { emoji: '✨', text: 'Designing Pixel UI' }
+  ];
+
+  let currentMoodIdx = 0;
+  const moodBtn = document.getElementById('mood-selector-btn');
+  const currentMoodEmoji = document.getElementById('current-mood-emoji');
+  const currentMoodText = document.getElementById('current-mood-text');
+
+  moodBtn?.addEventListener('click', () => {
+    playClickSound();
+    currentMoodIdx = (currentMoodIdx + 1) % moods.length;
+    if (currentMoodEmoji) currentMoodEmoji.textContent = moods[currentMoodIdx].emoji;
+    if (currentMoodText) currentMoodText.textContent = moods[currentMoodIdx].text;
+  });
+
+
+  // ------------------------------------------------------------------------
+  // 7. Interactive Guestbook (LocalStorage Persistence)
+  // ------------------------------------------------------------------------
+  const guestbookForm = document.getElementById('guestbook-form');
+  const guestbookList = document.getElementById('guestbook-list');
+
+  // Load stored comments
+  function loadGuestbook() {
+    const savedComments = JSON.parse(localStorage.getItem('nawwaspace_guestbook') || '[]');
+    savedComments.forEach(comment => {
+      renderComment(comment, false);
+    });
+  }
+
+  function renderComment(data, prepend = true) {
+    if (!guestbookList) return;
+    const commentEl = document.createElement('div');
+    commentEl.className = 'guestbook-comment';
+    commentEl.innerHTML = `
+      <div class="comment-avatar">${data.avatar || '👾'}</div>
+      <div class="comment-content">
+        <div class="comment-meta">
+          <strong class="comment-author">${escapeHTML(data.name)}</strong>
+          <span class="comment-time">${data.time}</span>
+        </div>
+        <p class="comment-text">${escapeHTML(data.message)}</p>
+      </div>
+    `;
+
+    if (prepend && guestbookList.firstChild) {
+      guestbookList.insertBefore(commentEl, guestbookList.firstChild);
+    } else {
+      guestbookList.appendChild(commentEl);
+    }
+  }
+
+  function escapeHTML(str) {
+    return str.replace(/[&<>'"]/g, 
+      tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+    );
+  }
+
+  guestbookForm?.addEventListener('submit', (e) => {
     e.preventDefault();
+    playClickSound();
 
-    const name = document.getElementById('form-name').value;
-    const email = document.getElementById('form-email').value;
-    const subject = document.getElementById('form-subject').value;
-    const message = document.getElementById('form-message').value;
+    const nameInput = document.getElementById('gb-name');
+    const avatarInput = document.getElementById('gb-avatar');
+    const messageInput = document.getElementById('gb-message');
 
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = `<span>Sending...</span>`;
+    if (!nameInput || !messageInput) return;
+
+    const newComment = {
+      name: nameInput.value.trim(),
+      avatar: avatarInput ? avatarInput.value : '👾',
+      message: messageInput.value.trim(),
+      time: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+    };
+
+    renderComment(newComment, true);
+
+    // Save to localStorage
+    const savedComments = JSON.parse(localStorage.getItem('nawwaspace_guestbook') || '[]');
+    savedComments.unshift(newComment);
+    localStorage.setItem('nawwaspace_guestbook', JSON.stringify(savedComments));
+
+    // Reset form
+    nameInput.value = '';
+    messageInput.value = '';
+  });
+
+  loadGuestbook();
+
+
+  // ------------------------------------------------------------------------
+  // 8. Mini Pixel Arcade Game (Pixel Star Catcher)
+  // ------------------------------------------------------------------------
+  const startGameBtn = document.getElementById('start-game-btn');
+  const arcadeBox = document.getElementById('arcade-box');
+  const arcadeOverlay = document.getElementById('arcade-overlay');
+  const gameScoreEl = document.getElementById('game-score');
+  const gameHighscoreEl = document.getElementById('game-highscore');
+
+  let gameScore = 0;
+  let gameHighscore = parseInt(localStorage.getItem('nawwaspace_highscore') || '0', 10);
+  let isGameRunning = false;
+  let spawnIntervalId = null;
+
+  if (gameHighscoreEl) gameHighscoreEl.textContent = gameHighscore;
+
+  startGameBtn?.addEventListener('click', () => {
+    playClickSound();
+    if (isGameRunning) return;
+
+    isGameRunning = true;
+    gameScore = 0;
+    if (gameScoreEl) gameScoreEl.textContent = gameScore;
+    if (arcadeOverlay) arcadeOverlay.style.display = 'none';
+
+    // Spawn star every 800ms for 15 seconds
+    spawnIntervalId = setInterval(() => {
+      spawnArcadeStar();
+    }, 800);
 
     setTimeout(() => {
-      console.log('Sending message to Supabase database:', { name, email, subject, message, timestamp: new Date().toISOString() });
-
-      showToast(`Thank you, ${name}! Your message has been sent successfully.`);
-      form.reset();
-
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = `
-        <span>Send Message</span>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" x2="11" y1="2" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-      `;
-    }, 1000);
+      endArcadeGame();
+    }, 15000); // 15 second round
   });
-}
 
-function showToast(message) {
-  const toast = document.getElementById('toast');
-  const toastMsg = document.getElementById('toast-message');
-  if (!toast || !toastMsg) return;
+  function spawnArcadeStar() {
+    if (!arcadeBox || !isGameRunning) return;
 
-  toastMsg.textContent = message;
-  toast.classList.add('show');
+    const star = document.createElement('div');
+    star.className = 'falling-star';
+    star.textContent = ['⭐', '🌟', '👾', '✨'][Math.floor(Math.random() * 4)];
+    const leftPos = Math.random() * (arcadeBox.clientWidth - 30);
+    star.style.left = `${leftPos}px`;
 
-  setTimeout(() => {
-    toast.classList.remove('show');
-  }, 4000);
-}
-
-/* ==========================================================================
-   5. MOBILE NAVIGATION & SCROLL OBSERVER
-   ========================================================================== */
-function initNavigation() {
-  const toggleBtn = document.getElementById('mobile-toggle');
-  const navMenu = document.getElementById('nav-menu');
-  const navbar = document.getElementById('navbar');
-
-  if (toggleBtn && navMenu) {
-    toggleBtn.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
+    star.addEventListener('click', () => {
+      if (!isGameRunning) return;
+      gameScore += 100;
+      if (gameScoreEl) gameScoreEl.textContent = gameScore;
+      playTone(1000, 0.08, 'square', 0.15);
+      star.remove();
     });
 
-    navMenu.querySelectorAll('.nav-link').forEach((link) => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-      });
-    });
+    arcadeBox.appendChild(star);
+    setTimeout(() => star.remove(), 2000);
   }
 
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
+  function endArcadeGame() {
+    isGameRunning = false;
+    clearInterval(spawnIntervalId);
+
+    if (gameScore > gameHighscore) {
+      gameHighscore = gameScore;
+      localStorage.setItem('nawwaspace_highscore', gameHighscore.toString());
+      if (gameHighscoreEl) gameHighscoreEl.textContent = gameHighscore;
+    }
+
+    if (arcadeOverlay) {
+      arcadeOverlay.style.display = 'flex';
+      arcadeOverlay.innerHTML = `<p>Time's Up! 🎉<br>Your Score: <strong>${gameScore}</strong><br>Click "Start Game" to play again!</p>`;
+    }
+  }
+
+
+  // ------------------------------------------------------------------------
+  // 9. Modals for Top Projects & Info Cards
+  // ------------------------------------------------------------------------
+  const projectModal = document.getElementById('project-modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalBody = document.getElementById('modal-body');
+  const modalCloseBtn = document.getElementById('modal-close-btn');
+
+  const projectDetails = {
+    sentra: {
+      title: "SentRa: Bilingual Sentiment Analysis System",
+      html: `
+        <div style="text-align: center; margin-bottom: 12px;">
+          <img src="./images/sentra.png" style="width: 100%; max-height: 220px; object-fit: cover; border: 2px solid var(--border-color);" alt="SentRa">
+        </div>
+        <p><strong>Category:</strong> Final Year Project (2025/2026)</p>
+        <p><strong>Scope:</strong> Developed a machine learning and opinion mining tool that processes student evaluation text in both Malay and English.</p>
+        <ul style="padding-left: 20px; margin: 10px 0;">
+          <li>Automated lexicon creation and NLP preprocessing pipeline.</li>
+          <li>Classifies sentiment into Positive, Neutral, and Negative polarity.</li>
+          <li>Provides actionable insights for university faculty evaluations.</li>
+        </ul>
+        <p><strong>Tech Stack:</strong> Python, NLTK, Lexicon Mining, PHP, MySQL, Vercel.</p>
+      `
+    },
+    smartmirror: {
+      title: "S.M.A.R.T. Mirror Concept & Prototype",
+      html: `
+        <div style="text-align: center; margin-bottom: 12px;">
+          <img src="./images/smartmirror.png" style="width: 100%; max-height: 220px; object-fit: cover; border: 2px solid var(--border-color);" alt="SMART Mirror">
+        </div>
+        <p><strong>Award:</strong> InTeLex 2024 Silver Award Winner 🥈</p>
+        <p><strong>Scope:</strong> Smart Ambient Mirror integrating facial recognition, daily productivity widgets, and real-time health metrics.</p>
+        <ul style="padding-left: 20px; margin: 10px 0;">
+          <li>Interactive widget dashboard displaying weather, schedule, and health tips.</li>
+          <li>Recognized at InTeLex innovation showcase for human-computer interaction excellence.</li>
+        </ul>
+        <p><strong>Tech Stack:</strong> JavaScript, Python OpenCV, Figma UI/UX Prototype.</p>
+      `
+    },
+    edag: {
+      title: "EDAG Holding — Enterprise IT Internship",
+      html: `
+        <div style="text-align: center; margin-bottom: 12px; font-family: 'Press Start 2P'; font-size: 24px; color: var(--accent-cyan);">
+          EDAG HOLDING
+        </div>
+        <p><strong>Period:</strong> March 2026 – Present</p>
+        <p><strong>Role & Responsibilities:</strong></p>
+        <ul style="padding-left: 20px; margin: 10px 0;">
+          <li><strong>Active Directory:</strong> Identity provisioning, Group Policy, security permissions.</li>
+          <li><strong>Systems Administration:</strong> Managing Windows 10/11, Ubuntu, Rocky Linux & Kali Linux servers.</li>
+          <li><strong>Service Desk:</strong> SLA-compliant incident resolution & IT hardware troubleshooting.</li>
+          <li><strong>Compliance:</strong> Evidence gathering for TISAX automotive security & ISO 9001 quality audits.</li>
+        </ul>
+      `
+    },
+    leadership: {
+      title: "UPNM DeSTeC Club & Event Leadership",
+      html: `
+        <div style="text-align: center; margin-bottom: 12px;">
+          <img src="./images/leadership.png" style="width: 100%; max-height: 220px; object-fit: cover; border: 2px solid var(--border-color);" alt="Leadership">
+        </div>
+        <p><strong>Roles:</strong> Secretary of DeSTeC Club (2024–2025) & Vice Secretary of UPNM Chess Club.</p>
+        <p><strong>Key Highlights:</strong></p>
+        <ul style="padding-left: 20px; margin: 10px 0;">
+          <li>Directed <em>MEPPS 2.0: Python Edition Programme</em> workshop for 100+ students.</li>
+          <li>Co-organized Grandmasters Cup Chess Tournament.</li>
+          <li>Deputy Secretary for MIACEP 2025 Malaysia-Indonesia Cultural Exchange.</li>
+        </ul>
+      `
+    }
+  };
+
+  document.querySelectorAll('.view-project-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      playClickSound();
+      const key = btn.getAttribute('data-modal');
+      const data = projectDetails[key];
+      if (data && projectModal) {
+        if (modalTitle) modalTitle.textContent = data.title;
+        if (modalBody) modalBody.innerHTML = data.html;
+        projectModal.classList.add('active');
+      }
+    });
+  });
+
+  modalCloseBtn?.addEventListener('click', () => {
+    playClickSound();
+    if (projectModal) projectModal.classList.remove('active');
+  });
+
+  projectModal?.addEventListener('click', (e) => {
+    if (e.target === projectModal) {
+      if (projectModal) projectModal.classList.remove('active');
     }
   });
-}
 
-/* ==========================================================================
-   6. RESUME CV DOWNLOAD & PRINT
-   ========================================================================== */
-function initResumeDownload() {
-  const cvBtn = document.getElementById('download-cv-btn');
-  if (!cvBtn) return;
 
-  cvBtn.addEventListener('click', () => {
-    const printWindow = window.open('', '_blank');
-    printWindow.document.write(`
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <title>Nawwarah Binti Zulkifli - Resume</title>
-        <style>
-          body { font-family: sans-serif; line-height: 1.5; color: #1F2937; padding: 2rem; max-width: 800px; margin: 0 auto; }
-          h1 { color: #1E3A8A; margin-bottom: 0.2rem; }
-          h2 { color: #3B82F6; font-size: 1.1rem; border-bottom: 2px solid #E2E8F0; padding-bottom: 0.3rem; margin-top: 1.5rem; }
-          .contact { font-size: 0.9rem; color: #4B5563; margin-bottom: 1.5rem; }
-          ul { padding-left: 1.2rem; }
-          li { margin-bottom: 0.3rem; }
-        </style>
-      </head>
-      <body>
-        <h1>Nawwarah Binti Zulkifli</h1>
-        <div class="contact">Port Dickson, Negeri Sembilan | nawwarah.zulkifli123@gmail.com | +60 11-6093 4124 | linkedin.com/in/nawwarah-zulkifli</div>
-        
-        <h2>Professional Summary</h2>
-        <p>Final-year Bachelor of Computer Science (Hons) student with a strong academic record of 3.79 with a solid foundation in programming, data analytics, and web development. Experienced in student leadership, event management, and technical projects.</p>
-
-        <h2>Work Experience</h2>
-        <p><strong>IT Intern</strong> - EDAG Holding Sdn. Bhd. (March 2026 – Present)</p>
-        <ul>
-          <li>Administer Active Directory user accounts and access permissions for secure access control.</li>
-          <li>Manage and maintain Windows and Linux-based systems performing user support and troubleshooting.</li>
-          <li>Resolve IT support tickets, investigate incidents to minimize service disruptions.</li>
-          <li>Participate in TISAX and ISO 9001 compliance activities through evidence collection and audit preparation.</li>
-        </ul>
-
-        <h2>Education</h2>
-        <p><strong>Bachelor’s Degree in Computer Science (Honours)</strong> - UPNM (2023 - Present) | CGPA: 3.79 (Dean's Award Recipient)</p>
-        <p><strong>Foundation in Medicine</strong> - UPNM (2022 - 2023) | CGPA: 3.57 (Excellent Academic Award)</p>
-
-        <h2>Featured Projects</h2>
-        <p><strong>SentRa: Sentiment Analysis System for Student Feedback</strong> (Final Year Project)</p>
-        <p><strong>S.M.A.R.T. Mirror HCI Concept & Figma Prototype</strong> (InTeLex 2024 Silver Award Winner)</p>
-
-        <script>
-          window.onload = function() { window.print(); }
-        </script>
-      </body>
-      </html>
-    `);
-    printWindow.document.close();
+  // ------------------------------------------------------------------------
+  // 10. Interactive Buttons (Add Friend, Bookmark)
+  // ------------------------------------------------------------------------
+  document.getElementById('add-friend-btn')?.addEventListener('click', () => {
+    playClickSound();
+    alert("✨ Friend Request Sent to Nawwarah! You are now retro besties!");
   });
-}
+
+  document.getElementById('bookmark-btn')?.addEventListener('click', () => {
+    playClickSound();
+    alert("⭐ NawwaSpace profile bookmarked to your browser favorites!");
+  });
+
+});

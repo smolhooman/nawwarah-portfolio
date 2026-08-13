@@ -1,775 +1,655 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nawwarah Zulkifli | Computer Science & IT Portfolio</title>
-  <meta name="description" content="Portfolio of Nawwarah Binti Zulkifli - Final-year Computer Science student at UPNM (CGPA 3.79), IT Intern at EDAG Holding, specializing in Web Development, Data Analytics, and Systems.">
-  
-  <!-- Google Fonts -->
+  <title>nawwaSpace ★ Nawwarah Zulkifli Retro Pixel Portfolio</title>
+  <meta name="description" content="Welcome to nawwaSpace! The retro 8-bit MySpace portfolio of Nawwarah Zulkifli — CS Student (CGPA 3.79) & IT Intern at EDAG.">
+
+  <!-- Google Pixel & Retro Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600;700&family=Press+Start+2P&family=Silkscreen:wght@400;700&family=VT323&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="./style.css">
 </head>
-<body>
-  <!-- OSU! Style Interactive Cursor Canvas -->
-  <div class="cursor-dot" id="cursor-dot"></div>
-  <div class="cursor-ring" id="cursor-ring"></div>
-  <canvas id="osu-cursor-canvas"></canvas>
+<body class="pixel-theme">
 
-  <!-- Ambient Glow Background Blobs -->
-  <div class="ambient-glow bg-glow-1"></div>
-  <div class="ambient-glow bg-glow-2"></div>
+  <!-- OSU! Custom Cursor Structure -->
+  <div id="osu-cursor-dot" class="osu-cursor-dot"></div>
+  <div id="osu-cursor-ring" class="osu-cursor-ring"></div>
+  <div id="osu-trail-container"></div>
+  <div id="hitburst-container"></div>
 
-  <!-- Navigation Header -->
-  <header class="navbar" id="navbar">
-    <div class="container nav-container">
-      <a href="#hero" class="nav-logo">
-        <span class="logo-badge">NZ</span>
-        <span class="logo-text">Nawwarah<span class="logo-dot">.</span></span>
-      </a>
+  <!-- CRT Scanline Effect (Toggleable via script if wanted, default subtle overlay) -->
+  <div class="crt-overlay"></div>
 
-      <div class="nav-status">
-        <span class="status-indicator"></span>
-        <span class="status-text">IT Intern @ EDAG | Open to Roles</span>
-      </div>
-
-      <nav class="nav-menu" id="nav-menu">
-        <a href="#about" class="nav-link">About</a>
-        <a href="#education" class="nav-link">Education</a>
-        <a href="#experience" class="nav-link">Experience</a>
-        <a href="#projects" class="nav-link">Projects</a>
-        <a href="#skills" class="nav-link">Skills</a>
-        <a href="#leadership" class="nav-link">Leadership</a>
-        <a href="#contact" class="nav-link btn-nav-cta">Contact Me</a>
-      </nav>
-
-      <!-- Dark / Light Theme Toggle -->
-      <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle Dark / Light Mode" title="Toggle Theme">
-        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="5"/>
-          <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-        </svg>
-        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-        </svg>
-      </button>
-
-      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation Menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </header>
-
-  <main>
-    <!-- Hero Section -->
-    <section class="hero-section" id="hero">
-      <div class="container hero-grid">
-        <!-- Hero Text Column -->
-        <div class="hero-content">
-          <div class="hero-pill-tag">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-            Computer Science (Hons) Student • CGPA 3.79
-          </div>
-
-          <h1 class="hero-title">
-            Hi, I'm <span class="gradient-text">Nawwarah Zulkifli</span>
-          </h1>
-          <h2 class="hero-subtitle">IT Administrator & Full-Stack Developer</h2>
-
-          <p class="hero-description">
-            Final-year Bachelor of Computer Science student at Universiti Pertahanan Nasional Malaysia (UPNM) with proven expertise in IT operations, system administration, data analytics, and web engineering.
-          </p>
-
-          <div class="hero-meta-pills">
-            <span class="meta-pill">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-              Port Dickson, Malaysia
-            </span>
-            <a href="mailto:nawwarah.zulkifli123@gmail.com" class="meta-pill meta-link">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-              nawwarah.zulkifli123@gmail.com
-            </a>
-            <a href="https://www.linkedin.com/in/nawwarah-zulkifli" target="_blank" class="meta-pill meta-link">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.74a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2Z"/></svg>
-              LinkedIn Profile
-            </a>
-          </div>
-
-          <div class="hero-actions">
-            <a href="#projects" class="btn btn-primary">
-              View Featured Projects
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-            <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-            <button id="download-cv-btn" class="btn btn-outline">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-              Resume PDF
-            </button>
-          </div>
+  <!-- 3-Second Retro OS Boot Loading Screen -->
+  <div id="retro-loader" class="loader-overlay active">
+    <div class="retro-window loader-window">
+      <div class="window-titlebar">
+        <div class="titlebar-text">
+          <span class="pixel-icon">💾</span> Downloading NawwaSpace.exe...
         </div>
-
-        <!-- Hero Feature Card -->
-        <div class="hero-visual-wrapper">
-          <div class="hero-card">
-            <div class="hero-card-header">
-              <div class="avatar-box">
-                <span class="avatar-initials">NZ</span>
-                <span class="online-dot"></span>
-              </div>
-              <div class="avatar-info">
-                <h3>Nawwarah Zulkifli</h3>
-                <p>Bachelor of CS (Hons) • UPNM</p>
-              </div>
-            </div>
-
-            <div class="hero-card-stats">
-              <div class="stat-box">
-                <span class="stat-number">3.79</span>
-                <span class="stat-label">Degree CGPA</span>
-              </div>
-              <div class="stat-box">
-                <span class="stat-number">4x</span>
-                <span class="stat-label">Dean's Award</span>
-              </div>
-              <div class="stat-box">
-                <span class="stat-number">Silver</span>
-                <span class="stat-label">InTeLex '24</span>
-              </div>
-            </div>
-
-            <div class="hero-card-featured">
-              <div class="featured-badge">Featured System</div>
-              <h4>SentRa: FYP Sentiment Analysis</h4>
-              <p>Bilingual Malay & English student feedback opinion mining tool built with Python & Lexicon ML.</p>
-            </div>
-
-            <div class="tech-stack-row">
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">Active Directory</span>
-              <span class="tech-tag">Linux</span>
-              <span class="tech-tag">PHP/MySQL</span>
-              <span class="tech-tag">Supabase</span>
-            </div>
-          </div>
+        <div class="titlebar-controls">
+          <button class="win-btn win-min" aria-label="Minimize">_</button>
+          <button class="win-btn win-max" aria-label="Maximize">□</button>
+          <button class="win-btn win-close" id="loader-close-btn" aria-label="Close">✕</button>
         </div>
       </div>
-    </section>
 
-    <!-- About Me Section (Clean Minimalist: Photo Left + Direct Text Right) -->
-    <section class="section" id="about">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-subtitle">Get to Know Me</span>
-          <h2 class="section-title">About Me</h2>
-          <div class="title-bar"></div>
-        </div>
-
-        <div class="about-minimal-grid">
-          <!-- Profile Photo Frame Left -->
-          <div class="about-photo-wrapper">
-            <div class="photo-frame">
-              <img src="./images/profile.png" alt="Nawwarah Zulkifli Profile" class="profile-photo">
-              <div class="photo-badge">
-                <span class="badge-icon">🎓</span>
-                <span>CGPA 3.79 Recipient</span>
-              </div>
-            </div>
+      <div class="window-body loader-body">
+        <div class="loader-top-info">
+          <div class="loader-icon-anim">
+            <span class="loader-floppy">💾</span>
+            <span class="loader-arrow">➔</span>
+            <span class="loader-pc">🖥️</span>
           </div>
-
-          <!-- Description Text Right (No Bulky Container) -->
-          <div class="about-text-content">
-            <h3 class="about-heading">Passionate Computer Scientist & Technical Administrator</h3>
-            
-            <p class="about-paragraph">
-              I am a final-year <strong>Bachelor of Computer Science (Hons)</strong> student at Universiti Pertahanan Nasional Malaysia (UPNM) with a strong academic standing of <strong>CGPA 3.79</strong>. 
-            </p>
-            
-            <p class="about-paragraph">
-              Currently working as an <strong>IT Intern at EDAG Holding Sdn. Bhd.</strong>, I support enterprise IT operations, administer Active Directory environments, troubleshoot Windows and Linux servers, and assist in TISAX and ISO 9001 security compliance audits.
-            </p>
-
-            <p class="about-paragraph">
-              My technical expertise spans full-stack web development, Python data analytics, sentiment analysis machine learning, and system infrastructure.
-            </p>
-
-            <div class="about-stats-inline">
-              <div class="inline-stat">
-                <span class="stat-val">3.79</span>
-                <span class="stat-lbl">Academic CGPA</span>
-              </div>
-              <div class="inline-stat">
-                <span class="stat-val">4x</span>
-                <span class="stat-lbl">Dean's List Award</span>
-              </div>
-              <div class="inline-stat">
-                <span class="stat-val">100%</span>
-                <span class="stat-lbl">System Reliability</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Education Section (Chronological Timeline) -->
-    <section class="section section-alt" id="education">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-subtitle">Academic Journey</span>
-          <h2 class="section-title">Chronological Education Timeline</h2>
-          <div class="title-bar"></div>
-        </div>
-
-        <div class="education-chronological-timeline">
-          <!-- Item 1: Degree -->
-          <div class="timeline-item">
-            <div class="timeline-marker">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-            </div>
-            <div class="timeline-content">
-              <div class="timeline-date">2023 – Present</div>
-              <h3 class="timeline-title">Bachelor's Degree in Computer Science (Honours)</h3>
-              <p class="timeline-institution">Universiti Pertahanan Nasional Malaysia (UPNM)</p>
-              <div class="timeline-cgpa">CGPA: 3.79 / 4.00</div>
-              <ul class="timeline-bullets">
-                <li>Dean's Award Recipient (Semester 1 & 2 Academic Session 2023/2024)</li>
-                <li>Dean's Award Recipient (Semester 1 & 2 Academic Session 2024/2025)</li>
-                <li>Core Focus: Web Programming, Data Structures, OOP, Database Systems, Operating Systems, Big Data Analytics, Software Engineering, Digital Forensics.</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Item 2: Foundation -->
-          <div class="timeline-item">
-            <div class="timeline-marker">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
-            <div class="timeline-content">
-              <div class="timeline-date">2022 – 2023</div>
-              <h3 class="timeline-title">Foundation in Medicine</h3>
-              <p class="timeline-institution">Universiti Pertahanan Nasional Malaysia (UPNM)</p>
-              <div class="timeline-cgpa">CGPA: 3.57 / 4.00</div>
-              <p class="timeline-subtext">Awarded Excellent Academic Award for high academic performance.</p>
-            </div>
-          </div>
-
-          <!-- Item 3: SPM -->
-          <div class="timeline-item">
-            <div class="timeline-marker">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8 21 12 17 16 21"/></svg>
-            </div>
-            <div class="timeline-content">
-              <div class="timeline-date">2019 – 2021</div>
-              <h3 class="timeline-title">Malayan Certificate of Education (SPM)</h3>
-              <p class="timeline-institution">SMK Yam Tuan Radin, Negeri Sembilan</p>
-              <div class="timeline-cgpa">Result: Straight A's (3A+ | 4A | 2A-)</div>
-              <p class="timeline-subtext">Awarded for outstanding academic performance and straight A achievements.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Work Experience Section (Maintained Intact) -->
-    <section class="section" id="experience">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-subtitle">Enterprise IT Operations</span>
-          <h2 class="section-title">Work Experience</h2>
-          <div class="title-bar"></div>
-        </div>
-
-        <div class="experience-card">
-          <div class="exp-header">
-            <div class="exp-company-logo">
-              <span>EDAG</span>
-            </div>
-            <div class="exp-title-group">
-              <h3 class="exp-role">IT Intern</h3>
-              <p class="exp-company">EDAG Holding Sdn. Bhd.</p>
-            </div>
-            <div class="exp-period">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-              March 2026 – Present
-            </div>
-          </div>
-
-          <p class="exp-intro">
-            Supporting enterprise IT operations through system administration, security access control, and technical troubleshooting across multi-platform environments.
-          </p>
-
-          <div class="exp-responsibilities">
-            <div class="resp-item">
-              <div class="resp-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-              </div>
-              <div>
-                <h4>Active Directory & Access Control</h4>
-                <p>Administer Active Directory user accounts, group policies, and access permissions to enforce secure identity management and role-based access control.</p>
-              </div>
-            </div>
-
-            <div class="resp-item">
-              <div class="resp-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
-              </div>
-              <div>
-                <h4>Windows & Linux Systems Management</h4>
-                <p>Maintain OS environments (Windows 10/11, Ubuntu, Rocky Linux, Kali Linux), performing system configuration, security patching, and server support.</p>
-              </div>
-            </div>
-
-            <div class="resp-item">
-              <div class="resp-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-              </div>
-              <div>
-                <h4>IT Service Desk & Incident Resolution</h4>
-                <p>Resolve IT support tickets, investigate hardware/software/network issues, minimizing operational service disruptions while meeting SLA response times.</p>
-              </div>
-            </div>
-
-            <div class="resp-item">
-              <div class="resp-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              </div>
-              <div>
-                <h4>TISAX & ISO 9001 Compliance Audit</h4>
-                <p>Participate in automotive security compliance (TISAX) and ISO 9001 quality audits through evidence collection, documentation, and process adherence verification.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Featured Projects Section (Clean Layout with Interactive Picture Slides) -->
-    <section class="section section-alt" id="projects">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-subtitle">Innovation & Engineering</span>
-          <h2 class="section-title">Featured Projects</h2>
-          <div class="title-bar"></div>
-        </div>
-
-        <div class="projects-grid">
-          <!-- Project 1: SentRa -->
-          <div class="project-card">
-            <div class="project-header-bar">
-              <span class="project-category-badge">Final Year Project</span>
-              <span class="project-year">2025/2026</span>
-            </div>
-
-            <!-- Picture Slide Carousel -->
-            <div class="project-slider-wrapper" id="slider-sentra">
-              <div class="slider-track">
-                <img src="./images/sentra.png" alt="SentRa Sentiment Dashboard" class="slide-img active">
-              </div>
-            </div>
-
-            <div class="project-content-compact">
-              <h3 class="project-title">SentRa: Bilingual Sentiment Analysis System</h3>
-              <p class="project-subtitle">Opinion Mining for Student Feedback on Lecturer Evaluations</p>
-
-              <div class="project-actions">
-                <button class="btn btn-sm btn-primary open-modal-btn" data-project="sentra">
-                  Explore Details
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 2: S.M.A.R.T. Mirror -->
-          <div class="project-card">
-            <div class="project-header-bar">
-              <span class="project-category-badge award-badge">InTeLex 2024 • Silver Award</span>
-              <span class="project-year">2024</span>
-            </div>
-
-            <!-- Picture Slide Carousel -->
-            <div class="project-slider-wrapper" id="slider-smartmirror">
-              <div class="slider-track">
-                <img src="./images/smartmirror.png" alt="S.M.A.R.T. Mirror Prototype" class="slide-img active">
-              </div>
-            </div>
-
-            <div class="project-content-compact">
-              <h3 class="project-title">S.M.A.R.T. Mirror Concept & Interactive Prototype</h3>
-              <p class="project-subtitle">AI-Powered Health Monitoring & Productivity Assistant</p>
-
-              <div class="project-actions">
-                <button class="btn btn-sm btn-primary open-modal-btn" data-project="smartmirror">
-                  Explore Details
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Technical Skills & Tools Section (Innovative Non-Container Tech Cloud) -->
-    <section class="section" id="skills">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-subtitle">Technical Competencies</span>
-          <h2 class="section-title">Skills & Toolset</h2>
-          <div class="title-bar"></div>
-        </div>
-
-        <!-- Category Selector Pills -->
-        <div class="skills-category-selector">
-          <button class="skill-tab-btn active" data-skill-cat="all">All Tools & Tech</button>
-          <button class="skill-tab-btn" data-skill-cat="prog">Programming</button>
-          <button class="skill-tab-btn" data-skill-cat="data">Data & AI</button>
-          <button class="skill-tab-btn" data-skill-cat="sys">Systems & Security</button>
-          <button class="skill-tab-btn" data-skill-cat="tools">Tools & Cloud</button>
-        </div>
-
-        <!-- Dynamic Skill Badge Cloud -->
-        <div class="skills-cloud-matrix" id="skills-matrix">
-          <!-- Programming -->
-          <div class="skill-chip-item" data-cat="prog">
-            <span class="chip-icon">🐍</span>
-            <span class="chip-label">Python</span>
-            <span class="chip-level">Advanced</span>
-          </div>
-          <div class="skill-chip-item" data-cat="prog">
-            <span class="chip-icon">☕</span>
-            <span class="chip-label">Java (DrJava)</span>
-            <span class="chip-level">Intermediate</span>
-          </div>
-          <div class="skill-chip-item" data-cat="prog">
-            <span class="chip-icon">🐘</span>
-            <span class="chip-label">PHP</span>
-            <span class="chip-level">Intermediate</span>
-          </div>
-          <div class="skill-chip-item" data-cat="prog">
-            <span class="chip-icon">🌐</span>
-            <span class="chip-label">HTML5 / CSS3</span>
-            <span class="chip-level">Advanced</span>
-          </div>
-          <div class="skill-chip-item" data-cat="prog">
-            <span class="chip-icon">⚡</span>
-            <span class="chip-label">JavaScript</span>
-            <span class="chip-level">Intermediate</span>
-          </div>
-          <div class="skill-chip-item" data-cat="prog">
-            <span class="chip-icon">⚙️</span>
-            <span class="chip-label">C++</span>
-            <span class="chip-level">Foundational</span>
-          </div>
-
-          <!-- Data & AI -->
-          <div class="skill-chip-item" data-cat="data">
-            <span class="chip-icon">📊</span>
-            <span class="chip-label">Data Analytics</span>
-            <span class="chip-level">Advanced</span>
-          </div>
-          <div class="skill-chip-item" data-cat="data">
-            <span class="chip-icon">🤖</span>
-            <span class="chip-label">Machine Learning</span>
-            <span class="chip-level">Intermediate</span>
-          </div>
-          <div class="skill-chip-item" data-cat="data">
-            <span class="chip-icon">🐍</span>
-            <span class="chip-label">Anaconda Navigator</span>
-            <span class="chip-level">Advanced</span>
-          </div>
-          <div class="skill-chip-item" data-cat="data">
-            <span class="chip-icon">💬</span>
-            <span class="chip-label">Opinion Mining NLP</span>
-            <span class="chip-level">Advanced</span>
-          </div>
-
-          <!-- Systems & Security -->
-          <div class="skill-chip-item" data-cat="sys">
-            <span class="chip-icon">🔑</span>
-            <span class="chip-label">Active Directory</span>
-            <span class="chip-level">Internship Admin</span>
-          </div>
-          <div class="skill-chip-item" data-cat="sys">
-            <span class="chip-icon">🐬</span>
-            <span class="chip-label">MySQL Database</span>
-            <span class="chip-level">Advanced</span>
-          </div>
-          <div class="skill-chip-item" data-cat="sys">
-            <span class="chip-icon">🛡️</span>
-            <span class="chip-label">Digital Forensics</span>
-            <span class="chip-level">Academic</span>
-          </div>
-          <div class="skill-chip-item" data-cat="sys">
-            <span class="chip-icon">🐉</span>
-            <span class="chip-label">Kali Linux</span>
-            <span class="chip-level">Intermediate</span>
-          </div>
-          <div class="skill-chip-item" data-cat="sys">
-            <span class="chip-icon">🐧</span>
-            <span class="chip-label">Ubuntu & Rocky Linux</span>
-            <span class="chip-level">Intermediate</span>
-          </div>
-
-          <!-- Tools & Cloud -->
-          <div class="skill-chip-item" data-cat="tools">
-            <span class="chip-icon">💙</span>
-            <span class="chip-label">VS Code</span>
-            <span class="chip-level">Daily Driver</span>
-          </div>
-          <div class="skill-chip-item" data-cat="tools">
-            <span class="chip-icon">⚡</span>
-            <span class="chip-label">Supabase</span>
-            <span class="chip-level">Cloud DB</span>
-          </div>
-          <div class="skill-chip-item" data-cat="tools">
-            <span class="chip-icon">▲</span>
-            <span class="chip-label">Vercel</span>
-            <span class="chip-level">Deployment</span>
-          </div>
-          <div class="skill-chip-item" data-cat="tools">
-            <span class="chip-icon">🐙</span>
-            <span class="chip-label">GitHub</span>
-            <span class="chip-level">Version Control</span>
-          </div>
-          <div class="skill-chip-item" data-cat="tools">
-            <span class="chip-icon">🎨</span>
-            <span class="chip-label">Figma</span>
-            <span class="chip-level">UI/UX Prototype</span>
+          <div class="loader-details">
+            <p class="loader-file-name">Downloading: <strong>nawwaSpace_v2.0_portfolio.pkg</strong></p>
+            <p class="loader-site">From: <em>www.nawwaspace.retro/download</em></p>
+            <p class="loader-speed">Transfer Rate: <span id="load-speed">128.4 KB/s</span></p>
+            <p class="loader-time">Time Remaining: <span id="load-timer">3</span> seconds</p>
           </div>
         </div>
 
-        <!-- Certifications & Languages Stream Row -->
-        <div class="skills-meta-stream">
-          <div class="stream-group">
-            <span class="stream-title">Certifications:</span>
-            <span class="stream-pill">Google: Technical Support Fundamentals</span>
-            <span class="stream-pill">Google: Bits and Bytes of Networking</span>
+        <div class="loader-progress-section">
+          <div class="progress-bar-border">
+            <div id="loader-progress-fill" class="progress-bar-fill">
+              <!-- Pixel progress blocks appended dynamically -->
+            </div>
           </div>
-          <div class="stream-group">
-            <span class="stream-title">Languages:</span>
-            <span class="stream-pill">Malay (Native)</span>
-            <span class="stream-pill">English (Advanced - MUET Band 4.0)</span>
+          <div class="loader-percent-row">
+            <span id="load-percent-text">0%</span>
+            <span>Checking CRC32...</span>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- Leadership & Events Section (Vertical Timeline with Sliding Picture Carousels) -->
-    <section class="section section-alt" id="leadership">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-subtitle">Extracurricular & Organization</span>
-          <h2 class="section-title">Leadership Roles & Event Timeline</h2>
-          <div class="title-bar"></div>
+        <div class="loader-actions">
+          <button class="pixel-btn" id="skip-load-btn">Run Now ▶</button>
+          <button class="pixel-btn disabled" disabled>Cancel</button>
         </div>
-
-        <div class="leadership-sliding-timeline">
-          <!-- Timeline Card 1: DeSTeC Secretary -->
-          <div class="lead-timeline-card">
-            <div class="lead-card-header">
-              <span class="lead-role-pill">Secretary</span>
-              <h3 class="lead-card-title">UPNM Defence Science & Technology Club (DeSTeC)</h3>
-              <p class="lead-card-period">2024 – 2025 (Secretary) | 2023 – 2024 (Cultural Exco)</p>
-            </div>
-
-            <!-- Picture Carousel Slide -->
-            <div class="lead-carousel-wrapper" id="lead-carousel-1">
-              <div class="lead-carousel-track">
-                <div class="lead-slide active">
-                  <img src="./images/leadership.png" alt="DeSTeC Event Workshop" class="lead-slide-img">
-                  <div class="lead-slide-caption">MEPPS 2.0: Python Edition Programme Workshop</div>
-                </div>
-              </div>
-            </div>
-
-            <p class="lead-card-desc">
-              Managed club administrative documentation, event proposals, official communications, and co-directed high-impact student technical workshops.
-            </p>
-          </div>
-
-          <!-- Timeline Card 2: Chess Club Vice Secretary -->
-          <div class="lead-timeline-card">
-            <div class="lead-card-header">
-              <span class="lead-role-pill">Vice Secretary</span>
-              <h3 class="lead-card-title">UPNM Chess Club</h3>
-              <p class="lead-card-period">2024 – 2025</p>
-            </div>
-
-            <p class="lead-card-desc">
-              Co-organized campus-wide chess tournaments, managed player registrations, and served as Deputy Secretary for the Grandmasters Cup Tournament.
-            </p>
-          </div>
-
-          <!-- Timeline Card 3: Event Management Grid -->
-          <div class="lead-timeline-card">
-            <div class="lead-card-header">
-              <span class="lead-role-pill">Event Management & Volunteer Work</span>
-              <h3 class="lead-card-title">Programmes & Committees</h3>
-            </div>
-
-            <div class="programmes-grid-compact">
-              <div class="programme-chip">
-                <span class="chip-role">Programme Director</span>
-                <span class="chip-title">Mastering EPP Skills 2.0 (MEPPS): Python Edition</span>
-              </div>
-              <div class="programme-chip">
-                <span class="chip-role">Deputy Director</span>
-                <span class="chip-title">Sinar Menuju Kejayaan Programme</span>
-              </div>
-              <div class="programme-chip">
-                <span class="chip-role">Secretary</span>
-                <span class="chip-title">Malaysia–Indonesia Academic & Cultural Exchange (MIACEP 2025)</span>
-              </div>
-              <div class="programme-chip">
-                <span class="chip-role">Secretary</span>
-                <span class="chip-title">Faculty Dean's Award Ceremony 2025</span>
-              </div>
-              <div class="programme-chip">
-                <span class="chip-role">Volunteer</span>
-                <span class="chip-title">Humanitarian Relief Mission for Gaza</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section (Mobile Portrait Optimized) -->
-    <section class="section" id="contact">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-subtitle">Get In Touch</span>
-          <h2 class="section-title">Let's Connect & Work Together</h2>
-          <div class="title-bar"></div>
-        </div>
-
-        <div class="contact-grid">
-          <!-- Left Info & Tech Ecosystem Badges -->
-          <div class="contact-info-col">
-            <h3>Contact Information</h3>
-            <p>I am open to full-time IT positions, Software Engineering roles, and collaborative projects. Feel free to reach out via email or LinkedIn!</p>
-
-            <div class="contact-details">
-              <a href="mailto:nawwarah.zulkifli123@gmail.com" class="contact-item">
-                <div class="contact-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                </div>
-                <div>
-                  <span class="label">Email</span>
-                  <span class="value">nawwarah.zulkifli123@gmail.com</span>
-                </div>
-              </a>
-
-              <a href="tel:+601160934124" class="contact-item">
-                <div class="contact-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                </div>
-                <div>
-                  <span class="label">Phone</span>
-                  <span class="value">+60 11-6093 4124</span>
-                </div>
-              </a>
-
-              <a href="https://www.linkedin.com/in/nawwarah-zulkifli" target="_blank" class="contact-item">
-                <div class="contact-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.74a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2Z"/></svg>
-                </div>
-                <div>
-                  <span class="label">LinkedIn</span>
-                  <span class="value">linkedin.com/in/nawwarah-zulkifli</span>
-                </div>
-              </a>
-            </div>
-
-            <!-- Tech Ecosystem Section -->
-            <div class="tech-ecosystem-box">
-              <h4>Deployment & Infrastructure</h4>
-              <div class="ecosystem-badges">
-                <div class="eco-badge">
-                  <svg width="18" height="18" viewBox="0 0 512 512" fill="currentColor"><path d="M256 48L496 464H16L256 48Z"/></svg>
-                  <span>Hosted on <strong>Vercel</strong></span>
-                </div>
-                <div class="eco-badge">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg>
-                  <span>Code on <strong>GitHub</strong></span>
-                </div>
-                <div class="eco-badge">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21.362 9.354H12.003L19.467.525A.5.5 0 0 0 19.083 0H9.503a.5.5 0 0 0-.46.304l-6.5 15a.5.5 0 0 0 .46.696h9.359l-7.464 8.829a.5.5 0 0 0 .384.825h9.58a.5.5 0 0 0 .46-.304l6.5-15a.5.5 0 0 0-.46-.696z"/></svg>
-                  <span>Database via <strong>Supabase</strong></span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Contact Form -->
-          <div class="contact-form-card">
-            <form id="contact-form" class="contact-form">
-              <h3>Send Me a Message</h3>
-              
-              <div class="form-group">
-                <label for="form-name">Your Name</label>
-                <input type="text" id="form-name" placeholder="e.g. Sarah Ahmad" required>
-              </div>
-
-              <div class="form-group">
-                <label for="form-email">Your Email</label>
-                <input type="email" id="form-email" placeholder="name@company.com" required>
-              </div>
-
-              <div class="form-group">
-                <label for="form-subject">Subject</label>
-                <input type="text" id="form-subject" placeholder="Job Opportunity / Project Inquiry" required>
-              </div>
-
-              <div class="form-group">
-                <label for="form-message">Message</label>
-                <textarea id="form-message" rows="4" placeholder="Write your message here..." required></textarea>
-              </div>
-
-              <button type="submit" class="btn btn-primary btn-block" id="submit-btn">
-                <span>Send Message</span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" x2="11" y1="2" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container footer-content">
-      <p>© 2026 Nawwarah Binti Zulkifli. Designed & Built with Precision.</p>
-      <div class="footer-links">
-        <a href="#hero">Back to Top ↑</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Project Details Modal Container -->
-  <div class="modal-overlay" id="project-modal">
-    <div class="modal-card">
-      <button class="modal-close" id="modal-close-btn">&times;</button>
-      <div id="modal-body">
-        <!-- Dynamic modal content loaded via JavaScript -->
       </div>
     </div>
   </div>
 
-  <!-- Toast Notification -->
-  <div class="toast" id="toast">
-    <span class="toast-icon">✓</span>
-    <span id="toast-message">Message sent successfully!</span>
+  <!-- Main Application Wrapper -->
+  <div id="app" class="myspace-wrapper">
+    
+    <!-- Top MySpace Header Bar -->
+    <header class="myspace-header">
+      <div class="header-inner">
+        <a href="#home" class="myspace-logo">
+          <span class="logo-sparkle">★</span>
+          <span class="logo-text">nawwa<span class="logo-highlight">Space</span></span>
+          <span class="logo-badge">v2.0</span>
+        </a>
+
+        <div class="myspace-search-bar">
+          <span class="search-icon">🔍</span>
+          <input type="text" placeholder="Search NawwaSpace (Projects, Skills, Bio)..." id="header-search-input">
+          <button class="pixel-btn search-btn">Go</button>
+        </div>
+
+        <div class="myspace-top-nav">
+          <span class="user-status-pill" id="user-status-pill">
+            <span class="status-dot online"></span> Online Now!
+          </span>
+
+          <button id="theme-toggle-btn" class="pixel-btn nav-action-btn" title="Toggle Light/Dark Theme">
+            <span class="btn-icon" id="theme-icon">🌙</span>
+            <span class="btn-text" id="theme-text">Dark Mode</span>
+          </button>
+
+          <button id="audio-toggle-btn" class="pixel-btn nav-action-btn" title="Toggle Retro Sound Effects">
+            <span class="btn-icon" id="audio-icon">🔊</span>
+            <span class="btn-text">Audio ON</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Nav Subbar -->
+      <nav class="myspace-subnav">
+        <a href="#about" class="subnav-link">Home / Profile</a>
+        <a href="#projects" class="subnav-link">Top Projects</a>
+        <a href="#experience" class="subnav-link">Experience</a>
+        <a href="#education" class="subnav-link">Education</a>
+        <a href="#music-player" class="subnav-link">Chiptune Jukebox</a>
+        <a href="#blog" class="subnav-link">Journal</a>
+        <a href="#guestbook" class="subnav-link">Guestbook</a>
+        <a href="#arcade" class="subnav-link">Arcade Game</a>
+      </nav>
+    </header>
+
+    <!-- Top Animated Marquee Banner -->
+    <div class="retro-marquee-container">
+      <div class="marquee-track">
+        <span>★ WELCOME TO NAWWASPACE ★ FINAL YEAR CS STUDENT (CGPA 3.79 @ UPNM) ★ IT INTERN @ EDAG HOLDING ★ FULL-STACK DEVELOPER & SYSTEM ADMIN ★ INSPIRATION: 90S RETRO PIXEL & CLASSIC MYSPACE ★ DROP A COMMENT IN THE GUESTBOOK! ★</span>
+        <span>★ WELCOME TO NAWWASPACE ★ FINAL YEAR CS STUDENT (CGPA 3.79 @ UPNM) ★ IT INTERN @ EDAG HOLDING ★ FULL-STACK DEVELOPER & SYSTEM ADMIN ★ INSPIRATION: 90S RETRO PIXEL & CLASSIC MYSPACE ★ DROP A COMMENT IN THE GUESTBOOK! ★</span>
+      </div>
+    </div>
+
+    <!-- Main Two-Column Layout -->
+    <div class="myspace-columns">
+
+      <!-- ================= LEFT COLUMN ================= -->
+      <aside class="myspace-left-col">
+
+        <!-- Profile Card Window -->
+        <section class="retro-window profile-window">
+          <div class="window-titlebar">
+            <div class="titlebar-text">
+              <span class="pixel-icon">👾</span> Profile: Nawwarah
+            </div>
+            <div class="titlebar-controls">
+              <button class="win-btn win-min">_</button>
+              <button class="win-btn win-max">□</button>
+            </div>
+          </div>
+
+          <div class="window-body profile-body">
+            <h2 class="profile-name">Nawwarah Zulkifli</h2>
+            
+            <div class="profile-avatar-wrapper">
+              <div class="pixel-frame">
+                <img src="./images/profile.png" alt="Nawwarah Profile Photo" class="profile-img">
+                <span class="online-stamp">ONLINE 🟢</span>
+              </div>
+            </div>
+
+            <div class="mood-box">
+              <span class="mood-label">Current Mood:</span>
+              <button id="mood-selector-btn" class="mood-pill" title="Click to change mood!">
+                <span id="current-mood-emoji">🎧</span> <span id="current-mood-text">In The Zone / Coding</span>
+              </button>
+            </div>
+
+            <div class="profile-action-buttons">
+              <a href="#guestbook" class="pixel-btn btn-action">
+                <span class="btn-icon">✉️</span> Send Message
+              </a>
+              <button id="add-friend-btn" class="pixel-btn btn-action">
+                <span class="btn-icon">➕</span> Add Friend
+              </button>
+              <a href="mailto:nawwarah.zulkifli123@gmail.com" class="pixel-btn btn-action">
+                <span class="btn-icon">📬</span> Forward Profile
+              </a>
+              <button id="bookmark-btn" class="pixel-btn btn-action">
+                <span class="btn-icon">⭐</span> Bookmark
+              </button>
+            </div>
+
+            <!-- Custom URL display box -->
+            <div class="myspace-url-box">
+              <span class="url-label">NawwaSpace URL:</span>
+              <div class="url-field">https://nawwaspace.retro/nawwarah</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Details Info Table Window -->
+        <section class="retro-window details-window">
+          <div class="window-titlebar">
+            <div class="titlebar-text">
+              <span class="pixel-icon">📋</span> Nawwa's Details
+            </div>
+          </div>
+          <div class="window-body">
+            <table class="myspace-details-table">
+              <tr>
+                <td class="table-key">Status:</td>
+                <td class="table-val">Single & Ready to Code 🚀</td>
+              </tr>
+              <tr>
+                <td class="table-key">Role:</td>
+                <td class="table-val">IT Intern @ EDAG & CS Student</td>
+              </tr>
+              <tr>
+                <td class="table-key">Degree CGPA:</td>
+                <td class="table-val"><span class="highlight-badge">3.79 / 4.00</span></td>
+              </tr>
+              <tr>
+                <td class="table-key">Honors:</td>
+                <td class="table-val">4x Dean's Award Recipient 🏅</td>
+              </tr>
+              <tr>
+                <td class="table-key">Location:</td>
+                <td class="table-val">Port Dickson / KL, MY 🇲🇾</td>
+              </tr>
+              <tr>
+                <td class="table-key">Zodiac:</td>
+                <td class="table-val">Gemini ♊</td>
+              </tr>
+              <tr>
+                <td class="table-key">Languages:</td>
+                <td class="table-val">Malay (Native), English (Band 4.0)</td>
+              </tr>
+            </table>
+          </div>
+        </section>
+
+        <!-- Interests & Favorites Window -->
+        <section class="retro-window interests-window">
+          <div class="window-titlebar">
+            <div class="titlebar-text">
+              <span class="pixel-icon">🎮</span> Interests & Stack
+            </div>
+          </div>
+          <div class="window-body">
+            <div class="interest-group">
+              <h4 class="interest-heading">General Interests:</h4>
+              <p class="interest-text">Web Engineering, Enterprise IT Security, Active Directory, Machine Learning, Chiptune Music, Retro Pixel Art, Gaming, Chess ♟️.</p>
+            </div>
+            
+            <div class="interest-group">
+              <h4 class="interest-heading">Core Tech Stack:</h4>
+              <div class="pixel-tag-cloud">
+                <span class="pixel-tag">Python</span>
+                <span class="pixel-tag">Active Directory</span>
+                <span class="pixel-tag">Ubuntu/Linux</span>
+                <span class="pixel-tag">JavaScript</span>
+                <span class="pixel-tag">PHP/MySQL</span>
+                <span class="pixel-tag">HTML5/CSS3</span>
+                <span class="pixel-tag">Kali Linux</span>
+                <span class="pixel-tag">Supabase</span>
+                <span class="pixel-tag">Vercel</span>
+              </div>
+            </div>
+
+            <div class="interest-group">
+              <h4 class="interest-heading">Certifications:</h4>
+              <ul class="pixel-list">
+                <li>Google Technical Support Fundamentals</li>
+                <li>Google Bits and Bytes of Networking</li>
+                <li>InTeLex 2024 Silver Award Winner</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Contact Info Box Window -->
+        <section class="retro-window contact-box-window">
+          <div class="window-titlebar">
+            <div class="titlebar-text">
+              <span class="pixel-icon">☎️</span> Direct Contact
+            </div>
+          </div>
+          <div class="window-body">
+            <div class="contact-links-stack">
+              <a href="mailto:nawwarah.zulkifli123@gmail.com" class="pixel-contact-link">
+                <span class="link-icon">✉️</span> nawwarah.zulkifli123@gmail.com
+              </a>
+              <a href="https://www.linkedin.com/in/nawwarah-zulkifli" target="_blank" class="pixel-contact-link">
+                <span class="link-icon">💼</span> LinkedIn Profile
+              </a>
+              <a href="tel:+601160934124" class="pixel-contact-link">
+                <span class="link-icon">📞</span> +60 11-6093 4124
+              </a>
+            </div>
+          </div>
+        </section>
+
+      </aside>
+
+
+      <!-- ================= RIGHT COLUMN ================= -->
+      <main class="myspace-right-col">
+
+        <!-- Welcome & About Me Blurbs Window -->
+        <section class="retro-window blurbs-window" id="about">
+          <div class="window-titlebar">
+            <div class="titlebar-text">
+              <span class="pixel-icon">📝</span> Nawwarah's Blurbs
+            </div>
+            <div class="titlebar-controls">
+              <button class="win-btn win-min">_</button>
+              <button class="win-btn win-max">□</button>
+            </div>
+          </div>
+
+          <div class="window-body blurbs-body">
+            
+            <div class="blurb-section">
+              <h3 class="blurb-title">About Me:</h3>
+              <p>
+                Hello there! Welcome to my retro 8-bit space. I am a final-year <strong>Bachelor of Computer Science (Honours)</strong> student at Universiti Pertahanan Nasional Malaysia (UPNM) with an academic achievement of <strong>CGPA 3.79</strong> and 4x Dean's List Award recipient.
+              </p>
+              <p>
+                Currently, I am working as an <strong>IT Intern at EDAG Holding Sdn. Bhd.</strong>, where I gain hands-on experience in enterprise Active Directory management, Windows & Linux server administration, IT service desk operations, and TISAX/ISO 9001 security compliance audits.
+              </p>
+              <p>
+                I thrive at the intersection of system administration, web development, data science, and user experience design.
+              </p>
+            </div>
+
+            <div class="blurb-section">
+              <h3 class="blurb-title">Who I'd Like to Meet:</h3>
+              <p>
+                IT Directors, Senior Web Engineers, Tech Recruiters, Systems Administrators, and fellow tech enthusiasts looking for an energetic, top-performing Computer Science graduate with strong technical and leadership skills!
+              </p>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Top Friends / Top Projects Window (Classic MySpace Top 8 Style Grid) -->
+        <section class="retro-window top-friends-window" id="projects">
+          <div class="window-titlebar">
+            <div class="titlebar-text">
+              <span class="pixel-icon">⭐</span> Nawwarah's Top Projects & Highlights (4)
+            </div>
+          </div>
+
+          <div class="window-body">
+            <p class="top-friends-subtitle">Nawwarah has <strong>4 Featured Showcase Items</strong> in her Top Grid:</p>
+            
+            <div class="top-friends-grid">
+              
+              <!-- Friend/Project 1: SentRa -->
+              <div class="top-friend-card">
+                <div class="friend-rank">#1</div>
+                <div class="friend-name">SentRa AI</div>
+                <div class="friend-img-box">
+                  <img src="./images/sentra.png" alt="SentRa Sentiment Analysis">
+                </div>
+                <div class="friend-desc">Bilingual Malay/English NLP Sentiment Analysis for Student Evaluations.</div>
+                <button class="pixel-btn btn-sm view-project-btn" data-modal="sentra">View System</button>
+              </div>
+
+              <!-- Friend/Project 2: S.M.A.R.T. Mirror -->
+              <div class="top-friend-card">
+                <div class="friend-rank">#2</div>
+                <div class="friend-name">SMART Mirror</div>
+                <div class="friend-img-box">
+                  <img src="./images/smartmirror.png" alt="SMART Mirror Project">
+                </div>
+                <div class="friend-desc">InTeLex 2024 Silver Award AI Health & Productivity Assistant.</div>
+                <button class="pixel-btn btn-sm view-project-btn" data-modal="smartmirror">View System</button>
+              </div>
+
+              <!-- Friend/Project 3: EDAG IT Internship -->
+              <div class="top-friend-card" id="experience">
+                <div class="friend-rank">#3</div>
+                <div class="friend-name">EDAG IT Ops</div>
+                <div class="friend-img-box exp-logo-box">
+                  <span class="pixel-exp-logo">EDAG</span>
+                </div>
+                <div class="friend-desc">Active Directory, Ubuntu/Linux admin, Helpdesk & TISAX Audit.</div>
+                <button class="pixel-btn btn-sm view-project-btn" data-modal="edag">View Details</button>
+              </div>
+
+              <!-- Friend/Project 4: DeSTeC Leadership -->
+              <div class="top-friend-card">
+                <div class="friend-rank">#4</div>
+                <div class="friend-name">DeSTeC Club</div>
+                <div class="friend-img-box">
+                  <img src="./images/leadership.png" alt="DeSTeC Leadership & Events">
+                </div>
+                <div class="friend-desc">Secretary for UPNM Defence Science & Tech Club & Event Director.</div>
+                <button class="pixel-btn btn-sm view-project-btn" data-modal="leadership">View Leadership</button>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- Chiptune Cassette Audio Player Window -->
+        <section class="retro-window jukebox-window" id="music-player">
+          <div class="window-titlebar">
+            <div class="titlebar-text">
+              <span class="pixel-icon">📻</span> Nawwa's Chiptune Cassette Player
+            </div>
+            <div class="titlebar-controls">
+              <button class="win-btn win-min">_</button>
+            </div>
+          </div>
+
+          <div class="window-body jukebox-body">
+            <div class="cassette-deck">
+              <div class="cassette-tape">
+                <div class="spool spool-left" id="spool-left"></div>
+                <div class="cassette-label">
+                  <span class="cassette-title">RETRO PIXEL SOUNDTRACK</span>
+                  <span class="track-display" id="current-track-name">Track 1: 8-Bit Arcade Chill</span>
+                </div>
+                <div class="spool spool-right" id="spool-right"></div>
+              </div>
+
+              <!-- Equalizer Visualizer Bars -->
+              <div class="audio-eq-bars" id="audio-eq">
+                <div class="eq-bar"></div>
+                <div class="eq-bar"></div>
+                <div class="eq-bar"></div>
+                <div class="eq-bar"></div>
+                <div class="eq-bar"></div>
+                <div class="eq-bar"></div>
+                <div class="eq-bar"></div>
+                <div class="eq-bar"></div>
+              </div>
+            </div>
+
+            <div class="player-controls">
+              <button class="pixel-btn player-btn" id="prev-track-btn">⏮️ Prev</button>
+              <button class="pixel-btn player-btn play-btn" id="play-pause-btn">▶️ Play Tune</button>
+              <button class="pixel-btn player-btn" id="next-track-btn">⏭️ Next</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Education & Chronological Timeline Window -->
+        <section class="retro-window education-window" id="education">
+          <div class="window-titlebar">
+            <div class="titlebar-text">
+              <span class="pixel-icon">🎓</span> Academic Timeline & Achievements
+            </div>
+          </div>
+
+          <div class="window-body">
+            <div class="pixel-timeline">
+              
+              <div class="timeline-block">
+                <div class="timeline-header">
+                  <span class="timeline-year">2023 – Present</span>
+                  <h4 class="timeline-degree">Bachelor of Computer Science (Honours)</h4>
+                  <span class="timeline-school">Universiti Pertahanan Nasional Malaysia (UPNM)</span>
+                </div>
+                <div class="timeline-badge-row">
+                  <span class="pixel-badge gold">CGPA: 3.79 / 4.00</span>
+                  <span class="pixel-badge purple">4x Dean's Award</span>
+                </div>
+                <p class="timeline-text">
+                  Specialized in Web Engineering, Operating Systems, Machine Learning, Data Analytics, Database Systems, and Digital Forensics.
+                </p>
+              </div>
+
+              <div class="timeline-block">
+                <div class="timeline-header">
+                  <span class="timeline-year">2022 – 2023</span>
+                  <h4 class="timeline-degree">Foundation in Medicine</h4>
+                  <span class="timeline-school">Universiti Pertahanan Nasional Malaysia (UPNM)</span>
+                </div>
+                <div class="timeline-badge-row">
+                  <span class="pixel-badge blue">CGPA: 3.57 / 4.00</span>
+                  <span class="pixel-badge green">Academic Excellence Award</span>
+                </div>
+              </div>
+
+              <div class="timeline-block">
+                <div class="timeline-header">
+                  <span class="timeline-year">2019 – 2021</span>
+                  <h4 class="timeline-degree">SPM High School Certificate</h4>
+                  <span class="timeline-school">SMK Yam Tuan Radin, Negeri Sembilan</span>
+                </div>
+                <div class="timeline-badge-row">
+                  <span class="pixel-badge red">Straight A's (3A+ | 4A | 2A-)</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- Journal / Blog Entries Window -->
+        <section class="retro-window blog-window" id="blog">
+          <div class="window-titlebar">
+            <div class="titlebar-text">
+              <span class="pixel-icon">📖</span> Nawwa's Journal Entries
+            </div>
+          </div>
+
+          <div class="window-body">
+            <div class="blog-entry">
+              <div class="blog-header">
+                <h4 class="blog-subject">Building "SentRa" - Bilingual NLP Sentiment Analysis</h4>
+                <span class="blog-date">August 12, 2026 @ 02:45 PM</span>
+              </div>
+              <div class="blog-content">
+                <p>
+                  Finishing up my final year project! SentRa extracts student feedback in both Malay and English, using custom lexicon dictionaries and Machine Learning to automatically analyze student sentiments towards lecturer evaluations. Excited to present the final thesis soon!
+                </p>
+              </div>
+              <div class="blog-footer">
+                <span>Mood: 💻 Excited</span> | <span>Comments: (12)</span> | <span>Kudos: ❤️ (48)</span>
+              </div>
+            </div>
+
+            <div class="blog-entry">
+              <div class="blog-header">
+                <h4 class="blog-subject">Reflections on IT Internship at EDAG Holding</h4>
+                <span class="blog-date">July 28, 2026 @ 11:15 AM</span>
+              </div>
+              <div class="blog-content">
+                <p>
+                  Managing enterprise Active Directory accounts, troubleshooting Linux servers, and getting involved in TISAX automotive security audits has given me tremendous real-world enterprise infrastructure perspective!
+                </p>
+              </div>
+              <div class="blog-footer">
+                <span>Mood: 🛡️ Proud</span> | <span>Comments: (8)</span> | <span>Kudos: ❤️ (35)</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Interactive Guestbook Window -->
+        <section class="retro-window guestbook-window" id="guestbook">
+          <div class="window-titlebar">
+            <div class="titlebar-text">
+              <span class="pixel-icon">💬</span> Nawwa's Guestbook (Comments)
+            </div>
+          </div>
+
+          <div class="window-body">
+            <form id="guestbook-form" class="guestbook-form">
+              <p class="form-instruction">Leave a message on Nawwa's profile wall!</p>
+              
+              <div class="form-row">
+                <div class="input-group">
+                  <label for="gb-name">Your Name:</label>
+                  <input type="text" id="gb-name" class="pixel-input" placeholder="e.g. Alex" required>
+                </div>
+                
+                <div class="input-group">
+                  <label for="gb-avatar">Pick Avatar:</label>
+                  <select id="gb-avatar" class="pixel-input">
+                    <option value="👾">👾 Alien Pixel</option>
+                    <option value="🐱">🐱 Pixel Cat</option>
+                    <option value="🤖">🤖 Retro Bot</option>
+                    <option value="⭐">⭐ Pixel Star</option>
+                    <option value="🎮">🎮 Gamer</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="input-group">
+                <label for="gb-message">Message:</label>
+                <textarea id="gb-message" class="pixel-input" rows="3" placeholder="Write something cool..." required></textarea>
+              </div>
+
+              <button type="submit" class="pixel-btn submit-gb-btn">Post to Guestbook ✨</button>
+            </form>
+
+            <hr class="pixel-hr">
+
+            <div class="guestbook-comments-list" id="guestbook-list">
+              <!-- Default Comments -->
+              <div class="guestbook-comment">
+                <div class="comment-avatar">👾</div>
+                <div class="comment-content">
+                  <div class="comment-meta">
+                    <strong class="comment-author">EDAG Team Member</strong>
+                    <span class="comment-time">August 10, 2026</span>
+                  </div>
+                  <p class="comment-text">Awesome portfolio Nawwarah! Love the retro 8-bit vibe and Active Directory showcase!</p>
+                </div>
+              </div>
+
+              <div class="guestbook-comment">
+                <div class="comment-avatar">🐱</div>
+                <div class="comment-content">
+                  <div class="comment-meta">
+                    <strong class="comment-author">UPNM DeSTeC Squad</strong>
+                    <span class="comment-time">August 05, 2026</span>
+                  </div>
+                  <p class="comment-text">Best secretary & event director ever! Good luck with your graduation! 🎓✨</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Mini Pixel Arcade Window (Surprise Interactive Feature!) -->
+        <section class="retro-window arcade-window" id="arcade">
+          <div class="window-titlebar">
+            <div class="titlebar-text">
+              <span class="pixel-icon">👾</span> Mini Arcade: Pixel Star Catcher!
+            </div>
+            <div class="titlebar-controls">
+              <button class="win-btn win-min">_</button>
+            </div>
+          </div>
+
+          <div class="window-body arcade-body">
+            <div class="arcade-status-bar">
+              <span>Score: <strong id="game-score">0</strong></span>
+              <span>High Score: <strong id="game-highscore">0</strong></span>
+              <button id="start-game-btn" class="pixel-btn btn-sm">Start Game 🕹️</button>
+            </div>
+
+            <div class="arcade-canvas-box" id="arcade-box">
+              <div class="arcade-instructions" id="arcade-overlay">
+                <p>Click "Start Game" to spawn falling stars! Click stars before they hit the bottom to score points!</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+    </div> <!-- End myspace-columns -->
+
+    <!-- Footer -->
+    <footer class="myspace-footer">
+      <div class="footer-inner">
+        <p>© 2026 Nawwarah Binti Zulkifli ★ nawwaSpace Retro Edition ★ All Rights Reserved</p>
+        <p class="footer-sub">Designed with pixel passion inspired by MySpace, NES 8-bit, and 90s OS loading dialogs.</p>
+      </div>
+    </footer>
+
+  </div> <!-- End myspace-wrapper -->
+
+  <!-- Modal Popups for Top Projects -->
+  <div class="modal-overlay" id="project-modal">
+    <div class="retro-window modal-window">
+      <div class="window-titlebar">
+        <div class="titlebar-text" id="modal-title">Project Details</div>
+        <div class="titlebar-controls">
+          <button class="win-btn win-close" id="modal-close-btn">✕</button>
+        </div>
+      </div>
+      <div class="window-body" id="modal-body">
+        <!-- Dynamic modal content inserted here -->
+      </div>
+    </div>
   </div>
 
   <script type="module" src="./main.js"></script>
