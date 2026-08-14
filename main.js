@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    const snakeColors = ['#C85828', '#C8A230', '#7A8C38', '#A83838', '#307870', '#604880'];
+    const snakeColors = ['#390007', '#9CA0AB', '#390007', '#9CA0AB', '#F0F4F5', '#390007'];
     const snakePoints = [];
     const maxPoints = 32;
     let lastMoveTime = 0;

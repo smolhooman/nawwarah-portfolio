@@ -1,106 +1,102 @@
 /* ==========================================================================
-   nawwaSpace - Grunge Retro Pixel Theme
-   Palette: Rust #B85020, Dirty Gold #C8A230, Olive #687830, Brick #943030,
-            Dark Teal #286858, Ash #503868, Charcoal #0F0D0A, Parchment #CFC4A8
-   No gradients — all solid, all flat, all grunge.
+   nawwaSpace — Minimal 4-Color Palette
+   #0E0E0E  Deep Black
+   #390007  Blood Crimson
+   #F0F4F5  Off-White
+   #9CA0AB  Steel Grey
+   No gradients — all solid, all flat.
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
    1. Theme Variables & Color Palettes
    -------------------------------------------------------------------------- */
 
-/* Light Mode — Aged Parchment */
+/* Light Mode */
 :root, [data-theme="light"] {
-  --bg-color: #EDE5D0;
-  --bg-pattern-color: rgba(104, 120, 48, 0.12);
-  --container-bg: #E2D9C0;
-  --window-bg: #D8CEBC;
-  --window-header-bg: #2E2518;
-  --window-header-text: #C8A230;
-  --text-main: #1C1408;
-  --text-muted: #6B5040;
-  --border-color: #7A5C38;
-  --shadow-color: rgba(30, 20, 8, 0.35);
+  --bg-color:           #F0F4F5;
+  --container-bg:       #E4E8EA;
+  --window-bg:          #D8DBDE;
+  --window-header-bg:   #0E0E0E;
+  --window-header-text: #F0F4F5;
+  --text-main:          #0E0E0E;
+  --text-muted:         #9CA0AB;
+  --border-color:       #0E0E0E;
+  --shadow-color:       rgba(14, 14, 14, 0.30);
 
-  --accent-rust:   #B85020;
-  --accent-gold:   #C8A230;
-  --accent-olive:  #687830;
-  --accent-brick:  #943030;
-  --accent-teal:   #286858;
-  --accent-ash:    #503868;
-
-  /* legacy aliases kept so existing rules don't break */
-  --accent-pink:   #B85020;
-  --accent-purple: #503868;
-  --accent-cyan:   #286858;
-  --accent-yellow: #C8A230;
-  --accent-green:  #687830;
-  --accent-peach:  #C87840;
-
-  --badge-bg:     #D8CEBC;
-  --badge-border: #7A5C38;
-  --badge-text:   #1C1408;
-
-  --btn-bg:    #C8A230;
-  --btn-hover: #B85020;
-  --btn-text:  #1C1408;
-
-  --nav-bg:   #2E2518;
-  --nav-text: #C8A230;
-
-  --snake-color-1: #B85020;
-  --snake-color-2: #C8A230;
-  --snake-color-3: #687830;
-  --snake-color-4: #943030;
-  --snake-color-5: #286858;
-  --snake-color-6: #503868;
-}
-
-/* Dark Mode — Industrial Charcoal */
-[data-theme="dark"] {
-  --bg-color: #0F0D0A;
-  --bg-pattern-color: rgba(184, 80, 32, 0.10);
-  --container-bg: #1C1810;
-  --window-bg: #252018;
-  --window-header-bg: #1A1208;
-  --window-header-text: #C8A230;
-  --text-main: #CFC4A8;
-  --text-muted: #887060;
-  --border-color: #4A3C28;
-  --shadow-color: rgba(0, 0, 0, 0.7);
-
-  --accent-rust:   #C85828;
-  --accent-gold:   #C8A230;
-  --accent-olive:  #7A8C38;
-  --accent-brick:  #A83838;
-  --accent-teal:   #307870;
-  --accent-ash:    #604880;
+  --accent-crimson: #390007;
+  --accent-grey:    #9CA0AB;
+  --accent-white:   #F0F4F5;
+  --accent-black:   #0E0E0E;
 
   /* legacy aliases */
-  --accent-pink:   #C85828;
-  --accent-purple: #604880;
-  --accent-cyan:   #307870;
-  --accent-yellow: #C8A230;
-  --accent-green:  #7A8C38;
-  --accent-peach:  #C87840;
+  --accent-pink:   #390007;
+  --accent-purple: #390007;
+  --accent-cyan:   #9CA0AB;
+  --accent-yellow: #F0F4F5;
+  --accent-green:  #9CA0AB;
+  --accent-peach:  #390007;
 
-  --badge-bg:     #2E2818;
-  --badge-border: #4A3C28;
-  --badge-text:   #C8A230;
+  --badge-bg:     #D8DBDE;
+  --badge-border: #0E0E0E;
+  --badge-text:   #0E0E0E;
 
-  --btn-bg:    #3A3020;
-  --btn-hover: #B85020;
-  --btn-text:  #CFC4A8;
+  --btn-bg:    #390007;
+  --btn-hover: #5A000E;
+  --btn-text:  #F0F4F5;
 
-  --nav-bg:   #0A0804;
-  --nav-text: #C8A230;
+  --nav-bg:   #0E0E0E;
+  --nav-text: #F0F4F5;
 
-  --snake-color-1: #C85828;
-  --snake-color-2: #C8A230;
-  --snake-color-3: #7A8C38;
-  --snake-color-4: #A83838;
-  --snake-color-5: #307870;
-  --snake-color-6: #604880;
+  --snake-color-1: #390007;
+  --snake-color-2: #9CA0AB;
+  --snake-color-3: #390007;
+  --snake-color-4: #9CA0AB;
+  --snake-color-5: #390007;
+  --snake-color-6: #9CA0AB;
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+  --bg-color:           #0E0E0E;
+  --container-bg:       #1A1A1A;
+  --window-bg:          #222222;
+  --window-header-bg:   #390007;
+  --window-header-text: #F0F4F5;
+  --text-main:          #F0F4F5;
+  --text-muted:         #9CA0AB;
+  --border-color:       #390007;
+  --shadow-color:       rgba(0, 0, 0, 0.8);
+
+  --accent-crimson: #390007;
+  --accent-grey:    #9CA0AB;
+  --accent-white:   #F0F4F5;
+  --accent-black:   #0E0E0E;
+
+  /* legacy aliases */
+  --accent-pink:   #390007;
+  --accent-purple: #390007;
+  --accent-cyan:   #9CA0AB;
+  --accent-yellow: #F0F4F5;
+  --accent-green:  #9CA0AB;
+  --accent-peach:  #390007;
+
+  --badge-bg:     #1A1A1A;
+  --badge-border: #390007;
+  --badge-text:   #F0F4F5;
+
+  --btn-bg:    #390007;
+  --btn-hover: #5A000E;
+  --btn-text:  #F0F4F5;
+
+  --nav-bg:   #0E0E0E;
+  --nav-text: #F0F4F5;
+
+  --snake-color-1: #390007;
+  --snake-color-2: #9CA0AB;
+  --snake-color-3: #390007;
+  --snake-color-4: #9CA0AB;
+  --snake-color-5: #390007;
+  --snake-color-6: #9CA0AB;
 }
 
 /* --------------------------------------------------------------------------
@@ -224,15 +220,15 @@ body {
 .loader-window {
   width: 90%;
   max-width: 480px;
-  background: #C0C0C0;
-  border: 3px inset #FFFFFF;
-  box-shadow: 6px 6px 0px #000000;
-  color: #000;
+  background: #F0F4F5;
+  border: 3px solid #0E0E0E;
+  box-shadow: 6px 6px 0px #0E0E0E;
+  color: #0E0E0E;
 }
 
 .loader-window .window-titlebar {
-  background: #1A1208;
-  color: #C8A230;
+  background: #390007;
+  color: #F0F4F5;
 }
 
 .loader-body {
@@ -270,8 +266,8 @@ body {
 
 .progress-bar-border {
   height: 24px;
-  background: #FFF;
-  border: 2px inset #808080;
+  background: #F0F4F5;
+  border: 2px solid #0E0E0E;
   padding: 2px;
   margin-bottom: 8px;
 }
@@ -279,7 +275,7 @@ body {
 .progress-bar-fill {
   height: 100%;
   width: 0%;
-  background: #943030;
+  background: #390007;
   transition: width 0.1s linear;
 }
 
@@ -387,9 +383,9 @@ body {
   height: 18px;
   line-height: 14px;
   text-align: center;
-  background: #C0C0C0;
-  color: #000;
-  border: 1px outset #FFF;
+  background: #F0F4F5;
+  color: #0E0E0E;
+  border: 1px solid #0E0E0E;
   font-weight: bold;
 }
 
@@ -414,7 +410,7 @@ body {
   background: var(--nav-bg);
   color: var(--nav-text);
   border: 3px solid var(--border-color);
-  box-shadow: 5px 5px 0px var(--border-color);
+  box-shadow: 4px 4px 0px var(--border-color);
   margin-bottom: 12px;
 }
 
@@ -455,7 +451,7 @@ body {
   font-family: 'Press Start 2P', monospace !important;
   font-size: 8px;
   background: var(--accent-yellow);
-  color: #1D1C38;
+  color: #0E0E0E;
   padding: 2px 5px;
   border-radius: 2px;
 }
@@ -541,8 +537,8 @@ body {
 
 /* Marquee Banner */
 .retro-marquee-container {
-  background: #FFF700;
-  color: #1D1C38;
+  background: #390007;
+  color: #F0F4F5;
   border: 3px solid var(--border-color);
   box-shadow: 4px 4px 0px var(--border-color);
   padding: 6px 0;
@@ -648,12 +644,12 @@ body {
   bottom: 0px;
   right: 10px;
   background: var(--accent-yellow);
-  color: #1D1C38;
+  color: #F0F4F5;
   font-family: 'Press Start 2P', monospace !important;
   font-size: 7px;
   padding: 3px 6px;
   border: 2px solid var(--border-color);
-  box-shadow: 2px 2px 0px #000;
+  box-shadow: 2px 2px 0px #0E0E0E;
   border-radius: 4px;
 }
 
@@ -716,8 +712,8 @@ body {
 }
 
 .highlight-badge {
-  background: var(--accent-yellow);
-  color: #1D1C38;
+  background: #390007;
+  color: #F0F4F5;
   padding: 2px 6px;
   border: 1px solid var(--border-color);
   font-weight: bold;
@@ -851,7 +847,7 @@ body {
 .friend-img-box {
   width: 100%;
   height: 110px;
-  background: #000;
+  background: #0E0E0E;
   border: 2px solid var(--border-color);
   margin-bottom: 8px;
   overflow: hidden;
@@ -872,14 +868,14 @@ body {
 }
 
 .exp-logo-box {
-  background: #1A1208;
+  background: #390007;
 }
 
 .pixel-exp-logo {
   font-family: 'Press Start 2P', monospace !important;
   font-size: 16px;
-  color: var(--accent-yellow);
-  text-shadow: 2px 2px 0 #000;
+  color: #F0F4F5;
+  text-shadow: 2px 2px 0 #0E0E0E;
 }
 
 .friend-desc {
@@ -892,10 +888,10 @@ body {
 
 /* Chiptune Audio Player Window */
 .cassette-deck {
-  background: #111;
-  border: 3px inset #555;
+  background: #0E0E0E;
+  border: 3px solid #390007;
   padding: 16px;
-  border-radius: 4px;
+  border-radius: 0;
   margin-bottom: 12px;
   display: flex;
   flex-direction: column;
@@ -907,8 +903,8 @@ body {
   width: 100%;
   max-width: 320px;
   height: 90px;
-  background: #333;
-  border: 2px solid #666;
+  background: #1A1A1A;
+  border: 2px solid #390007;
   border-radius: 6px;
   display: flex;
   justify-content: space-between;
@@ -920,8 +916,8 @@ body {
 .spool {
   width: 44px;
   height: 44px;
-  background: #444;
-  border: 3px solid #777;
+  background: #390007;
+  border: 3px solid #9CA0AB;
   border-radius: 50%;
 }
 
@@ -935,10 +931,10 @@ body {
 }
 
 .cassette-label {
-  background: var(--accent-yellow);
-  color: #1D1C38;
+  background: #390007;
+  color: #F0F4F5;
   padding: 6px 10px;
-  border: 2px solid #000;
+  border: 2px solid #0E0E0E;
   text-align: center;
   flex-grow: 1;
   margin: 0 10px;
@@ -1050,11 +1046,11 @@ body {
   font-weight: bold;
 }
 
-.pixel-badge.gold { background: #FFE66D; color: #1D1C38; }
-.pixel-badge.purple { background: #8B50A4; color: #FFF; }
-.pixel-badge.blue { background: #2EC4B6; color: #FFF; }
-.pixel-badge.green { background: #57CC99; color: #1D1C38; }
-.pixel-badge.red { background: #FF758F; color: #FFF; }
+.pixel-badge.gold   { background: #390007; color: #F0F4F5; }
+.pixel-badge.purple { background: #390007; color: #F0F4F5; }
+.pixel-badge.blue   { background: #9CA0AB; color: #0E0E0E; }
+.pixel-badge.green  { background: #9CA0AB; color: #0E0E0E; }
+.pixel-badge.red    { background: #390007; color: #F0F4F5; }
 
 /* Blog Window */
 .blog-entry {
@@ -1217,8 +1213,8 @@ body {
 .arcade-canvas-box {
   width: 100%;
   height: 240px;
-  background: #1D1C38;
-  border: 3px inset var(--border-color);
+  background: #0E0E0E;
+  border: 3px solid var(--border-color);
   position: relative;
   overflow: hidden;
 }
@@ -1314,7 +1310,7 @@ body {
 .pixel-slideshow {
   position: relative;
   width: 100%;
-  background: #000;
+  background: #0E0E0E;
   border: 3px solid var(--border-color);
   overflow: hidden;
   user-select: none;
@@ -1349,8 +1345,8 @@ body {
   top: 50%;
   transform: translateY(-50%);
   z-index: 10;
-  background: rgba(29, 28, 56, 0.78);
-  color: #EFF29B;
+  background: rgba(57, 0, 7, 0.85);
+  color: #F0F4F5;
   border: 2px solid var(--border-color);
   font-family: 'Press Start 2P', monospace !important;
   font-size: 11px;
@@ -1394,8 +1390,8 @@ body {
 
 /* Caption bar */
 .slide-caption {
-  background: rgba(29, 28, 56, 0.85);
-  color: #EFF29B;
+  background: rgba(57, 0, 7, 0.90);
+  color: #F0F4F5;
   font-family: 'Press Start 2P', monospace !important;
   font-size: 8px;
   text-align: center;
@@ -1418,7 +1414,7 @@ body {
   height: 220px;
   position: relative;
   overflow: hidden;
-  background: #000;
+  background: #0E0E0E;
   border: 2px solid var(--border-color);
 }
 
